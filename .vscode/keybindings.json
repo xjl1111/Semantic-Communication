@@ -1,0 +1,8 @@
+[
+    {
+        "key": "ctrl+f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "运行当前 Python 文件",
+        "when": "editorLangId == python"
+    }
+]
