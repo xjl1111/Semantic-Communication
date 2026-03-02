@@ -1,0 +1,28 @@
+# ============================================================
+# 语义通信 (Semantic Communication) 项目 - Python 依赖清单
+# ============================================================
+# Python 版本要求: >= 3.10
+#
+# 安装方式 (二选一):
+#   1. pip install -r requirements.txt
+#   2. 如需 CUDA/GPU 支持, 请先按照 PyTorch 官网指引安装对应版本:
+#      https://pytorch.org/get-started/locally/
+#      然后再安装其余依赖:
+#      pip install torchvision tqdm matplotlib Pillow numpy
+# ============================================================
+
+# 深度学习框架 (核心)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# 数据处理 & 科学计算
+numpy>=1.24.0
+
+# 图像处理
+Pillow>=9.0.0
+
+# 训练进度条
+tqdm>=4.60.0
+
+# 可视化 & 绘图
+matplotlib>=3.7.0
