@@ -1,0 +1,45 @@
+exp_name: default
+figure: null
+model_cache_dir: D:/model_cache/vlm_csc
+use_fp16: true
+disable_fallback_in_formal_experiments: true
+blip:
+  model_name: Salesforce/blip-image-captioning-base
+sd:
+  model_name: sd-legacy/stable-diffusion-v1-5
+ram:
+  checkpoint_path: ""
+data:
+  image_size: 224
+  max_caption_len: 32
+  datasets_root: ../data
+model:
+  d_model: 128
+  n_heads: 8
+  semantic_layers: 3
+  channel_hidden: [256, 128]
+  nam_hidden: [56, 128, 56, 56]
+  dropout: 0.1
+  checkpoint_blip: Salesforce/blip-image-captioning-base
+  checkpoint_sd: sd-legacy/stable-diffusion-v1-5
+channel:
+  channel_type: awgn
+  snr_train_mode: fixed
+  snr_train_db: 4.0
+  snr_train_min_db: 0.0
+  snr_train_max_db: 10.0
+  seed: 42
+train:
+  optimizer: adamw
+  lr: 1.0e-4
+  weight_decay: 1.0e-2
+  batch_size: 16
+  grad_accum_steps: 1
+  epochs: 10
+  scheduler: cosine
+  seeds: [1, 2, 3]
+  med_enabled: false
+  nam_enabled: true
+eval:
+  snr_test_db: [0,1,2,3,4,5,6,7,8,9,10]
+  metrics: [bleu, ssq]

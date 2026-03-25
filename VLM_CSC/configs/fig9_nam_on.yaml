@@ -1,0 +1,8 @@
+exp_name: fig9_nam_on
+figure: fig9
+train:
+  nam_enabled: true
+channel:
+  snr_train_mode: uniform
+  snr_train_min_db: 0.0
+  snr_train_max_db: 10.0

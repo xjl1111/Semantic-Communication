@@ -1,0 +1,790 @@
+【说明】
+本文件分为两层：
+第一层：论文事实包（仅包含已经从论文原文确认过的内容）
+第二层：开发任务书（面向代理 AI 的工程落地任务单）
+
+硬性规则：
+1. 代理 AI 不可把“工程实现补充”伪装成“论文明确写出”。
+2. 若事实包中没有明确写出的内容，必须标注为“为复现做的合理实现选择”。
+3. 必须先实现真实主链路，再实现实验图复现；禁止用 proxy 曲线冒充实验复现完成。
+4. 若某模块缺少论文细节，必须显式列出“不确定点”，不能擅自脑补为论文原文。
+
+==================================================
+第一层：论文事实包
+==================================================
+
+1. 论文任务目标
+【论文明确写出】
+论文提出的是 Visual Language Model-based Cross-modal Semantic Communication system（VLM-CSC）。
+它要解决传统图像语义通信在动态环境下的三个问题：
+(1) 图像像素直接传输的信息密度低；
+(2) 动态场景下持续学习会产生灾难性遗忘；
+(3) 训练与测试 SNR 不匹配时鲁棒性下降。
+
+论文提出三项核心设计：
+- CKB：跨模态知识库。发送端用 BLIP 做 image-to-text，接收端用 SD 做 text-to-image。
+- MED：Memory-Assisted Encoder and Decoder，通过 STM/LTM 缓解持续学习遗忘。
+- NAM：Noise Attention Module，利用 SNR 自适应调节特征。
+
+2. 系统总体组成
+【论文明确写出】
+系统由发送端、物理信道、接收端三部分组成。
+输入图像定义为：
+\[
+x \in \mathbb{R}^{H \times W \times C}
+\]
+
+发送端整体映射：
+\[
+y = C_{\beta}(S_{\alpha}(K_{\theta}(x), \mu), \mu)
+\]
+
+接收端整体映射：
+\[
+\hat{x} = K^{-1}_{\theta'} \big( S^{-1}_{\delta}(C^{-1}_{\gamma}(\hat{y}, \mu), \mu) \big)
+\]
+
+信道模型：
+\[
+\hat{y} = h \cdot y + n
+\]
+其中，h 为信道增益，n 为 AWGN 噪声。
+
+3. 已确认的数据流
+【论文明确写出】
+完整主链路为：
+image x
+-> BLIP-based CKB
+-> text s
+-> semantic encoder
+-> channel encoder
+-> channel
+-> channel decoder
+-> semantic decoder
+-> recovered text \hat{s}
+-> SD-based CKB
+-> reconstructed image \hat{x}
+
+结论：系统主传输对象是文本语义，而不是直接传输图像像素。
+
+4. 哪些模块是预训练模型
+【论文明确写出】
+以下两个模块是预训练 VLM，不需要为 CSC 系统重新训练：
+- BLIP-based CKB
+- SD-based CKB
+
+【工程含义】
+复现时主训练对象应为：
+- semantic encoder / decoder
+- channel encoder / decoder
+- NAM
+- MED 机制相关逻辑
+而不是重新训练 BLIP 或 SD。
+
+5. BLIP-based CKB
+【论文明确写出】
+发送端使用 BLIP 做图像到文本语义提取。
+结构包括：
+- image encoder
+- image-grounded text decoder
+
+图像编码器：
+- 基于 ViT
+- 图像先切为 patch sequence x_p
+- 多层 encoder layer，每层包含 MSA 与 FF
+
+第一层 MSA 输出：
+\[
+m_{\mathrm{msa},1} = \mathrm{MSA}(\mathrm{LN}(x_p)) + x_p
+\]
+
+第一层 FF 输出：
+\[
+m_{\mathrm{ff},1} = \mathrm{GeLU}(W_{b,f}\cdot \mathrm{LN}(m_{\mathrm{msa},1}) + b_{b,f}) + m_{\mathrm{msa},1}
+\]
+
+第 L 层输出：
+\[
+m_L = \mathrm{LN}(m_{\mathrm{ff},L})
+\]
+
+文本解码器：
+- 采用 BERT 风格结构
+- 每层包含 Causal Self-Attention、Cross Attention、FF
+- 初始 token 为 "[Decoder]"
+
+第一层：
+\[
+k_{\mathrm{csa},1} = \mathrm{CSA}(\mathrm{LN}(D_0)) + D_0
+\]
+\[
+k_{\mathrm{ca},1} = \mathrm{CA}(\mathrm{LN}(k_{\mathrm{csa},1}), m_L) + k_{\mathrm{csa},1}
+\]
+\[
+k_{\mathrm{ff},1} = \mathrm{ReLU}(W'_{b,f}\cdot \mathrm{LN}(k_{\mathrm{ca},1}) + b'_{b,f}) + k_{\mathrm{ca},1}
+\]
+
+最后通过线性投影和 softmax 逐步生成文本描述 s。
+
+已确认输入输出：
+- 输入：图像 x \in \mathbb{R}^{H \times W \times C}
+- 输出：文本描述 s（token sequence / caption）
+
+6. SD-based CKB
+【论文明确写出】
+接收端使用 Stable Diffusion 做文本到图像重建。
+组件包括：
+- text encoder
+- feature generator
+- image decoder
+其中 feature generator 核心为 denoising U-Net。
+
+text encoder：
+- 把恢复文本 \hat{s} 映射为固定维语义向量
+- 由多层 stack 组成，每层包含 MSA 与 FF
+- 先进行 word embedding，再迭代编码得到 textual feature vectors
+
+扩散去噪迭代：
+\[
+Z_{t-1} =
+\frac{1}{\sqrt{\alpha_t}}
+\left(
+Z_t -
+\frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} f_{\theta}(Z_t,t,d)
+\right)
++ \sigma_t Y
+\]
+其中：
+- Z_t：时刻 t 的图像特征向量
+- \alpha_t：前向扩散方差超参数
+- \bar{\alpha}_t = \prod_{i=1}^{t} \alpha_i
+- f_{\theta}：预训练 noise prediction U-Net
+- d：文本语义向量
+- \sigma_t = \sqrt{1-\bar{\alpha}_t}
+- Y \sim \mathcal{N}(0, I)
+
+image decoder：
+- 在压缩语义空间完成去噪
+- 最后用 VAE decoder 从 latent 恢复到像素空间，得到 \hat{x}
+
+已确认输入输出：
+- 输入：恢复文本 \hat{s}
+- 输出：重建图像 \hat{x}
+
+7. semantic encoder / decoder
+【论文明确写出】
+semantic encoder：
+- 由 3 个 transformer encoder layers 组成
+- 与 NAM 交替排列
+- 每层 8 heads
+- feature dimension = 128
+
+semantic decoder：
+- 结构与 semantic encoder 相反，用于恢复文本
+
+【论文未明确写出】
+以下未在原文中写死：
+- tokenizer 类型
+- vocabulary 设计
+- 最大序列长度
+- position embedding 细节
+- decoder 的精确 block 排布
+- 语义 latent 与 channel latent 的 exact shape
+
+8. channel encoder / decoder
+【论文明确写出】
+channel encoder：
+- 2 个 FF hidden layers
+- 与 NAM 交替排列
+- 第一层 256 neurons
+- 第二层 128 neurons
+
+channel decoder：
+- 结构与 channel encoder 相反
+
+【论文未明确写出】
+- 发送符号维度
+- 功率归一化细节
+- 物理层调制方式
+- batch 级 exact tensor shape
+
+9. MED 机制
+【论文明确写出】
+MED 使用：
+- STM
+- LTM
+
+记号：
+\[
+M_{\mathrm{stm}} = \{s_i^{\mathrm{stm}}\}_{i=1}^{n_{\mathrm{stm}}}, \quad
+M_{\mathrm{ltm}} = \{s_j^{\mathrm{ltm}}\}_{j=1}^{n_{\mathrm{ltm}}}
+\]
+
+STM 满时，从 STM 中选择代表样本转入 LTM。
+最大 STM 容量记为 n_{stm}^{max}。
+
+RBF 相似度：
+\[
+\mathrm{RBF}(s_i^{\mathrm{stm}}, s_j^{\mathrm{ltm}})
+=
+\exp\left(
+-\frac{\|v_i^{\mathrm{stm}} - v_j^{\mathrm{ltm}}\|^2}{2\tau^2}
+\right)
+\]
+其中：
+- v_i^{stm}, v_j^{ltm} 为 semantic encoder 提取的特征向量
+- \tau = 10
+
+平均相似度：
+\[
+R(s_i^{\mathrm{stm}})
+=
+\frac{1}{n_{\mathrm{ltm}}}
+\sum_{k=1}^{n_{\mathrm{ltm}}}
+\mathrm{RBF}(s_i^{\mathrm{stm}}, s_k^{\mathrm{ltm}})
+\]
+
+样本转移规则：
+\[
+R(s_i^{\mathrm{stm}}) > \lambda
+\Rightarrow
+M_{\mathrm{ltm}} = M_{\mathrm{ltm}} \cup s_i^{\mathrm{stm}}
+\]
+
+实验中明确给出：
+- STM 最大样本数 = 500
+- sample selection threshold = 0.05
+
+10. NAM 机制
+【论文明确写出】
+NAM 输入：
+- SNR 值 r
+- 中间特征向量 G
+输出：
+- 校准特征向量 A
+
+SNR projection：
+\[
+v' = \mathrm{ReLU}(W_{n2}\cdot \mathrm{ReLU}(W_{n1}\cdot r + b_{n1}) + b_{n2})
+\]
+\[
+v = \mathrm{Sigmoid}(W_{n3}\cdot v' + b_{n3})
+\]
+
+feature scaling：
+\[
+K = \mathrm{Sigmoid}(e \cdot v)
+\]
+\[
+e = W_{n4}\cdot G + b_{n4}
+\]
+\[
+A_i = K_i \cdot G_i
+\]
+
+NAM 的 4 层 FF 神经元数：
+56, 128, 56, 56
+
+11. 训练目标与损失
+【论文明确写出】
+文本恢复损失为 CE：
+\[
+L_{\mathrm{CE}}(s,\hat{s})
+=
+-\sum_{l=1}^{L}
+q(w_l)\log p(w_i)
++
+(1-q(w_l))\log(1-p(w_i))
+\]
+说明：论文记号在此有不统一，但核心意义是让恢复文本 \hat{s} 的词分布逼近原始文本 s 的词分布。
+
+整体优化目标：
+\[
+(\alpha^*, \beta^*, \delta^*, \gamma^*)
+=
+\arg\min_{\alpha,\beta,\delta,\gamma}
+\mathbb{E}_{p(\mu)}\mathbb{E}_{p(s,\hat{s})}
+\left[L_{\mathrm{CE}}(s,\hat{s})\right]
+\]
+
+论文还明确写出：
+第一阶段训练 channel encoder / decoder + NAM 的目标是 minimizing the mutual information。
+
+【论文未明确写出】
+- mutual information 的具体计算公式
+- MI estimator 的具体选型
+- CE 与 channel-side objective 的联合权重
+
+12. 训练阶段
+【论文明确写出】
+训练分为 3 个阶段：
+
+Stage A：联合训练 channel encoder / decoder 与 NAM
+- 使用 MED
+- 目标：最小化 mutual information
+- 训练后冻结 channel encoder / decoder 与 NAM
+
+Stage B：联合训练 semantic encoder / decoder 与 NAM
+- 使用 MED
+- 目标：CE loss
+- 训练后冻结 semantic encoder / decoder 与 NAM
+
+Stage C：crossover-based iterative training
+- 在 channel 分支与 semantic 分支间交替迭代训练
+- 直到系统收敛
+
+【论文未明确写出】
+- 每阶段 epoch 数
+- optimizer
+- learning rate
+- batch size
+- scheduler
+- stopping criterion 的具体数值
+- “交替一次”的精确定义
+
+13. 数据集与实验配置
+【论文明确写出】
+数据集：
+- CIFAR
+- BIRDS
+- CATSvsDOGS
+均来自 Kaggle。
+
+实验环境：
+- Windows 2016 Server
+- Python 3.8
+- PyTorch 1.8.0
+- CUDA 11.6
+- CPU: Intel Xeon Silver 4210R
+- GPU: NVIDIA Tesla T4
+
+模型配置：
+- pretrained BLIP: 129MB
+- pretrained SD: 1.99GB
+- semantic encoder: 3 层 transformer encoder + NAM
+- 每层 8 heads, feature dim = 128
+- channel encoder: 2 层 FF = 256, 128
+- NAM FF: 56, 128, 56, 56
+- STM max size: 500
+- threshold \lambda: 0.05
+
+14. 评估指标
+【论文明确写出】
+系统从图像层与文本层两个角度评估。
+
+图像层：SSQ
+\[
+\mathrm{SSQ} = \frac{ST(\hat{S})}{ST(S)}
+\]
+其中 ST(·) 在本文中表示分类准确率。
+
+文本层：BLEU
+\[
+\log \mathrm{BLEU}
+=
+\min\left(1-\frac{l_{\hat{s}}}{l_s},0\right)
++
+\sum_{n=1}^{N} u_n \log p_n
+\]
+\[
+p_n
+=
+\frac{\sum_k \min(C_k(\hat{s}), C_k(s))}
+{\sum_k \min(C_k(\hat{s}))}
+\]
+
+15. 图与实验对应关系
+【论文明确写出】
+Fig. 7：不同 sender-side VLM 构建 KB 的比较
+- sender-side：BLIP / LEMON / RAM
+- receiver-side：统一 SD
+- channel：AWGN
+- dataset：CATSvsDOGS
+- metric：SSQ
+- 结论：BLIP 最好，LEMON 次之，RAM 最差
+
+Fig. 8：MED 的持续学习效果
+- 比较：with MED vs without MED
+- dataset：CIFAR、BIRDS、CATSvsDOGS
+- channel：Rayleigh
+- metric：BLEU-1 / BLEU-2
+- 输出 continual learning map
+- 结论：with MED 遗忘更少
+
+Fig. 9：NAM 的效果
+- with NAM vs without NAM（NNA）
+- metric：BLEU
+- 有 NAM 时训练 SNR 在 0 到 10 dB 均匀分布
+- 无 NAM 时分别在 0/2/4/8 dB 训练
+- 测试 SNR 在 0 到 10 dB
+- 结论：有 NAM 的系统更稳健
+
+Fig. 10：与其它 ISC 系统比较
+- baseline：JSCC(CNN), WITT(ViT)
+- (a) SNR vs classification/SSQ
+- (b) compression ratio 与 trainable parameters
+- (c) 原图、重建图、文本描述的语义对齐展示
+- 结论：低 SNR 下 VLM-CSC 更优；高 SNR 下直接传图像的基线在 SSQ 上可能更高；VLM-CSC 参数量更少、压缩率更低
+
+16. 明确未给出的点
+【论文未明确写出】
+以下内容必须在实现时单独标为“为复现做的合理实现选择”：
+- BLIP 的精确 checkpoint
+- SD 的精确版本号
+- tokenizer 类型
+- semantic / channel exact tensor shape
+- channel symbol 维度与归一化方式
+- mutual information loss 的具体实现
+- optimizer / learning rate / batch size / epoch
+- 数据预处理细节与划分细节
+- 持续学习每个任务的样本组织方式
+- Fig.10 compression ratio 的精确定义
+- downstream classifier 的具体结构
+
+==================================================
+第二层：开发任务书（给代理 AI）
+==================================================
+
+【总目标】
+基于上面的“论文事实包”，分阶段完成 VLM-CSC 复现工程。先实现真实主链路，再复现 Fig.7~Fig.10 所需实验。禁止先画代理曲线冒充实验结果。
+
+【硬性约束】
+1. 你无法访问论文原文，因此只能以上述事实包为论文依据。
+2. 事实包未写明的内容，一律标记为“为复现做的合理实现选择”。
+3. 不允许把工程实现补充伪装成“论文明确写出”。
+4. 主线优先：BLIP -> text -> semantic/channel -> text -> SD。
+5. 正式实验禁止 fallback；仅 smoke test 允许 mock。
+
+1. 建议目录结构
+vlm_csc/
+├─ configs/
+│  ├─ default.yaml
+│  ├─ model.yaml
+│  ├─ train.yaml
+│  └─ eval.yaml
+├─ data/
+│  ├─ datasets.py
+│  ├─ cifar_loader.py
+│  ├─ birds_loader.py
+│  ├─ catsdogs_loader.py
+│  ├─ text_cache.py
+│  └─ continual_split.py
+├─ models/
+│  ├─ kb_blip.py
+│  ├─ kb_sd.py
+│  ├─ semantic_encoder.py
+│  ├─ semantic_decoder.py
+│  ├─ channel_encoder.py
+│  ├─ channel_decoder.py
+│  ├─ nam.py
+│  ├─ med.py
+│  ├─ channel.py
+│  └─ baselines.py
+├─ losses/
+│  ├─ ce_loss.py
+│  └─ mi_loss.py
+├─ trainers/
+│  ├─ train_channel_stage.py
+│  ├─ train_semantic_stage.py
+│  ├─ train_crossover.py
+│  └─ continual_trainer.py
+├─ eval/
+│  ├─ eval_fig7.py
+│  ├─ eval_fig8.py
+│  ├─ eval_fig9.py
+│  ├─ eval_fig10.py
+│  ├─ metrics_text.py
+│  ├─ metrics_image.py
+│  └─ classifier_head.py
+├─ scripts/
+│  ├─ prepare_text_cache.py
+│  ├─ smoke_test.py
+│  ├─ train_all.py
+│  ├─ run_fig7.py
+│  ├─ run_fig8.py
+│  ├─ run_fig9.py
+│  └─ run_fig10.py
+└─ tests/
+   ├─ test_shapes.py
+   ├─ test_med.py
+   ├─ test_nam.py
+   └─ test_pipeline.py
+
+2. 分步实施计划
+
+Step 1：接通预训练 CKB
+任务：实现 models/kb_blip.py 与 models/kb_sd.py。
+要求：
+- BLIP 真实加载预训练模型，输入图像输出 caption string。
+- SD 真实加载预训练模型，输入文本输出图像。
+- 正式实验中不得用 mock caption 或随机图像替代。
+
+建议接口：
+- generate_caption(image) -> str
+- generate_caption_tokens(image) -> Dict[str, Tensor]
+- reconstruct_image(text) -> PIL.Image
+- expose_components() -> text_encoder / unet / vae（可选）
+
+验收：
+- 任意 1 张测试图，BLIP 成功输出 caption。
+- 任意 1 条文本，SD 成功输出图像。
+- 两模块可独立运行并打印成功标志。
+
+Step 2：实现 semantic encoder / decoder
+任务：实现 models/semantic_encoder.py 与 models/semantic_decoder.py。
+
+【论文明确写出】
+- 3 层 transformer encoder
+- 每层 8 heads
+- feature dim = 128
+- 与 NAM 交替排列
+
+【为复现做的合理实现选择】
+- tokenizer 后 token ids -> embedding(128)
+- 加 position embedding
+- encoder block x 3，每层后接 NAM
+- decoder 采用 transformer decoder 风格 x 3，每层后接 NAM
+- 使用 shifted target 做 teacher forcing，禁止 label leakage
+
+shape 约定（工程选择）：
+- input token ids: [B, L]
+- embedding: [B, L, 128]
+- semantic latent: [B, L, 128]
+- decoder logits: [B, L, V]
+
+验收：
+- 前向 shape 对齐
+- CE loss 正常反传
+- 一个小 batch 上 loss 能下降
+
+Step 3：实现 channel encoder / decoder + channel
+任务：实现 models/channel_encoder.py, models/channel_decoder.py, models/channel.py。
+
+【论文明确写出】
+- channel encoder 两层 FF：256 -> 128
+- 与 NAM 交替排列
+- decoder 结构相反
+
+【为复现做的合理实现选择】
+- semantic latent 若为 [B, L, 128]，可先做 pooling 得 [B, 128]
+- channel encoder 输出连续信道符号 [B, 128]
+- channel.py 支持 AWGN 与 Rayleigh
+- channel decoder 输出 [B, 128]，再作为 semantic decoder 的条件输入
+
+验收：
+- AWGN / Rayleigh 均可前向运行
+- 编码器与解码器维度闭合
+- 与 NAM 可直接串接
+
+Step 4：实现 NAM
+任务：实现 models/nam.py。
+
+【论文明确写出】
+- 四层 FF 神经元数：56, 128, 56, 56
+- 按论文公式完成 SNR projection 与 feature scaling
+
+接口要求：
+- 输入 r: [B, 1] 或 [B]
+- 输入 G: [B, D] 或 [B, L, D]
+- 输出 A 与 G 同 shape
+
+【为复现做的合理实现选择】
+- 当 G 为 [B, L, D] 时，将 SNR 投影向量扩展为 [B, 1, D] 再做逐元素缩放
+
+验收：
+- 不同 SNR 输入产生不同输出
+- 输出 shape 与输入特征 shape 一致
+
+Step 5：实现 MED
+任务：实现 models/med.py。
+
+【论文明确写出】
+- STM 最大容量 500
+- \tau = 10
+- threshold = 0.05
+
+必须实现接口：
+- add_to_stm(sample, feature)
+- is_stm_full()
+- compute_rbf(stm_feat, ltm_feat)
+- select_representatives()
+- transfer_to_ltm()
+- sample_train_batch()
+
+【为复现做的合理实现选择】
+- 每条样本至少保存 image id/path, caption text, token ids, semantic feature
+- LTM 先不设死上限，使用可增长实现
+- relevance evaluation 使用 semantic encoder 特征
+
+验收：
+- STM 满后能触发转移
+- 有样本进入 LTM
+- 训练 batch 可同时采到 STM 与 LTM 样本
+
+Step 6：准备文本缓存
+任务：实现 scripts/prepare_text_cache.py。
+
+【为复现做的合理实现选择】
+BLIP 为预训练模型，不需要重新训练。工程上应先遍历数据集生成并缓存 caption，避免训练中重复调用 BLIP。
+
+缓存至少包含：
+- image id
+- image path
+- caption string
+- token ids
+
+验收：
+- 三个数据集都可生成 text cache
+- 训练阶段可直接读取缓存而非重复在线 captioning
+
+Step 7：按论文三阶段训练
+任务：实现 trainers/train_channel_stage.py, trainers/train_semantic_stage.py, trainers/train_crossover.py, scripts/train_all.py。
+
+Stage A：train channel encoder / decoder + NAM
+【论文明确写出】
+- 使用 MED
+- 目标：minimizing mutual information
+- 训练后冻结
+
+【为复现做的合理实现选择】
+- 若论文未给出 MI 具体实现，则必须明确采用某种 surrogate loss 或替代目标，并在文档中单独标注“不等同于论文原式”
+
+Stage B：train semantic encoder / decoder + NAM
+【论文明确写出】
+- 使用 MED
+- 使用 CE loss
+- 训练后冻结
+
+Stage C：crossover-based iterative training
+【论文明确写出】
+- 交替训练 channel 分支与 semantic 分支
+- 直到收敛
+
+【为复现做的合理实现选择】
+- 明确“一个交替周期”的定义
+- 明确 early stopping 与验证逻辑
+
+验收：
+- 每阶段均产出 checkpoint
+- 每阶段 loss 有下降趋势
+- C 阶段至少能完成 1 个完整交替周期
+
+Step 8：实现 Fig.7 所需实验
+任务：实现 eval/eval_fig7.py 与 scripts/run_fig7.py。
+
+【论文明确写出】
+- sender-side: BLIP / LEMON / RAM
+- receiver-side: SD
+- channel: AWGN
+- dataset: CATSvsDOGS
+- metric: SSQ
+
+要求：
+- BLIP 与 RAM 必须真实接入
+- LEMON 必须先查找是否有可验证公开 checkpoint
+- 若找不到，输出“LEMON unresolved”，不得静默替代为别的 captioner
+
+验收：
+- 输出 Fig.7 对应的结果表与绘图数据
+- 模型来源说明中明确区分“论文明确写出”和“为复现做的合理实现选择”
+
+Step 9：实现 Fig.8 与 Fig.9
+任务：实现 eval/eval_fig8.py, eval/eval_fig9.py, scripts/run_fig8.py, scripts/run_fig9.py。
+
+Fig.8（MED）要求：
+- with MED vs without MED
+- dataset 顺序：CIFAR -> BIRDS -> CATSvsDOGS
+- channel: Rayleigh
+- metric: BLEU-1 / BLEU-2
+- 输出 continual learning map
+
+Fig.9（NAM）要求：
+- with NAM vs without NAM
+- with NAM: train SNR uniformly sampled from [0, 10] dB
+- without NAM: fixed train SNR in {0, 2, 4, 8} dB
+- test SNR from 0 to 10 dB
+- metric: BLEU
+
+验收：
+- Fig.8 趋势符合论文：with MED 遗忘较小
+- Fig.9 趋势符合论文：with NAM 在多测试 SNR 下更稳健
+
+Step 10：实现 Fig.10 与总验收
+任务：实现 eval/eval_fig10.py, eval/classifier_head.py, scripts/run_fig10.py。
+
+【论文明确写出】
+- baseline：JSCC(CNN), WITT(ViT)
+- 输出：
+  (a) SNR vs classification/SSQ
+  (b) compression ratio + trainable parameters
+  (c) 原图 / 重建图 / 文本描述展示
+
+【为复现做的合理实现选择】
+- 若 baseline 官方代码暂未完全接通，可先实现 scaffold，但必须明确标为 baseline scaffold，禁止当成正式复现完成
+- compression ratio 的具体计算方法必须单独说明
+- downstream classifier 的实现必须单独说明
+
+总验收标准：
+最低验收：
+1. 单张图像能完整走通：image -> BLIP -> text -> semantic/channel -> text -> SD -> image
+2. semantic 分支 CE loss 可下降
+3. NAM 可接受 SNR 并调制特征
+4. MED 可完成 STM -> LTM 转移
+5. 能输出 Fig.8 / Fig.9 / Fig.10 所需结果表
+
+中级验收：
+1. Fig.8 趋势与论文一致
+2. Fig.9 趋势与论文一致
+3. Fig.10 至少完成可解释的定性比较
+
+高级验收：
+- 结果趋势、排序和论文图中的关系基本一致
+
+3. 哪些地方允许 mock，哪些地方必须真接模型
+允许先 mock 的：
+- mutual information 的具体 estimator
+- Fig.10 baseline 的临时 scaffold
+- compression ratio 统计框架
+
+必须真接的：
+- BLIP 主链路
+- SD 主链路
+- semantic encoder / decoder
+- channel encoder / decoder
+- NAM
+- MED 的 STM/LTM 逻辑
+
+4. 代码级执行要求
+- 正式实验模式中禁用 fallback
+- smoke test 模式中可允许 fallback 或 mock，但必须打印“SMOKE MODE / NOT FORMAL EXPERIMENT”
+- 所有关键模块都要有 shape 日志或单元测试
+- 所有模型加载都要有来源说明、checkpoint 说明、license 说明
+- 所有“不确定点”都要集中写入一个 unresolved.md
+
+5. 交付物要求
+必须输出：
+1. 可运行代码
+2. 配置文件
+3. 模型加载验证脚本
+4. 各阶段训练脚本
+5. 各图实验脚本
+6. unresolved.md
+7. reproduction_report.md
+
+6. 代理 AI 最终执行顺序
+严格按以下顺序执行，不得跳步：
+1. 接 BLIP 主链路
+2. 接 SD 主链路
+3. 实现 semantic encoder / decoder
+4. 实现 channel encoder / decoder + channel
+5. 实现 NAM
+6. 实现 MED
+7. 生成 text cache
+8. 跑 Stage A / B / C 训练
+9. 复现 Fig.8 / Fig.9
+10. 最后处理 Fig.7 / Fig.10 与 unresolved baseline
+
+【最后提醒】
+- 你不能访问论文原文，因此上面的“论文事实包”是唯一论文依据。
+- 你不得把工程实现补充伪装成论文原文。
+- 你必须优先实现真实主链路，不要先生成代理实验图冒充复现完成。

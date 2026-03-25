@@ -1,0 +1,7 @@
+exp_name: fig7_ram
+figure: fig7
+sender_kb: ram
+receiver_kb: sd
+dataset: catsvsdogs
+channel:
+  channel_type: awgn
