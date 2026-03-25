@@ -1,9 +1,9 @@
 """Channel encoder/decoder with NAM interleaving.
 
 Input/Output shapes:
-- Input features: Tensor[B, 128] or Tensor[B, T, 128]
-- Encoded symbols: Tensor[B, C]
-- Decoded features: Tensor[B, 128]
+- Input features: Tensor[B, T, 128]
+- Encoded symbols: Tensor[B, T, C]
+- Decoded features: Tensor[B, T, 128]
 
 Paper traceability:
 - Hidden sizes 256/128 and symmetric decoder are 论文明确写出.
@@ -33,31 +33,18 @@ class ChannelEncoder(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, semantic_features: Tensor, snr: Optional[Tensor] = None) -> Tensor:
-        """Forward encode semantic features to channel symbols [B,C]."""
-        if semantic_features.ndim == 3:
-            if semantic_features.shape[-1] != self.d_model:
-                raise ValueError(
-                    f"Expected semantic_features shape [B,T,{self.d_model}], got {tuple(semantic_features.shape)}"
-                )
-            semantic_code = semantic_features.mean(dim=1)
-        elif semantic_features.ndim == 2:
-            if semantic_features.shape[-1] != self.d_model:
-                raise ValueError(
-                    f"Expected semantic_features shape [B,{self.d_model}], got {tuple(semantic_features.shape)}"
-                )
-            semantic_code = semantic_features
-        else:
+        """Forward encode [B,T,128] -> [B,T,C]."""
+        if semantic_features.ndim != 3 or semantic_features.shape[-1] != self.d_model:
             raise ValueError(
-                f"Expected semantic_features shape [B,{self.d_model}] or [B,T,{self.d_model}], got {tuple(semantic_features.shape)}"
+                f"Expected semantic_features shape [B,T,{self.d_model}], got {tuple(semantic_features.shape)}"
             )
-
-        batch_size = semantic_code.shape[0]
+        batch_size = semantic_features.shape[0]
         if snr is None:
-            snr = torch.zeros(batch_size, 1, device=semantic_code.device, dtype=semantic_code.dtype)
+            snr = torch.zeros(batch_size, 1, device=semantic_features.device, dtype=semantic_features.dtype)
         else:
-            snr = snr.to(device=semantic_code.device, dtype=semantic_code.dtype)
+            snr = snr.to(device=semantic_features.device, dtype=semantic_features.dtype)
 
-        x = self.fc1(semantic_code)
+        x = self.fc1(semantic_features)
         x = self.nam1(snr, x)
         x = self.relu(x)
 
@@ -84,10 +71,10 @@ class ChannelDecoder(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, received_symbols: Tensor, snr: Optional[Tensor] = None) -> Tensor:
-        """Forward decode channel symbols [B,C] -> semantic code [B,128]."""
-        if received_symbols.ndim != 2 or received_symbols.shape[-1] != self.symbol_dim:
+        """Forward decode [B,T,C] -> [B,T,128]."""
+        if received_symbols.ndim != 3 or received_symbols.shape[-1] != self.symbol_dim:
             raise ValueError(
-                f"Expected received_symbols shape [B,{self.symbol_dim}], got {tuple(received_symbols.shape)}"
+                f"Expected received_symbols shape [B,T,{self.symbol_dim}], got {tuple(received_symbols.shape)}"
             )
         batch_size = received_symbols.shape[0]
         if snr is None:

@@ -68,7 +68,7 @@ class ChannelTrainer:
             snr_db = float(batch.get("snr_db", 4.0))
 
             with torch.no_grad():
-                semantic_features = self.semantic_encoder.encode_sentence(token_ids=token_ids, snr=snr)
+                semantic_features = self.semantic_encoder(token_ids=token_ids, snr=snr)
 
             encoded_symbols = self.channel_encoder(semantic_features=semantic_features, snr=snr)
             received_symbols = self.channel_fn(encoded_symbols, snr_db=snr_db, training_mode=True, seed=self.seed)
@@ -103,7 +103,7 @@ class ChannelTrainer:
                 snr = batch.get("snr", torch.zeros(token_ids.shape[0], 1, device=self.device))
                 snr_db = float(batch.get("snr_db", 4.0))
 
-                semantic_features = self.semantic_encoder.encode_sentence(token_ids=token_ids, snr=snr)
+                semantic_features = self.semantic_encoder(token_ids=token_ids, snr=snr)
                 encoded_symbols = self.channel_encoder(semantic_features=semantic_features, snr=snr)
                 received_symbols = self.channel_fn(encoded_symbols, snr_db=snr_db, training_mode=False, seed=self.seed)
                 decoded_features = self.channel_decoder(received_symbols=received_symbols, snr=snr)

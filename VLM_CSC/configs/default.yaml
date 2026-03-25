@@ -11,14 +11,14 @@ ram:
   checkpoint_path: ""
 data:
   image_size: 224
-  max_caption_len: 48
+  max_caption_len: 32
   datasets_root: ../data
 model:
   d_model: 128
   n_heads: 8
   semantic_layers: 3
   channel_hidden: [256, 128]
-  symbol_dim: 32
+  symbol_dim: 128
   nam_hidden: [56, 128, 56, 56]
   dropout: 0.1
   checkpoint_blip: Salesforce/blip-image-captioning-base
@@ -34,14 +34,9 @@ train:
   optimizer: adamw
   lr: 1.0e-4
   weight_decay: 1.0e-2
-  batch_size: 32
+  batch_size: 16
   grad_accum_steps: 1
-  warmup_epochs: 10
-  stage_a_epochs: 20
-  stage_b_epochs: 20
-  joint_rounds: 10
-  patience: 3
-  epochs: 20
+  epochs: 10
   scheduler: cosine
   seeds: [1, 2, 3]
   med_enabled: false

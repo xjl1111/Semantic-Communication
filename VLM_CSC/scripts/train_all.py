@@ -27,32 +27,30 @@ from scripts.smoke_test import run_step5_smoke
 from trainers.trainer_channel import ChannelTrainer
 from trainers.trainer_joint import JointTrainConfig, JointTrainer
 from trainers.trainer_semantic import SemanticTrainer
-from losses.text_ce import text_cross_entropy
 from utils.seed import set_seed
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["formal", "smoke"], default="formal")
-    parser.add_argument("--stage", choices=["all", "warmup", "a", "b", "c"], default="all")
+    parser.add_argument("--stage", choices=["all", "a", "b", "c"], default="all")
     parser.add_argument("--cache-file", type=str, default="outputs/cache/captions/cifar_train.jsonl")
     parser.add_argument("--output-dir", type=str, default="outputs/train_all")
     parser.add_argument("--device", type=str, default="cpu")
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--seeds", nargs="+", type=int, default=[1, 2, 3])
-    parser.add_argument("--batch-size", type=int, default=32)
-    parser.add_argument("--max-len", type=int, default=48)
+    parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--max-len", type=int, default=32)
     parser.add_argument("--vocab-size", type=int, default=0)
     parser.add_argument("--d-model", type=int, default=128)
     parser.add_argument("--n-heads", type=int, default=8)
     parser.add_argument("--semantic-layers", type=int, default=3)
     parser.add_argument("--channel-hidden1", type=int, default=256)
     parser.add_argument("--channel-hidden2", type=int, default=128)
-    parser.add_argument("--symbol-dim", type=int, default=32)
+    parser.add_argument("--symbol-dim", type=int, default=128)
     parser.add_argument("--lr", type=float, default=1e-4)
-    parser.add_argument("--epochs-warmup", type=int, default=10)
-    parser.add_argument("--epochs-a", type=int, default=20)
-    parser.add_argument("--epochs-b", type=int, default=20)
+    parser.add_argument("--epochs-a", type=int, default=10)
+    parser.add_argument("--epochs-b", type=int, default=10)
     parser.add_argument("--joint-rounds", type=int, default=10)
     parser.add_argument("--patience", type=int, default=3)
     parser.add_argument("--channel", choices=["awgn", "rayleigh"], default="awgn")
@@ -144,53 +142,6 @@ def _ensure_device(device: str) -> str:
     if device == "cuda" and not torch.cuda.is_available():
         return "cpu"
     return device
-
-
-def _shift_for_decoder(token_ids: torch.Tensor, attention_mask: torch.Tensor, bos_id: int = 1) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    if token_ids.shape[1] < 2:
-        raise ValueError("token sequence length must be >= 2 for shifted decoder training")
-    decoder_input = token_ids[:, :-1].clone()
-    decoder_input[:, 0] = bos_id
-    targets = token_ids[:, 1:].contiguous()
-    target_mask = attention_mask[:, 1:].contiguous()
-    return decoder_input, targets, target_mask
-
-
-def _run_semantic_warmup(
-    semantic_encoder: SemanticEncoder,
-    semantic_decoder: SemanticDecoder,
-    dataloader: list[dict],
-    device: str,
-    lr: float,
-    epochs: int,
-) -> list[dict]:
-    optimizer = torch.optim.AdamW(list(semantic_encoder.parameters()) + list(semantic_decoder.parameters()), lr=lr)
-    history: list[dict] = []
-
-    for _ in range(epochs):
-        semantic_encoder.train()
-        semantic_decoder.train()
-        total_loss = 0.0
-        steps = 0
-        for raw_batch in dataloader:
-            token_ids = raw_batch["token_ids"].to(device).long()
-            attn_mask = raw_batch["attention_mask"].to(device).long()
-            snr = raw_batch.get("snr", torch.zeros(token_ids.shape[0], 1)).to(device)
-
-            decoder_input_ids, targets, target_mask = _shift_for_decoder(token_ids, attn_mask)
-            semantic_features = semantic_encoder(token_ids=token_ids, snr=snr)
-            logits = semantic_decoder(channel_features=semantic_features, target_ids=decoder_input_ids, snr=snr)
-            loss = text_cross_entropy(logits=logits, targets=targets, attention_mask=target_mask)
-
-            optimizer.zero_grad(set_to_none=True)
-            loss.backward()
-            optimizer.step()
-
-            total_loss += float(loss.item())
-            steps += 1
-
-        history.append({"loss": total_loss / max(steps, 1), "steps": steps})
-    return history
 
 
 def _run_formal(args: argparse.Namespace) -> dict:
@@ -291,16 +242,6 @@ def _run_formal(args: argparse.Namespace) -> dict:
         )
 
         seed_result: Dict[str, object] = {"seed": seed}
-        if args.stage in ("all", "warmup"):
-            seed_result["stage0_warmup"] = _run_semantic_warmup(
-                semantic_encoder=semantic_encoder,
-                semantic_decoder=semantic_decoder,
-                dataloader=dataloader,
-                device=device,
-                lr=args.lr,
-                epochs=args.epochs_warmup,
-            )
-
         if args.stage in ("all", "a"):
             hist_a = []
             for _ in range(args.epochs_a):
