@@ -71,6 +71,22 @@ class SemanticEncoder(nn.Module):
             x = nam(snr, x)
         return x
 
+    @staticmethod
+    def pool_features(sequence_features: Tensor, mode: str = "mean") -> Tensor:
+        """Pool [B,T,D] sequence features into sentence-level [B,D]."""
+        if sequence_features.ndim != 3:
+            raise ValueError(f"Expected sequence_features shape [B,T,D], got {tuple(sequence_features.shape)}")
+        if mode == "mean":
+            return sequence_features.mean(dim=1)
+        if mode == "cls":
+            return sequence_features[:, 0, :]
+        raise ValueError(f"Unsupported pool mode: {mode}")
+
+    def encode_sentence(self, token_ids: Tensor, snr: Optional[Tensor] = None, pool_mode: str = "mean") -> Tensor:
+        """Encode token ids [B,T] into sentence-level semantic code [B,D]."""
+        seq = self.forward(token_ids=token_ids, snr=snr)
+        return self.pool_features(seq, mode=pool_mode)
+
 
 class SemanticDecoder(nn.Module):
     """Transformer decoder stack for semantic decoding."""
@@ -104,12 +120,32 @@ class SemanticDecoder(nn.Module):
         self.output_proj = nn.Linear(d_model, vocab_size)
 
     def forward(self, channel_features: Tensor, target_ids: Optional[Tensor] = None, snr: Optional[Tensor] = None) -> Tensor:
-        """Decode [B,T,128] to logits [B,T,vocab_size]."""
-        if channel_features.ndim != 3 or channel_features.shape[-1] != self.d_model:
+        """Decode channel memory to logits [B,T,vocab_size].
+
+        Accepted channel feature shapes:
+        - [B,D]: bottleneck code
+        - [B,Tm,D]: sequence memory
+        """
+        if channel_features.ndim == 2:
+            if channel_features.shape[-1] != self.d_model:
+                raise ValueError(
+                    f"Expected channel_features shape [B,{self.d_model}], got {tuple(channel_features.shape)}"
+                )
+            batch_size = channel_features.shape[0]
+            memory = channel_features.unsqueeze(1)
+        elif channel_features.ndim == 3:
+            if channel_features.shape[-1] != self.d_model:
+                raise ValueError(
+                    f"Expected channel_features shape [B,T,{self.d_model}], got {tuple(channel_features.shape)}"
+                )
+            batch_size = channel_features.shape[0]
+            memory = channel_features
+        else:
             raise ValueError(
-                f"Expected channel_features shape [B,T,{self.d_model}], got {tuple(channel_features.shape)}"
+                f"Expected channel_features shape [B,{self.d_model}] or [B,T,{self.d_model}], got {tuple(channel_features.shape)}"
             )
-        batch_size, seq_len, _ = channel_features.shape
+
+        seq_len = memory.shape[1] if target_ids is None else target_ids.shape[1]
         if seq_len > self.max_len:
             raise ValueError(f"Sequence length {seq_len} exceeds max_len={self.max_len}")
 
@@ -126,9 +162,9 @@ class SemanticDecoder(nn.Module):
         tgt = self.dropout(tgt)
 
         if snr is None:
-            snr = torch.zeros(batch_size, 1, device=channel_features.device, dtype=channel_features.dtype)
+            snr = torch.zeros(batch_size, 1, device=memory.device, dtype=memory.dtype)
         else:
-            snr = snr.to(device=channel_features.device, dtype=channel_features.dtype)
+            snr = snr.to(device=memory.device, dtype=memory.dtype)
 
         causal_mask = torch.triu(
             torch.ones(seq_len, seq_len, device=channel_features.device, dtype=torch.bool),
@@ -137,7 +173,7 @@ class SemanticDecoder(nn.Module):
 
         x = tgt
         for layer, nam in zip(self.layers, self.nams):
-            x = layer(tgt=x, memory=channel_features, tgt_mask=causal_mask)
+            x = layer(tgt=x, memory=memory, tgt_mask=causal_mask)
             x = nam(snr, x)
 
         logits = self.output_proj(x)
@@ -146,8 +182,8 @@ class SemanticDecoder(nn.Module):
     @torch.no_grad()
     def greedy_decode(self, channel_features: Tensor, bos_id: int, eos_id: int, max_len: int) -> Tensor:
         """Greedy decoding output token ids [B,T]."""
-        if channel_features.ndim != 3:
-            raise ValueError(f"Expected channel_features shape [B,T,D], got {tuple(channel_features.shape)}")
+        if channel_features.ndim not in (2, 3):
+            raise ValueError(f"Expected channel_features shape [B,D] or [B,T,D], got {tuple(channel_features.shape)}")
 
         batch_size = channel_features.shape[0]
         decoded = torch.full(

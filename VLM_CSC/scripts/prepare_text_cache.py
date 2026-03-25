@@ -51,9 +51,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-cache-dir", type=str, default="D:/model_cache/vlm_csc/blip")
     parser.add_argument("--image-size", type=int, default=224)
     parser.add_argument("--batch-size", type=int, default=8)
-    parser.add_argument("--max-length", type=int, default=32)
+    parser.add_argument("--max-length", type=int, default=48)
     parser.add_argument("--allow-fallback", action="store_true")
-    parser.add_argument("--max-samples-per-dataset", type=int, default=200)
+    parser.add_argument("--max-samples-per-dataset", type=int, default=-1)
     return parser.parse_args()
 
 
@@ -111,9 +111,9 @@ def run_prepare_text_cache(
                         )
                     )
                     processed += 1
-                    if processed >= max_samples_per_dataset:
+                    if max_samples_per_dataset > 0 and processed >= max_samples_per_dataset:
                         break
-                if processed >= max_samples_per_dataset:
+                if max_samples_per_dataset > 0 and processed >= max_samples_per_dataset:
                     break
 
             jsonl_path = caption_dir / f"{ds_name}_train.jsonl"

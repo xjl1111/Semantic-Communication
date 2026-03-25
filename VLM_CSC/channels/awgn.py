@@ -15,14 +15,15 @@ from torch import Tensor
 
 def awgn_channel(symbols: Tensor, snr_db: float, training_mode: bool, seed: int = 42) -> Tensor:
     """Apply AWGN noise under target SNR."""
-    if symbols.ndim != 3:
-        raise ValueError(f"Expected symbols shape [B,T,C], got {tuple(symbols.shape)}")
+    if symbols.ndim not in (2, 3):
+        raise ValueError(f"Expected symbols shape [B,C] or [B,T,C], got {tuple(symbols.shape)}")
 
     device = symbols.device
     dtype = symbols.dtype
     snr_linear = 10.0 ** (snr_db / 10.0)
 
-    signal_power = torch.mean(symbols.pow(2), dim=(1, 2), keepdim=True)
+    reduce_dims = tuple(range(1, symbols.ndim))
+    signal_power = torch.mean(symbols.pow(2), dim=reduce_dims, keepdim=True)
     noise_power = signal_power / snr_linear
     noise_std = torch.sqrt(noise_power)
 

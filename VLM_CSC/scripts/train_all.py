@@ -10,7 +10,7 @@ import json
 import math
 import sys
 from pathlib import Path
-from typing import Iterable, List
+from typing import Dict, List
 
 import torch
 
@@ -27,31 +27,34 @@ from scripts.smoke_test import run_step5_smoke
 from trainers.trainer_channel import ChannelTrainer
 from trainers.trainer_joint import JointTrainConfig, JointTrainer
 from trainers.trainer_semantic import SemanticTrainer
+from losses.text_ce import text_cross_entropy
 from utils.seed import set_seed
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["formal", "smoke"], default="formal")
-    parser.add_argument("--stage", choices=["all", "a", "b", "c"], default="all")
+    parser.add_argument("--stage", choices=["all", "warmup", "a", "b", "c"], default="all")
     parser.add_argument("--cache-file", type=str, default="outputs/cache/captions/cifar_train.jsonl")
     parser.add_argument("--output-dir", type=str, default="outputs/train_all")
     parser.add_argument("--device", type=str, default="cpu")
-    parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--batch-size", type=int, default=16)
-    parser.add_argument("--max-len", type=int, default=32)
+    parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--seeds", nargs="+", type=int, default=[1, 2, 3])
+    parser.add_argument("--batch-size", type=int, default=32)
+    parser.add_argument("--max-len", type=int, default=48)
     parser.add_argument("--vocab-size", type=int, default=0)
     parser.add_argument("--d-model", type=int, default=128)
     parser.add_argument("--n-heads", type=int, default=8)
     parser.add_argument("--semantic-layers", type=int, default=3)
     parser.add_argument("--channel-hidden1", type=int, default=256)
     parser.add_argument("--channel-hidden2", type=int, default=128)
-    parser.add_argument("--symbol-dim", type=int, default=128)
+    parser.add_argument("--symbol-dim", type=int, default=32)
     parser.add_argument("--lr", type=float, default=1e-4)
-    parser.add_argument("--epochs-a", type=int, default=1)
-    parser.add_argument("--epochs-b", type=int, default=1)
-    parser.add_argument("--joint-rounds", type=int, default=3)
-    parser.add_argument("--patience", type=int, default=1)
+    parser.add_argument("--epochs-warmup", type=int, default=10)
+    parser.add_argument("--epochs-a", type=int, default=20)
+    parser.add_argument("--epochs-b", type=int, default=20)
+    parser.add_argument("--joint-rounds", type=int, default=10)
+    parser.add_argument("--patience", type=int, default=3)
     parser.add_argument("--channel", choices=["awgn", "rayleigh"], default="awgn")
     parser.add_argument("--snr-mode", choices=["fixed", "uniform"], default="fixed")
     parser.add_argument("--snr-db", type=float, default=4.0)
@@ -143,6 +146,53 @@ def _ensure_device(device: str) -> str:
     return device
 
 
+def _shift_for_decoder(token_ids: torch.Tensor, attention_mask: torch.Tensor, bos_id: int = 1) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    if token_ids.shape[1] < 2:
+        raise ValueError("token sequence length must be >= 2 for shifted decoder training")
+    decoder_input = token_ids[:, :-1].clone()
+    decoder_input[:, 0] = bos_id
+    targets = token_ids[:, 1:].contiguous()
+    target_mask = attention_mask[:, 1:].contiguous()
+    return decoder_input, targets, target_mask
+
+
+def _run_semantic_warmup(
+    semantic_encoder: SemanticEncoder,
+    semantic_decoder: SemanticDecoder,
+    dataloader: list[dict],
+    device: str,
+    lr: float,
+    epochs: int,
+) -> list[dict]:
+    optimizer = torch.optim.AdamW(list(semantic_encoder.parameters()) + list(semantic_decoder.parameters()), lr=lr)
+    history: list[dict] = []
+
+    for _ in range(epochs):
+        semantic_encoder.train()
+        semantic_decoder.train()
+        total_loss = 0.0
+        steps = 0
+        for raw_batch in dataloader:
+            token_ids = raw_batch["token_ids"].to(device).long()
+            attn_mask = raw_batch["attention_mask"].to(device).long()
+            snr = raw_batch.get("snr", torch.zeros(token_ids.shape[0], 1)).to(device)
+
+            decoder_input_ids, targets, target_mask = _shift_for_decoder(token_ids, attn_mask)
+            semantic_features = semantic_encoder(token_ids=token_ids, snr=snr)
+            logits = semantic_decoder(channel_features=semantic_features, target_ids=decoder_input_ids, snr=snr)
+            loss = text_cross_entropy(logits=logits, targets=targets, attention_mask=target_mask)
+
+            optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            optimizer.step()
+
+            total_loss += float(loss.item())
+            steps += 1
+
+        history.append({"loss": total_loss / max(steps, 1), "steps": steps})
+    return history
+
+
 def _run_formal(args: argparse.Namespace) -> dict:
     cache_file = Path(args.cache_file)
     if not cache_file.exists():
@@ -151,8 +201,9 @@ def _run_formal(args: argparse.Namespace) -> dict:
         )
 
     device = _ensure_device(args.device)
-    set_seed(args.seed)
-    dataloader, vocab_size_from_cache = _build_batches_from_cache(
+    seeds = args.seeds if args.seeds else [args.seed]
+
+    base_dataloader, vocab_size_from_cache = _build_batches_from_cache(
         cache_file=cache_file,
         batch_size=args.batch_size,
         max_len=args.max_len,
@@ -160,97 +211,135 @@ def _run_formal(args: argparse.Namespace) -> dict:
         snr_db=args.snr_db,
         snr_min_db=args.snr_min_db,
         snr_max_db=args.snr_max_db,
-        seed=args.seed,
+        seed=seeds[0],
     )
     vocab_size = max(args.vocab_size, vocab_size_from_cache, 128)
-
-    semantic_encoder = SemanticEncoder(
-        vocab_size=vocab_size,
-        d_model=args.d_model,
-        n_heads=args.n_heads,
-        num_layers=args.semantic_layers,
-    ).to(device)
-    semantic_decoder = SemanticDecoder(
-        vocab_size=vocab_size,
-        d_model=args.d_model,
-        n_heads=args.n_heads,
-        num_layers=args.semantic_layers,
-    ).to(device)
-    channel_encoder = ChannelEncoder(
-        d_model=args.d_model,
-        hidden1=args.channel_hidden1,
-        hidden2=args.channel_hidden2,
-        symbol_dim=args.symbol_dim,
-    ).to(device)
-    channel_decoder = ChannelDecoder(
-        d_model=args.d_model,
-        hidden1=args.channel_hidden1,
-        hidden2=args.channel_hidden2,
-        symbol_dim=args.symbol_dim,
-    ).to(device)
-
-    channel_fn = _pick_channel_fn(args.channel)
-    trainer_a = ChannelTrainer(
-        semantic_encoder=semantic_encoder,
-        channel_encoder=channel_encoder,
-        channel_decoder=channel_decoder,
-        dataloader=dataloader,
-        channel_fn=channel_fn,
-        device=device,
-        lr=args.lr,
-        seed=args.seed,
-    )
-    trainer_b = SemanticTrainer(
-        semantic_encoder=semantic_encoder,
-        semantic_decoder=semantic_decoder,
-        channel_encoder=channel_encoder,
-        channel_decoder=channel_decoder,
-        dataloader=dataloader,
-        channel_fn=channel_fn,
-        device=device,
-        lr=args.lr,
-        seed=args.seed,
-    )
 
     result: dict = {
         "mode": "formal",
         "stage": args.stage,
         "cache_file": str(cache_file),
         "device": device,
-        "num_batches": len(dataloader),
+        "num_batches": len(base_dataloader),
         "vocab_size": vocab_size,
         "channel": args.channel,
+        "symbol_dim": args.symbol_dim,
+        "seeds": seeds,
     }
 
-    if args.stage in ("all", "a"):
-        hist_a = []
-        for _ in range(args.epochs_a):
-            train_stats = trainer_a.train_one_epoch()
-            val_stats = trainer_a.validate()
-            hist_a.append({"train": train_stats, "val": val_stats})
-        result["stage_a"] = hist_a
+    per_seed: list[Dict[str, object]] = []
+    channel_fn = _pick_channel_fn(args.channel)
 
-    if args.stage in ("all", "b"):
-        hist_b = []
-        for _ in range(args.epochs_b):
-            train_stats = trainer_b.train_one_epoch()
-            val_stats = trainer_b.validate()
-            hist_b.append({"train": train_stats, "val": val_stats})
-        result["stage_b"] = hist_b
-
-    if args.stage in ("all", "c"):
-        joint = JointTrainer(
-            trainer_a,
-            trainer_b,
-            config=JointTrainConfig(max_rounds=args.joint_rounds, patience=args.patience),
+    for seed in seeds:
+        set_seed(seed)
+        dataloader, _ = _build_batches_from_cache(
+            cache_file=cache_file,
+            batch_size=args.batch_size,
+            max_len=args.max_len,
+            snr_mode=args.snr_mode,
+            snr_db=args.snr_db,
+            snr_min_db=args.snr_min_db,
+            snr_max_db=args.snr_max_db,
+            seed=seed,
         )
-        result["stage_c"] = joint.fit()
 
-    if "stage_c" in result:
-        best_loss = float(result["stage_c"].get("best_combined_val_loss", math.inf))
+        semantic_encoder = SemanticEncoder(
+            vocab_size=vocab_size,
+            d_model=args.d_model,
+            n_heads=args.n_heads,
+            num_layers=args.semantic_layers,
+        ).to(device)
+        semantic_decoder = SemanticDecoder(
+            vocab_size=vocab_size,
+            d_model=args.d_model,
+            n_heads=args.n_heads,
+            num_layers=args.semantic_layers,
+        ).to(device)
+        channel_encoder = ChannelEncoder(
+            d_model=args.d_model,
+            hidden1=args.channel_hidden1,
+            hidden2=args.channel_hidden2,
+            symbol_dim=args.symbol_dim,
+        ).to(device)
+        channel_decoder = ChannelDecoder(
+            d_model=args.d_model,
+            hidden1=args.channel_hidden1,
+            hidden2=args.channel_hidden2,
+            symbol_dim=args.symbol_dim,
+        ).to(device)
+
+        trainer_a = ChannelTrainer(
+            semantic_encoder=semantic_encoder,
+            channel_encoder=channel_encoder,
+            channel_decoder=channel_decoder,
+            dataloader=dataloader,
+            channel_fn=channel_fn,
+            device=device,
+            lr=args.lr,
+            seed=seed,
+        )
+        trainer_b = SemanticTrainer(
+            semantic_encoder=semantic_encoder,
+            semantic_decoder=semantic_decoder,
+            channel_encoder=channel_encoder,
+            channel_decoder=channel_decoder,
+            dataloader=dataloader,
+            channel_fn=channel_fn,
+            device=device,
+            lr=args.lr,
+            seed=seed,
+        )
+
+        seed_result: Dict[str, object] = {"seed": seed}
+        if args.stage in ("all", "warmup"):
+            seed_result["stage0_warmup"] = _run_semantic_warmup(
+                semantic_encoder=semantic_encoder,
+                semantic_decoder=semantic_decoder,
+                dataloader=dataloader,
+                device=device,
+                lr=args.lr,
+                epochs=args.epochs_warmup,
+            )
+
+        if args.stage in ("all", "a"):
+            hist_a = []
+            for _ in range(args.epochs_a):
+                train_stats = trainer_a.train_one_epoch()
+                val_stats = trainer_a.validate()
+                hist_a.append({"train": train_stats, "val": val_stats})
+            seed_result["stage_a"] = hist_a
+
+        if args.stage in ("all", "b"):
+            hist_b = []
+            for _ in range(args.epochs_b):
+                train_stats = trainer_b.train_one_epoch()
+                val_stats = trainer_b.validate()
+                hist_b.append({"train": train_stats, "val": val_stats})
+            seed_result["stage_b"] = hist_b
+
+        if args.stage in ("all", "c"):
+            joint = JointTrainer(
+                trainer_a,
+                trainer_b,
+                config=JointTrainConfig(max_rounds=args.joint_rounds, patience=args.patience),
+            )
+            seed_result["stage_c"] = joint.fit()
+
+        per_seed.append(seed_result)
+
+    result["per_seed"] = per_seed
+    best_losses = [
+        float(item["stage_c"].get("best_combined_val_loss", math.inf))
+        for item in per_seed
+        if "stage_c" in item
+    ]
+    if best_losses:
+        result["summary"] = {
+            "best_combined_val_loss_mean": float(sum(best_losses) / len(best_losses)),
+            "best_combined_val_loss_values": best_losses,
+        }
     else:
-        best_loss = math.inf
-    result["summary"] = {"best_combined_val_loss": best_loss}
+        result["summary"] = {"best_combined_val_loss_mean": math.inf, "best_combined_val_loss_values": []}
     return result
 
 

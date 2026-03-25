@@ -2,10 +2,10 @@
 
 Input:
 - r: Tensor[B,1] snr descriptor
-- G: Tensor[B,T,128] feature tensor
+- G: Tensor[B,128] or Tensor[B,T,128] feature tensor
 
 Output:
-- A: Tensor[B,T,128]
+- A: same shape as G
 
 Paper traceability:
 - Core equations and 56/128/56/56 neuron counts are 论文明确写出.
@@ -37,13 +37,18 @@ class NoiseAdaptiveModulator(nn.Module):
 
         Shapes:
             r: [B,1]
-            g: [B,T,128]
-            out: [B,T,128]
+            g: [B,128] or [B,T,128]
+            out: same shape as g
         """
         if r.ndim != 2 or r.shape[-1] != 1:
             raise ValueError(f"Expected r shape [B,1], got {tuple(r.shape)}")
-        if g.ndim != 3 or g.shape[-1] != self.d_model:
-            raise ValueError(f"Expected g shape [B,T,{self.d_model}], got {tuple(g.shape)}")
+        if g.ndim not in (2, 3) or g.shape[-1] != self.d_model:
+            raise ValueError(f"Expected g shape [B,{self.d_model}] or [B,T,{self.d_model}], got {tuple(g.shape)}")
+
+        squeeze_back = False
+        if g.ndim == 2:
+            g = g.unsqueeze(1)
+            squeeze_back = True
 
         v_prime = self.relu(self.snr_fc2(self.relu(self.snr_fc1(r))))
         v = self.sigmoid(self.snr_fc3(v_prime))
@@ -52,4 +57,6 @@ class NoiseAdaptiveModulator(nn.Module):
         k = self.sigmoid(e * v.unsqueeze(1))
         a_bottleneck = k * e
         out = self.out_fc(a_bottleneck)
+        if squeeze_back:
+            out = out.squeeze(1)
         return out
