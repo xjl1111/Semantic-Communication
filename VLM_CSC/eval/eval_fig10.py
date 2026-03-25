@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import torch
 
 from losses.compression import compression_ratio
-from models.baselines_jscc import JSCCBaseline
-from models.baselines_witt import WITTBaseline
+from models.baselines.jscc import JSCCBaseline
+from models.baselines.witt import WITTBaseline
 from models.classifier_eval import ClassifierEvaluator
 from eval.metrics_image import ssq
 
