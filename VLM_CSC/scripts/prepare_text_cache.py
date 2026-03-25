@@ -7,15 +7,33 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Iterable, List
 
 import torch
 from torch.utils.data import DataLoader
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from data.cache import CaptionCacheItem, ensure_cache_dirs, write_caption_cache
 from data.datasets import BirdsDataset, CIFARDataset, CatsVsDogsDataset
 from models.kb_blip import BlipKnowledgeBase
+
+
+def _cache_collate_fn(batch: list[dict]) -> dict:
+    images = torch.stack([item["image"] for item in batch], dim=0)
+    labels = torch.tensor([int(item["label"]) for item in batch], dtype=torch.long)
+    sample_ids = [str(item["sample_id"]) for item in batch]
+    dataset_names = [str(item["dataset_name"]) for item in batch]
+    return {
+        "image": images,
+        "label": labels,
+        "sample_id": sample_ids,
+        "dataset_name": dataset_names,
+    }
 
 
 def _build_dataloader(dataset_name: str, data_root: Path, image_size: int, batch_size: int) -> DataLoader:
@@ -39,7 +57,7 @@ def _build_dataloader(dataset_name: str, data_root: Path, image_size: int, batch
         dataset = CatsVsDogsDataset(root=str(data_root / "catsvsdogs"), split="train", image_size=image_size)
     else:
         raise ValueError(f"Unsupported dataset: {dataset_name}")
-    return DataLoader(dataset, batch_size=batch_size, shuffle=False)
+    return DataLoader(dataset, batch_size=batch_size, shuffle=False, collate_fn=_cache_collate_fn)
 
 
 def parse_args() -> argparse.Namespace:
