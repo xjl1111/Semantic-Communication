@@ -1,0 +1,677 @@
+论文复现代理 AI 提示词（可直接复制执行）
+
+你要复现的论文是：Visual Language Model-Based Cross-Modal Semantic Communication Systems（VLM-CSC）。
+你的目标不是写摘要，而是完成“可运行、可训练、可评估、可复现实验图”的工程实现。
+
+先遵守以下硬性规则：
+1. 只要论文明确写出，就按论文实现，并在代码注释、README、assumptions.md 中标注为“论文明确写出”。
+2. 论文没有明确写出的实现细节，不允许伪装成论文原文，必须显式标注为“为复现做的合理实现选择”。
+3. 你必须分阶段输出，每完成一个阶段都要先自检，再进入下一阶段；不要一口气生成整套代码而不验证。
+4. 每个阶段都要产出：代码、配置文件、运行命令、日志样例、阶段性验收结论。
+5. 若发现论文关键信息缺失，必须记录到 assumptions.md，并给出你采用的默认实现方案及理由。
+6. 不允许偷换任务定义。必须复现论文中的四类实验：Fig.7、Fig.8、Fig.9、Fig.10。
+7. 不允许把预训练 BLIP/SD 重新大规模训练；论文明确说明 BLIP 和 SD 作为预训练 VLM，不针对 CSC 重新训练。
+8. 代码必须是可维护工程，不是单文件脚本堆砌。
+9. 任何 shape、张量流向、损失项、信道模型、评估指标，都要在代码注释和文档中写清楚。
+10. 最终交付必须包含：完整代码、复现实验脚本、图表生成脚本、实验日志、assumptions.md、repro_report.md。
+
+====================================
+一、先建立“论文事实表”和“不确定项表”
+====================================
+先新建两个文档：
+- paper_facts.md
+- assumptions.md
+
+其中 paper_facts.md 先整理以下论文明确写出的事实：
+
+A. 系统总流程（论文明确写出）
+- 发射端输入图像 \(x \in \mathbb{R}^{H \times W \times C}\)。
+- 发射端由三部分组成：CKB、semantic encoder、channel encoder。
+- 发送符号表示为：
+  \[
+  y = C_\beta\big(S_\alpha(K_\theta(x), \mu), \mu\big)
+  \]
+- 信道模型：
+  \[
+  \hat{y} = h \cdot y + n
+  \]
+  其中 \(n\) 为 AWGN。
+- 接收端由三部分组成：channel decoder、semantic decoder、cross-modal knowledge base for reconstruction。
+- 重建图像表示为：
+  \[
+  \hat{x} = K_{\theta'}^{-1}\Big(S_\delta^{-1}(C_\gamma^{-1}(\hat{y}, \mu), \mu)\Big)
+  \]
+- 文本一致性损失采用交叉熵：
+  \[
+  L_{CE}(s,\hat{s}) = -\sum_{l=1}^{L} q(w_l)\log p(w_i) + (1-q(w_l))\log(1-p(w_i))
+  \]
+- 目标函数：
+  \[
+  (\alpha^*,\beta^*,\delta^*,\gamma^*) = \arg\min_{\alpha,\beta,\delta,\gamma} \mathbb{E}_{p(\mu)}\mathbb{E}_{p(s,\hat{s})}[L_{CE}(s,\hat{s})]
+  \]
+
+B. VLM-CSC 的 3 个核心贡献（论文明确写出）
+- CKB：发射端用 BLIP 从图像提取高信息密度文本语义；接收端用 SD 根据文本重建图像。
+- MED：STM + LTM 混合记忆，缓解 continual learning 中的 catastrophic forgetting。
+- NAM：基于 SNR 的注意力模块，动态调整 semantic coding 与 channel coding 的权重。
+
+C. 发射端 CKB（BLIP-based）结构（论文明确写出）
+- 使用 BLIP 的 image encoder + image-grounded text decoder。
+- image encoder 基于 ViT，将图像分成 patch，经过 MSA + FF 子层。
+- 第 1 个 image encoder layer 的写法：
+  \[
+  m_{msa,1} = MSA(LN(x_p)) + x_p
+  \]
+  \[
+  m_{ff,1} = GeLU(W_{b,f} \cdot LN(m_{msa,1}) + b_{b,f}) + m_{msa,1}
+  \]
+- 第 \(L\) 个 image encoder layer 输出：
+  \[
+  m_L = LN(m_{ff,L})
+  \]
+- text decoder 由 CSA、CA、FF 组成。
+- 第 1 个 text decoder layer：
+  \[
+  k_{csa,1} = CSA(LN(D_0)) + D_0
+  \]
+  \[
+  k_{ca,1} = CA(LN(k_{csa,1}), m_L) + k_{csa,1}
+  \]
+  \[
+  k_{ff,1} = ReLU(W'_{b,f} \cdot LN(k_{ca,1}) + b'_{b,f}) + k_{ca,1}
+  \]
+- 其最终输出是图像文本描述 \(s\)。
+
+D. 接收端 CKB（SD-based）结构（论文明确写出）
+- 使用 SD 的 text encoder、denoising U-Net、image decoder。
+- text encoder 输出固定维度语义向量，作为 diffusion 过程条件。
+- diffusion generator 的迭代公式：
+  \[
+  Z_{t-1} = \frac{1}{\sqrt{\alpha_t}}\left(Z_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} f_\theta(Z_t, t, d)\right) + \sigma_t Y
+  \]
+- image decoder 使用 VAE decoder，将语义空间特征映射回像素空间。
+
+E. MED（论文明确写出）
+- 同时维护 STM 和 LTM。
+- 当 STM 满时，计算 STM 与 LTM 的核距离，选择代表样本转移至 LTM。
+- RBF 核：
+  \[
+  RBF(s_i^{stm}, s_j^{ltm}) = \exp\left(-\frac{\|v_i^{stm}-v_j^{ltm}\|^2}{2\tau^2}\right)
+  \]
+- 论文明确给出 \(\tau = 10\)。
+- 平均相似度：
+  \[
+  R(s_i^{stm}) = \frac{1}{n_{ltm}}\sum_{k=1}^{n_{ltm}} RBF(s_i^{stm}, s_k^{ltm})
+  \]
+- 转移规则：
+  \[
+  R(s_i^{stm}) > \lambda \Rightarrow M_{ltm} = M_{ltm} \cup s_i^{stm}
+  \]
+- 论文明确给出：STM 最大样本数 500；sample selection threshold 为 0.05。
+
+F. NAM（论文明确写出）
+- 基于 SNR 的 attention/gating 模块。
+- SNR projection：3 层 FF，前两层 ReLU，第三层 Sigmoid。
+  \[
+  v' = ReLU(W_{n2}\cdot ReLU(W_{n1}\cdot r + b_{n1}) + b_{n2})
+  \]
+  \[
+  v = Sigmoid(W_{n3}\cdot v' + b_{n3})
+  \]
+- feature scaling：
+  \[
+  K = Sigmoid(e \cdot v)
+  \]
+  \[
+  e = W_{n4}\cdot G + b_{n4}
+  \]
+  \[
+  A_i = K_i \cdot G_i
+  \]
+- 论文明确给出：NAM 4 个 FF 层神经元数为 56, 128, 56, 56。
+
+G. 训练/实验中明确写出的模型设置（论文明确写出）
+- semantic encoder：3 个 transformer encoder layers，与 NAM 交替。
+- 每个 transformer encoder layer：8 heads，feature dimension = 128。
+- channel encoder：2 个 FF hidden layers，与 NAM 交替。
+- 2 个 hidden 层神经元数：256、128。
+- semantic decoder / channel decoder：结构与 encoder 对称、相反。
+- BLIP 预训练参数量：129MB。
+- SD 预训练参数量：1.99GB。
+- STM 最大样本数：500。
+- sample selection threshold：0.05。
+- 实验环境：Windows Server 2016, Python 3.8, PyTorch 1.8.0, CUDA 11.6, CPU Intel Xeon Silver 4210R 2.40GHz, GPU Tesla T4。
+
+H. 评估指标（论文明确写出）
+- Image-level：SSQ
+  \[
+  SSQ = \frac{ST(\hat{S})}{ST(S)}
+  \]
+  其中 \(ST(\cdot)\) 在本文中是 classification accuracy。
+- Text-level：BLEU
+  \[
+  \log BLEU = \min(1 - \frac{\hat{l}_s}{l_s}, 0) + \sum_{n=1}^{N} u_n \log p_n
+  \]
+  \[
+  p_n = \frac{\sum_k \min(C_k(\hat{s}), C_k(s))}{\sum_k \min(C_k(\hat{s}))}
+  \]
+
+I. 数据集与实验任务（论文明确写出）
+- 数据集：CIFAR、BIRDS、CATSvsDOGS。
+- Fig.7：BLIP / LEMON / RAM 作为 sender-side KB，对比 SSQ；receiver-side KB 统一使用 SD；信道为 AWGN；数据集为 CATSvsDOGS。
+- Fig.8：比较有无 MED；跨数据集 continual learning map；数据集为 CIFAR、BIRDS、CATSvsDOGS；指标为 BLEU；信道固定为 Rayleigh。
+- Fig.9：比较有无 NAM；VLM-CSC+NAM 在 \(SNR_{train}\in[0,10]dB\) 的均匀分布训练；无 NAM 版本分别在 0/2/4/8 dB 训练；评估 \(SNR_{test}\in[0,10]dB\)；指标 BLEU。
+- Fig.10：VLM-CSC vs JSCC(CNN) vs WITT(ViT)；评价分类性能、compression ratio、trainable parameters、semantic alignment。
+
+接着在 assumptions.md 中列出论文未明确写出的不确定项：
+- BLIP 的具体 checkpoint 名称。
+- SD 的具体 checkpoint 名称。
+- 图像分辨率、patch size、tokenizer 最大长度。
+- semantic encoder/decoder 的 dropout、FFN expansion、layernorm 细节。
+- channel encoder 输出维度、调制方式、功率归一化方式。
+- “minimizing the mutual information”在 channel encoder/decoder 训练中的具体可计算替代目标。
+- Rayleigh 信道精确实现细节。
+- SSQ 所依赖分类器的具体网络与训练方式。
+- baseline JSCC / WITT 的精确实现配置。
+- 各实验 epoch、batch size、optimizer、learning rate、scheduler、seed。
+
+====================================
+二、建立工程目录，并先写空接口
+====================================
+建立如下目录：
+
+vlm_csc/
+  configs/
+    default.yaml
+    fig7_blip.yaml
+    fig7_lemon.yaml
+    fig7_ram.yaml
+    fig8_med_on.yaml
+    fig8_med_off.yaml
+    fig9_nam_on.yaml
+    fig9_nam_off_0db.yaml
+    fig9_nam_off_2db.yaml
+    fig9_nam_off_4db.yaml
+    fig9_nam_off_8db.yaml
+    fig10_vlm_csc.yaml
+    fig10_jscc.yaml
+    fig10_witt.yaml
+  data/
+    datasets.py
+    transforms.py
+    continual_splits.py
+  models/
+    kb_blip.py
+    kb_alt_vlm.py
+    kb_sd.py
+    semantic_codec.py
+    channel_codec.py
+    nam.py
+    med.py
+    baselines_jscc.py
+    baselines_witt.py
+    classifier_eval.py
+  channels/
+    awgn.py
+    rayleigh.py
+  losses/
+    text_ce.py
+    mutual_info_proxy.py
+    compression.py
+  trainers/
+    trainer_semantic.py
+    trainer_channel.py
+    trainer_joint.py
+    trainer_baseline.py
+  eval/
+    eval_fig7.py
+    eval_fig8.py
+    eval_fig9.py
+    eval_fig10.py
+    metrics_text.py
+    metrics_image.py
+  scripts/
+    train_fig7.py
+    train_fig8.py
+    train_fig9.py
+    train_fig10.py
+    run_all.py
+  utils/
+    seed.py
+    logger.py
+    checkpoints.py
+    tensor_shapes.py
+  tests/
+    test_shapes.py
+    test_channel.py
+    test_nam.py
+    test_med.py
+  outputs/
+  paper_facts.md
+  assumptions.md
+  repro_report.md
+  README.md
+
+要求：
+- 先把所有模块空接口和 dataclass/config schema 写出来。
+- 每个模块至少写 docstring，标明输入、输出、shape、是否“论文明确写出”或“为复现做的合理实现选择”。
+- 在 tests/ 里先写 shape 测试模板。
+
+====================================
+三、实现数据层与实验数据组织
+====================================
+先实现数据读取与可复现实验切分。
+
+1. 数据集适配要求
+- `data/datasets.py` 中统一实现 Dataset wrapper：
+  - CIFARDataset
+  - BirdsDataset
+  - CatsVsDogsDataset
+- 每个样本统一返回：
+  - `image`: Tensor, shape `[3, H, W]`
+  - `label`: int
+  - `raw_text`: str or None（初始为空，后续由 BLIP 生成）
+  - `sample_id`: str
+  - `dataset_name`: str
+- 所有图像统一 resize 到一个固定分辨率。
+- 固定分辨率、归一化参数若论文未写出，写入 assumptions.md 并作为“为复现做的合理实现选择”。
+
+2. continual learning 数据组织
+- `data/continual_splits.py` 中实现：
+  - 顺序任务流：CIFAR -> BIRDS -> CATSvsDOGS
+  - 每个任务输出 train/val/test split
+  - 支持 Fig.8 的 continual learning map 评估
+- 保存 split 索引到 json，保证复现实验稳定。
+
+3. shape 与缓存
+- 实现 BLIP caption 缓存与 SD reconstruction 缓存目录，避免重复推理。
+- 所有 caption 以 jsonl 缓存，字段包括：sample_id, dataset_name, caption, tokenizer ids。
+
+====================================
+四、实现发射端与接收端核心模型
+====================================
+先完成 paper-faithful 主干，再做 baseline。
+
+1. BLIP sender-side CKB (`models/kb_blip.py`)
+- 功能：输入图像，输出文本描述 `s`。
+- 接口：
+  - `generate_caption(image: Tensor[B,3,H,W]) -> List[str]`
+  - `tokenize(captions: List[str]) -> Dict[str, Tensor]`
+- 论文明确写出：使用 BLIP 的 image encoder + image-grounded text decoder。
+- 为复现做的合理实现选择：
+  - 选用具体 BLIP checkpoint；优先选择与 129MB 规模最接近的 BLIP-base captioning checkpoint。
+  - 记录 checkpoint 名称、参数量、下载来源。
+- 必须输出：
+  - captions 文本
+  - token ids `[B, T]`
+  - attention mask `[B, T]`
+- `T` 若论文未给出，显式设定如 32 或 64，并记录。
+
+2. semantic encoder / decoder (`models/semantic_codec.py`)
+- semantic encoder 输入：token embedding `[B, T, 128]`
+- semantic encoder 输出：semantic feature `[B, T, 128]`
+- 论文明确写出：
+  - 3 个 transformer encoder layers
+  - 与 NAM 交替
+  - 8 heads
+  - feature dim = 128
+- 语义编码器推荐实现：
+  - `Embedding(vocab_size, 128)`
+  - 3 个 `TransformerEncoderBlock(d_model=128, nhead=8)`
+  - 每个 block 后接一个 NAM
+- semantic decoder：
+  - 输入：channel-decoded feature `[B, T, 128]`
+  - 输出：logits `[B, T, vocab_size]`
+  - 3 个 `TransformerDecoderBlock(d_model=128, nhead=8)` 与 NAM 交替
+  - 支持 teacher forcing 训练与 greedy decode 推理
+- 为复现做的合理实现选择：
+  - block 中 FFN expansion、dropout、positional encoding、mask 构造方式
+  - 建议采用标准 Transformer：FFN hidden dim = 4*128，dropout = 0.1，sinusoidal 或 learned positional encoding 二选一，但必须记录。
+
+3. channel encoder / decoder (`models/channel_codec.py`)
+- 论文明确写出：
+  - channel encoder 由 2 个 FF hidden layers 与 NAM 交替组成
+  - hidden sizes = 256, 128
+  - channel decoder 结构与其相反
+- 推荐实现：
+  - 输入 `[B, T, 128]`
+  - Linear(128,256) -> NAM -> ReLU
+  - Linear(256,128) -> NAM -> ReLU
+  - 输出仍为 `[B, T, 128]`
+- 若需要实际发射符号向量：
+  - 再加一个 `Linear(128, C)` 投影到 channel symbols，建议默认 `C=128` 先保证结构闭合；若后续需要压缩率实验，再将 `C` 配为可调超参数。
+- 为复现做的合理实现选择：
+  - power normalization：对最后一维进行平均功率归一化。
+  - 是否使用实数信道还是实/虚双通道表示，必须记录。
+
+4. receiver-side SD CKB (`models/kb_sd.py`)
+- 功能：输入恢复文本 `\hat{s}`，输出重建图像 `\hat{x}`。
+- 接口：
+  - `reconstruct_from_text(texts: List[str]) -> Tensor[B,3,H,W]`
+- 论文明确写出：使用 text encoder、denoising U-Net、VAE decoder。
+- 为复现做的合理实现选择：
+  - 选用具体 Stable Diffusion checkpoint，优先选择与 1.99GB 接近的 SD v1.x fp16 权重。
+  - 推理步数、guidance scale、negative prompt 是否使用。
+- 为保证实验可复现：
+  - 固定采样器（如 DDIM）
+  - 固定 inference steps
+  - 固定随机种子
+  - 所有生成图保存到 outputs/reconstructions/
+
+====================================
+五、实现 NAM、MED、信道和损失
+====================================
+1. NAM (`models/nam.py`)
+- 必须严格实现论文公式：
+  \[
+  v' = ReLU(W_{n2} ReLU(W_{n1}r + b_{n1}) + b_{n2})
+  \]
+  \[
+  v = Sigmoid(W_{n3}v' + b_{n3})
+  \]
+  \[
+  K = Sigmoid(e \cdot v)
+  \]
+  \[
+  e = W_{n4}G + b_{n4}
+  \]
+  \[
+  A_i = K_i G_i
+  \]
+- 论文明确写出 NAM 四层 FF 的神经元数量为 56, 128, 56, 56。
+- 这里存在维度不完全自洽的问题：semantic feature dim = 128，但 NAM 给出的 4 层尺寸是 56,128,56,56。
+- 必须在 assumptions.md 中单独解释这一不确定点，并采用下面的默认方案：
+  - 方案A（推荐）：把 NAM 视为 bottleneck gate。SNR projection 为 `1 -> 56 -> 128 -> 56`，feature projection 为 `d_model -> 56`，得到 gate 后再通过 `Linear(56, d_model)` 回到输入维度；这样既保留论文给出的 56/128/56/56，也保持与 128 维主干兼容。
+  - 不允许 silently 忽略这个冲突。
+- 写单元测试：
+  - 输入 `r:[B,1]`, `G:[B,T,128]`
+  - 输出 shape 仍为 `[B,T,128]`
+
+2. MED (`models/med.py`)
+- 实现 STM / LTM 两级记忆。
+- 每个记忆单元至少保存：
+  - semantic text
+  - semantic feature
+  - dataset/task id
+  - timestamp / insertion order
+- 必须实现：
+  - RBF kernel
+  - average similarity
+  - threshold transfer rule
+- 论文明确写出：
+  - `tau = 10`
+  - `max STM size = 500`
+  - `threshold = 0.05`
+- 注意：论文文字说“select samples from STM that are significantly different from those in LTM”，但公式使用 `R(s_i^{stm}) > λ` 时才转移，这在语义上更像“相似度高于阈值”。
+- 这是论文内部潜在不一致点。你必须：
+  - 在 assumptions.md 记录该冲突。
+  - 默认先按论文公式实现，即 `R > λ` 触发转移。
+  - 同时额外实现一个可切换开关 `transfer_if = 'greater' | 'smaller'`，便于后续对比排查。
+
+3. 信道实现 (`channels/awgn.py`, `channels/rayleigh.py`)
+- AWGN：
+  - 输入 `[B,T,C]`
+  - 根据目标 SNR(dB) 计算噪声方差，加入高斯噪声
+- Rayleigh：
+  - 输入 `[B,T,C]`
+  - 使用 i.i.d. Rayleigh fading 系数；若采用实值实现，则清楚记录。
+- 所有信道函数都必须支持：
+  - `snr_db: float`
+  - `training_mode: bool`
+  - 固定 seed
+
+4. 损失函数
+- semantic/text loss：严格实现 CE，训练 semantic encoder/decoder。
+- channel training loss：论文只说“minimizing the mutual information”，但没有给出具体可计算形式。
+- 因此必须在 `losses/mutual_info_proxy.py` 中实现“为复现做的合理实现选择”：
+  - 推荐使用 MSE/InfoNCE/negative mutual-information proxy 三选一中的一种，并记录理由。
+  - 默认推荐：对 channel encoder-decoder 输出前后特征做 MSE + power regularization，作为 mutual-information optimization 的可计算替代项。
+- 不允许声称这是论文原文。
+
+====================================
+六、训练流程必须拆成三阶段，并可交替迭代
+====================================
+按论文训练逻辑实现，不要改成一次性端到端黑盒训练。
+
+1. Stage A：训练 channel encoder / decoder + NAM
+- 冻结 BLIP、SD、semantic encoder、semantic decoder。
+- 输入来自 semantic encoder 的特征，经过 channel encoder -> channel -> channel decoder。
+- 优化目标：论文说是 minimization of mutual information / 消除噪声影响；采用你在 assumptions.md 记录的 proxy loss。
+- 训练完成后冻结 channel encoder / decoder + NAM 参数。
+
+2. Stage B：训练 semantic encoder / decoder + NAM
+- 冻结 BLIP、SD、channel encoder、channel decoder。
+- 训练 semantic encoder / decoder，在信道存在下恢复文本。
+- 损失使用 CE。
+- 训练完成后冻结 semantic encoder / decoder + NAM。
+
+3. Stage C：crossover-based iterative training
+- 交替执行 Stage A 与 Stage B，直到验证集不再提升。
+- 每轮交替都保存 checkpoint。
+- `trainers/trainer_joint.py` 实现早停、最佳模型选择、日志记录。
+
+4. continual learning / MED 接入方式
+- Fig.8、Fig.9、Fig.10 训练时，训练迭代器应支持 MED。
+- 每个 step 或每个 epoch 后：
+  - 把当前样本加入 STM
+  - 满容量时做 RBF relevance evaluation
+  - 按规则转移至 LTM
+  - 训练 batch 由 STM/LTM 按比例混合抽样
+- 论文未给出混合比例，这是“为复现做的合理实现选择”；默认 1:1，并记录。
+
+5. 训练超参数默认策略（均为“为复现做的合理实现选择”）
+论文没有给出 epoch、batch size、optimizer、lr，你必须明确写进 config：
+- optimizer：AdamW
+- lr：1e-4（semantic/channel 主干），如显存不足可调 5e-5
+- batch size：16（T4 可先用 8 或梯度累积）
+- epochs：
+  - Fig.7：10~20 epoch
+  - Fig.8/9：每个任务 5~10 epoch
+  - Fig.10：20 epoch 左右
+- scheduler：cosine or step，必须记录
+- seed：固定 3 个种子，输出均值和标准差
+
+====================================
+七、按图编号逐个复现实验，不要混在一起
+====================================
+1. 复现 Fig.7：VLM-based KB 比较
+目标：比较 BLIP / LEMON / RAM 作为 sender-side KB 的 SSQ。
+
+实现要求：
+- receiver-side KB 统一使用 SD。
+- dataset：CATSvsDOGS。
+- channel：AWGN。
+- 只替换 sender-side caption model，不改其余训练流程。
+- 对每个模型都独立训练/评估并画出 SSQ-SNR 曲线。
+- 输出：
+  - `outputs/fig7/curve.png`
+  - `outputs/fig7/results.csv`
+  - `outputs/fig7/logs/`
+
+验收标准：
+- BLIP 曲线应整体高于 LEMON 与 RAM。
+- 低 SNR 下 BLIP 仍保持相对最好表现。
+- 若排序不一致，先排查 caption 质量、token 长度、semantic decoder 是否训练充分。
+
+2. 复现 Fig.8：MED ablation
+目标：比较有无 MED 在 continual learning 下的 BLEU 退化情况。
+
+实现要求：
+- 任务顺序：CIFAR -> BIRDS -> CATSvsDOGS。
+- channel：Rayleigh（论文明确写出）。
+- 指标：BLEU-1, BLEU-2。
+- 输出 continual learning map，分别画：
+  - 无 MED 的 BLEU-1
+  - 无 MED 的 BLEU-2
+  - 有 MED 的 BLEU-1
+  - 有 MED 的 BLEU-2
+- 每个任务学习后，都在所有已见任务上回测。
+
+验收标准：
+- 无 MED 时，学习后续任务后，旧任务（特别是 CIFAR）BLEU 明显下降。
+- 有 MED 时，旧任务 BLEU 下降显著减轻。
+
+3. 复现 Fig.9：NAM ablation
+目标：验证 NAM 缓解 train-test SNR mismatch 的能力。
+
+实现要求：
+- NAM-on：训练时 `SNR_train ~ Uniform(0,10)dB`
+- NAM-off：分别在固定训练 SNR = {0,2,4,8} dB 下训练 4 个模型
+- 测试时：`SNR_test = 0,1,2,...,10 dB`
+- 指标：BLEU
+- 作图：x 轴 `SNR_test(dB)`，y 轴 BLEU
+
+验收标准：
+- NAM-on 曲线应整体优于各个固定 SNR 训练的无 NAM 模型。
+- 若不成立，先检查 NAM 是否真正插入 semantic/channel encoder 和 decoder 的每层后。
+
+4. 复现 Fig.10：与 JSCC/WITT 对比
+目标：比较 VLM-CSC、JSCC、WITT。
+
+实现要求：
+- dataset：CATSvsDOGS。
+- 指标至少包含：
+  - SSQ / classification accuracy
+  - compression ratio
+  - trainable parameters
+  - semantic alignment 可视化
+- baseline：
+  - JSCC：CNN-based
+  - WITT：ViT-based
+- 由于论文未给出 baseline 精确超参数，因此在 assumptions.md 中标记为“为复现做的合理实现选择”，但要尽量采用公开标准实现。
+
+compression ratio 的实现要求：
+- 论文未给出精确公式，因此你必须显式定义：
+  \[
+  compression\ ratio = \frac{\text{transmitted data size}}{\text{original image size}}
+  \]
+- transmitted data size 对 VLM-CSC 可优先用“经 semantic/channel encoder 后的发射符号总数 × 每符号位宽”等价估算；也可对文本 token 流进行等价码长估算，但必须统一对 baseline 使用可比较定义。
+- 不允许边实现边改定义。
+
+SSQ/classification accuracy 的实现要求：
+- 论文说 \(ST(\cdot)\) 是 classification accuracy。
+- 因此你必须先训练或选定一个固定图像分类器（例如 ResNet18）作为任务评估器。
+- 原图与重建图都送入同一个 classifier，计算 accuracy，然后按论文公式算 SSQ。
+- classifier 的选择属于“为复现做的合理实现选择”，必须记录。
+
+semantic alignment 图要求：
+- 保存原图、重建图、caption/decoded text。
+- 生成和论文 Fig.10(c) 类似的可视化拼图。
+
+====================================
+八、每个模块都要做 shape 审查与最小单测
+====================================
+必须给每个核心模块写最小可运行单测：
+
+1. BLIP wrapper
+- 输入 `[2,3,H,W]`
+- 输出 2 条 caption；token ids shape `[2,T]`
+
+2. semantic encoder
+- 输入 token ids `[B,T]`
+- embedding 后 `[B,T,128]`
+- encoder 后 `[B,T,128]`
+
+3. channel encoder + channel decoder
+- 输入 `[B,T,128]`
+- 经 channel encoder -> channel -> decoder 后仍为 `[B,T,128]`
+
+4. NAM
+- 输入 `r:[B,1]`, `G:[B,T,128]`
+- 输出 `[B,T,128]`
+
+5. MED
+- 构造 STM/LTM feature，验证 RBF 值在 `[0,1]`
+- 验证满容量时能触发 transfer
+
+6. SD wrapper
+- 输入 2 条文本
+- 输出图像 `[2,3,H,W]`
+
+若单测不通过，不允许进入大规模训练。
+
+====================================
+九、日志、图表、报告都要标准化输出
+====================================
+1. 每次训练输出：
+- config 副本
+- git commit hash
+- random seed
+- best checkpoint path
+- 训练/验证 loss 曲线
+- 关键指标 csv
+
+2. 每个实验输出：
+- `results.csv`
+- `plot.py` 或 `make_plot.py`
+- 最终图 `png` + `pdf`
+- `experiment_note.md`
+
+3. 最终 `repro_report.md` 必须包含：
+- 哪些内容严格来自论文
+- 哪些内容是合理实现选择
+- 每个图是否成功复现
+- 曲线趋势是否一致
+- 排序是否一致
+- 未解决差异及原因分析
+
+====================================
+十、默认合理实现选择（直接采用，除非实验失败）
+====================================
+以下不是论文原文，而是你现在应直接采用的默认工程选择：
+
+1. 图像分辨率：224x224。
+2. caption 最大长度：32。
+3. tokenizer padding：right padding。
+4. semantic decoder 训练：teacher forcing；推理：greedy decoding。
+5. semantic/channel 主干 optimizer：AdamW。
+6. learning rate：1e-4。
+7. batch size：16；显存不足则 batch size=8 + gradient accumulation。
+8. dropout：0.1。
+9. positional encoding：learned positional embedding。
+10. AWGN 与 Rayleigh 均使用实值实现，必要时在 assumptions.md 说明未使用复数基带。
+11. classifier evaluator：ResNet18，先在对应数据集训练到稳定，再固定权重用于 ST(·) 评估。
+12. BLIP checkpoint：优先选 BLIP-base image captioning；SD checkpoint：优先选 Stable Diffusion v1.5 fp16。
+13. channel training proxy loss：`MSE(decoded_feat, original_feat) + beta * power_penalty`。
+14. MED 混合采样比例：STM:LTM = 1:1。
+15. 所有图使用 3 个 seed 取均值，并保留单次结果。
+
+====================================
+十一、严格的执行顺序
+====================================
+按下面顺序执行，不允许跳步：
+
+Step 1. 建工程骨架、paper_facts.md、assumptions.md、空接口。
+Step 2. 实现数据集、缓存、continual split、单元测试骨架。
+Step 3. 实现 BLIP sender CKB、semantic encoder/decoder、channel encoder/decoder、NAM、AWGN/Rayleigh。
+Step 4. 实现 SD receiver CKB、MED、losses、训练器。
+Step 5. 先做 smoke test：单 batch 前向、单 epoch 训练，确保 shape 和 loss 正常。
+Step 6. 复现 Fig.7。
+Step 7. 复现 Fig.8。
+Step 8. 复现 Fig.9。
+Step 9. 复现 Fig.10（含 baseline）。
+Step 10. 汇总图表、生成 repro_report.md，明确论文事实与实现选择的边界。
+
+====================================
+十二、最终交付要求
+====================================
+最终你必须交付：
+1. 可运行代码仓库。
+2. 完整配置文件。
+3. 所有实验脚本。
+4. 所有图表生成脚本。
+5. tests 单测。
+6. paper_facts.md。
+7. assumptions.md。
+8. repro_report.md。
+9. 每个实验的结果 csv、图像、日志。
+10. 一份“差异说明”，专门说明哪些结果是趋势复现，哪些结果与论文数值仍有偏差，以及原因。
+
+如果你发现某一步无法严格由论文唯一确定，不要停下；继续实现，但必须把该项记录为“为复现做的合理实现选择”，并确保代码可跑、可验、可改。
+
+从现在开始执行，不要回到泛泛解释模式。先完成 Step 1，并输出：
+- 目录树
+- paper_facts.md 初稿
+- assumptions.md 初稿
+- 每个核心模块的空接口文件
+- 下一步计划
