@@ -1,7 +1,0 @@
-exp_name: fig7_blip
-figure: fig7
-sender_kb: blip
-receiver_kb: sd
-dataset: catsvsdogs
-channel:
-  channel_type: awgn

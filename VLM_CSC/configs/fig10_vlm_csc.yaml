@@ -1,4 +1,0 @@
-exp_name: fig10_vlm_csc
-figure: fig10
-model_variant: vlm_csc
-dataset: catsvsdogs

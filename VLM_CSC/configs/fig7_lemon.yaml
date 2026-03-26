@@ -1,7 +1,0 @@
-exp_name: fig7_lemon
-figure: fig7
-sender_kb: lemon
-receiver_kb: sd
-dataset: catsvsdogs
-channel:
-  channel_type: awgn

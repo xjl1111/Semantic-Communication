@@ -1,7 +1,0 @@
-exp_name: fig9_nam_off_8db
-figure: fig9
-train:
-  nam_enabled: false
-channel:
-  snr_train_mode: fixed
-  snr_train_db: 8.0

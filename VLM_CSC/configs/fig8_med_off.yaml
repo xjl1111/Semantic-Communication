@@ -1,7 +1,0 @@
-exp_name: fig8_med_off
-figure: fig8
-dataset_sequence: [cifar, birds, catsvsdogs]
-channel:
-  channel_type: rayleigh
-train:
-  med_enabled: false
