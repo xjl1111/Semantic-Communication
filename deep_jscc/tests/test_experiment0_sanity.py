@@ -7,6 +7,10 @@ from torch.utils.data import DataLoader
 # Ensure package root is on sys.path so local imports work
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+COMMON_DATASETS_DIR = REPO_ROOT / "data" / "datasets"
+TORCHVISION_CIFAR10_DIR = COMMON_DATASETS_DIR / "torchvision_cifar10"
+
 from model.encoder import Encoder
 from model.channel import Channel
 from model.decoder import Decoder
@@ -24,7 +28,8 @@ def _get_cifar10_test_batch(batch_size: int = 4) -> torch.Tensor:
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
-    test_ds = datasets.CIFAR10(root="data", train=False, download=True, transform=transform)
+    TORCHVISION_CIFAR10_DIR.mkdir(parents=True, exist_ok=True)
+    test_ds = datasets.CIFAR10(root=str(TORCHVISION_CIFAR10_DIR), train=False, download=True, transform=transform)
     loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=0)
     x, _ = next(iter(loader))
     return x

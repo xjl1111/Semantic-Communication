@@ -15,6 +15,10 @@ from torch.utils.data import DataLoader
 # Ensure package root is on sys.path so local imports work
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+COMMON_DATASETS_DIR = REPO_ROOT / "data" / "datasets"
+TORCHVISION_CIFAR10_DIR = COMMON_DATASETS_DIR / "torchvision_cifar10"
+
 from model.encoder import Encoder
 from model.channel import Channel
 from model.decoder import Decoder
@@ -154,12 +158,13 @@ def test_deepjscc_trained_snr_curve(steps: int = 3000):
         transforms.ToTensor(),
         transforms.Normalize(cifar_mean, cifar_std),
     ])
-    train_ds = datasets.CIFAR10(root='data', train=True, download=True, transform=transform)
+    TORCHVISION_CIFAR10_DIR.mkdir(parents=True, exist_ok=True)
+    train_ds = datasets.CIFAR10(root=str(TORCHVISION_CIFAR10_DIR), train=True, download=True, transform=transform)
     train_loader = DataLoader(train_ds, batch_size=B, shuffle=True, drop_last=True, num_workers=0)
     train_iter = iter(itertools.cycle(train_loader))
 
     # fixed test batch used after training
-    test_ds = datasets.CIFAR10(root='data', train=False, download=True, transform=transform)
+    test_ds = datasets.CIFAR10(root=str(TORCHVISION_CIFAR10_DIR), train=False, download=True, transform=transform)
     test_loader = DataLoader(test_ds, batch_size=256, shuffle=False, num_workers=0)
     test_x, _ = next(iter(test_loader))
 

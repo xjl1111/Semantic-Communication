@@ -1,0 +1,1043 @@
+《Visual Language Model-Based Cross-Modal Semantic Communication Systems》
+严格复现实验任务书（TXT版，公式使用 LaTeX 代码）
+
+说明：
+1. 本文档面向“代理 AI / 编码代理”执行，目标是搭建论文实验的严格复现工程。
+2. 文档内容区分为两类：
+   - 论文明确写出
+   - 为复现做的合理实现选择
+3. 任何论文未明确但工程实现必须补充的内容，都显式标为“不确定点 / 阻断项”，不得伪装成论文原文。
+4. 正式实验禁止 proxy、mock、fallback 混入结果路径；没有真实 checkpoint 和真实结果文件，不得生成正式图。
+
+====================================================================
+1. 论文任务与目标
+====================================================================
+
+论文要解决的是动态环境下的图像语义通信问题。传统 ISC 系统存在三类主要问题：
+- 图像语义表示的信息密度不足；
+- 动态环境下持续训练容易发生灾难性遗忘；
+- 训练 SNR 与测试/部署 SNR 不匹配时，系统泛化能力差。
+
+论文提出的系统为 VLM-based Cross-modal Semantic Communication (VLM-CSC)，其目标是：
+- 发送端使用视觉语言模型把图像转成高信息密度的文本语义；
+- 中间通过语义编码器、信道编码器和物理信道传输文本语义；
+- 接收端恢复文本语义后，再通过文本到图像生成模型重建图像；
+- 用 MED 提升持续学习能力；
+- 用 NAM 提升跨 SNR 条件下的鲁棒性。
+
+论文核心模块：
+- CKB（Cross-modal Knowledge Base）
+- MED（Memory-Efficient Dynamic learning）
+- NAM（Noise Attention Mechanism）
+
+====================================================================
+2. 输入输出与核心变量定义
+====================================================================
+
+2.1 论文明确写出的变量
+
+- 输入图像：
+  $x \in \mathbb{R}^{H \times W \times C}$
+
+- 发送端 CKB 输出的文本语义：
+  $s = K_{\theta}(x)$
+
+- 语义编码器：
+  $S_{\alpha}(\cdot, \mu)$
+
+- 信道编码器：
+  $C_{\beta}(\cdot, \mu)$
+
+- 发射符号：
+  $y = C_{\beta}(S_{\alpha}(K_{\theta}(x), \mu), \mu)$
+
+- 信道输出：
+  $\hat{y} = h \cdot y + n$
+
+- 信道解码器：
+  $C_{\gamma}^{-1}(\cdot, \mu)$
+
+- 语义解码器：
+  $S_{\delta}^{-1}(\cdot, \mu)$
+
+- 接收端重建图像：
+  $\hat{x} = K_{\theta'}^{-1}(S_{\delta}^{-1}(C_{\gamma}^{-1}(\hat{y}, \mu), \mu))$
+
+- SNR：
+  $\mu$
+
+- MED 中的短期记忆与长期记忆：
+  $M_{stm}, M_{ltm}$
+
+- NAM 中的中间变量：
+  $r, v, G, e, K, A$
+
+2.2 代码中建议的数据结构（为复现做的合理实现选择）
+
+- 图像：
+  `torch.FloatTensor[B, C, H, W]`
+
+- 文本：
+  - 原始字符串：`list[str]`
+  - token ids：`LongTensor[B, T]`
+  - attention mask：`BoolTensor[B, T]`
+
+- 语义特征：
+  `FloatTensor[B, T, 128]`
+
+- SNR：
+  `FloatTensor[B, 1]`
+
+- 恢复文本：
+  `list[str]`
+
+- 重建图像：
+  `FloatTensor[B, C, H, W]`
+
+2.3 不确定点
+
+论文没有明确写出以下内容：
+- token 序列长度 $T$
+- BLIP 输入分辨率
+- SD 输入 prompt 长度
+- 发射符号维数
+- 是按 token 逐步传输还是整句压缩后传输
+
+这些都属于工程上必须补充的实现选择，不能写成论文原文。
+
+====================================================================
+3. 论文明确写出的模型结构
+====================================================================
+
+3.1 发送端 CKB：BLIP-based CKB
+
+论文明确写出：
+- 发送端 CKB 使用 BLIP。
+- BLIP 包含 image encoder 与 image-grounded text decoder。
+- image encoder 基于 ViT，把图像切成 patch；每层包含 MSA 和 FF。
+- text decoder 基于 BERT；每层包含 CSA、CA、FF。
+- FF 激活函数在图像编码侧为 GeLU，在文本解码侧为 ReLU。
+- BLIP 作为预训练 VLM，不需要专门为 CSC 系统训练。
+
+输入输出：
+- 输入：图像 $x$
+- 输出：文本语义 $s$
+
+3.2 接收端 CKB：SD-based CKB
+
+论文明确写出：
+- 接收端 CKB 使用 Stable Diffusion。
+- 由 text encoder、denoising U-Net、image decoder 构成。
+- 在压缩语义空间中执行扩散去噪。
+- 最终由 VAE decoder 从 latent 恢复到像素空间。
+- SD 作为预训练 VLM，不需要专门为 CSC 系统训练。
+
+输入输出：
+- 输入：恢复文本 $\hat{s}$
+- 输出：重建图像 $\hat{x}$
+
+3.3 语义编码器 / 解码器
+
+论文明确写出：
+- 语义编码器由 3 个 transformer encoder layers 与 NAM 交替组成。
+- 每层有 8 个 attention heads。
+- feature dimension 为 128。
+- 语义解码器与语义编码器相反，由 transformer decoder layers 与 NAM 交替组成。
+
+3.4 信道编码器 / 解码器
+
+论文明确写出：
+- 信道编码器由 2 个 FF hidden layers 与 NAM 交替组成。
+- 第 1 hidden layer：256 neurons
+- 第 2 hidden layer：128 neurons
+- 信道解码器与信道编码器对称。
+
+3.5 MED
+
+论文明确写出：
+- MED 使用 STM 与 LTM 两类记忆池。
+- STM 最大容量为 500。
+- 使用 RBF kernel 评估相关性。
+- 阈值 $\lambda = 0.05$。
+- 核宽参数 $\tau = 10$。
+- MED 服务于语义编码器与语义解码器的持续学习。
+
+3.6 NAM
+
+论文明确写出：
+- NAM 是基于 SNR 的噪声注意机制。
+- SNR projection 使用 3 层 FF，前两层 ReLU，第三层 Sigmoid。
+- 第 4 层 FF 处理特征 $G$。
+- 4 层 FF 神经元数为：56, 128, 56, 56。
+- 输出形式为对中间特征逐元素缩放。
+
+3.7 baseline
+
+论文明确写出：
+- Fig.7 比较的 sender-side KB：BLIP、LEMON、RAM
+- Fig.10 比较的 ISC baseline：JSCC（CNN-based）、WITT（ViT-based）
+
+不确定点：
+- 论文没有明确给出这些 baseline 的公开代码地址、checkpoint 版本、训练细节。
+- 这是严格复现中的阻断项。
+
+====================================================================
+4. 根据图和正文可直接推导出的实现细节
+====================================================================
+
+4.1 主链路顺序
+
+由系统结构图和正文可直接推出，正式实验主链路必须为：
+
+`image -> BLIP CKB -> text -> semantic encoder (+NAM,+MED) -> channel encoder (+NAM) -> physical channel -> channel decoder (+NAM) -> semantic decoder (+NAM,+MED) -> recovered text -> SD CKB -> reconstructed image`
+
+4.2 NAM 的插入位置
+
+由于论文明确写出语义编码器、语义解码器、信道编码器、信道解码器都与 NAM 交替组成，因此可直接推出：
+- NAM 不是后处理模块；
+- NAM 是模型主干中的结构性模块；
+- with/without NAM 必须做真消融，而不是只改配置名。
+
+4.3 训练顺序
+
+论文明确写出：
+1. 先联合训练 channel encoder/decoder + NAM，并冻结；
+2. 再联合训练 semantic encoder/decoder + NAM，并冻结；
+3. 最后进行 crossover-based iterative training，直到收敛。
+
+因此可直接推出：
+- 正式复现不能随意改成“全部端到端一次性训练”；
+- 训练协议本身是论文的一部分。
+
+4.4 MED 的作用范围
+
+根据图和正文可直接推出：
+- MED 主要服务于 semantic encoder / decoder 的持续学习；
+- 论文没有明确要求必须给 BLIP 或 SD 本体维护 STM/LTM。
+
+4.5 共享维度约束
+
+根据正文给出的 feature dim=128、channel hidden dims=256/128 及 decoder 对称关系，可直接推出：
+- 语义编码器输出到信道编码器输入之间需要闭合到 128 维；
+- 否则解码器对称结构将难以对齐。
+
+====================================================================
+5. 数学公式与关键约束
+====================================================================
+
+5.1 系统主公式
+
+(1) 发送端输出：
+
+$$
+y = C_{\beta}(S_{\alpha}(K_{\theta}(x), \mu), \mu)
+$$
+
+代码实现含义：
+- 不能绕过 CKB；
+- 不能绕过语义编码器；
+- 不能直接把图像送进信道编码器冒充主链路。
+
+(2) 物理信道：
+
+$$
+\hat{y} = h \cdot y + n
+$$
+
+代码实现含义：
+- 正式实验至少需要支持 AWGN；
+- Fig.8 还要求支持 Rayleigh。
+
+(3) 接收端恢复：
+
+$$
+\hat{x} = K_{\theta'}^{-1}(S_{\delta}^{-1}(C_{\gamma}^{-1}(\hat{y}, \mu), \mu))
+$$
+
+代码实现含义：
+- 正式实验必须真实走 `channel decoder -> semantic decoder -> receiver CKB`。
+
+5.2 文本恢复损失
+
+(4) 交叉熵损失：
+
+$$
+L_{CE}(s, \hat{s}) = -\sum_{l=1}^{L} q(w_l)\log p(w_i) + (1-q(w_l))\log(1-p(w_i))
+$$
+
+代码实现含义：
+- 应按 token-level teacher forcing 的标准 CE 实现；
+- 论文公式排版略有歧义，但总体目标明确是文本恢复 CE。
+
+(5) 总体优化目标：
+
+$$
+(\alpha^*, \beta^*, \delta^*, \gamma^*) = \arg\min_{\alpha,\beta,\delta,\gamma} \mathbb{E}_{p(\mu)}\mathbb{E}_{p(s,\hat{s})}[L_{CE}(s,\hat{s})]
+$$
+
+代码实现含义：
+- 正式训练必须覆盖论文规定的 SNR 训练分布；
+- 不能只在单一 SNR 偷跑所有实验。
+
+5.3 BLIP sender CKB 公式
+
+(6) MSA 子层：
+
+$$
+m_{msa,1} = MSA(LN(x_p)) + x_p
+$$
+
+(7) FF 子层：
+
+$$
+m_{ff,1} = GeLU(W_{b,f} \cdot LN(m_{msa,1}) + b_{b,f}) + m_{msa,1}
+$$
+
+(8) 编码器最终输出：
+
+$$
+m_L = LN(m_{ff,L})
+$$
+
+(9) CSA 子层：
+
+$$
+k_{csa,1} = CSA(LN(D_0)) + D_0
+$$
+
+(10) CA 子层：
+
+$$
+k_{ca,1} = CA(LN(k_{csa,1}), m_L) + k_{csa,1}
+$$
+
+(11) FF 子层：
+
+$$
+k_{ff,1} = ReLU(W'_{b,f} \cdot LN(k_{ca,1}) + b'_{b,f}) + k_{ca,1}
+$$
+
+代码实现含义：
+- 正式复现应接入真实 BLIP，而不是手写 proxy captioner；
+- 如果用官方 BLIP 推理，可不必重写其内部 ViT/BERT。
+
+5.4 SD receiver CKB 公式
+
+(12) 反向扩散一步：
+
+$$
+Z_{t-1} = \frac{1}{\sqrt{\alpha_t}}
+\left(
+Z_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} f_\theta(Z_t, t, d)
+\right) + \sigma_t Y
+$$
+
+代码实现含义：
+- 正式主链路应真实接入 text encoder + U-Net + VAE decoder；
+- 不能把文本直接交给一个简化图像生成器，然后仍声称是论文同款。
+
+不确定点：
+- 论文没有写具体 SD 版本、scheduler、采样步数。
+- 这是工程补充项，也是严格复现阻断项之一。
+
+5.5 MED 公式
+
+(13) RBF kernel：
+
+$$
+RBF(s_i^{stm}, s_j^{ltm}) = \exp\left(-\frac{\|v_i^{stm} - v_j^{ltm}\|^2}{2\tau^2}\right)
+$$
+
+(14) 批量相似度矩阵：
+
+$$
+S = F_{exp}\left(- (B^{stm}(-B^{ltm})^T) \odot (B^{stm}(-B^{ltm})^T)/(2\tau^2)\right)
+$$
+
+(15) 单样本相关性：
+
+$$
+R(s_i^{stm}) = \frac{1}{n_{ltm}} \sum_{k=1}^{n_{ltm}} RBF(s_i^{stm}, s_k^{ltm})
+$$
+
+(16) 样本迁移规则：
+
+$$
+R(s_i^{stm}) > \lambda \Rightarrow M_{ltm} = M_{ltm} \cup s_i^{stm}
+$$
+
+代码实现含义：
+- 正式 MED 不是普通 replay buffer；
+- 必须真的有 STM/LTM、RBF、threshold、迁移逻辑。
+
+关键约束：
+- $\tau = 10$
+- $\lambda = 0.05$
+- $n_{stm}^{Max} = 500$
+
+5.6 NAM 公式
+
+(17) SNR projection 第 1~2 层：
+
+$$
+v' = ReLU(W_{n2} \cdot ReLU(W_{n1} \cdot r + b_{n1}) + b_{n2})
+$$
+
+(18) SNR projection 第 3 层：
+
+$$
+v = Sigmoid(W_{n3} \cdot v' + b_{n3})
+$$
+
+(19) 缩放因子：
+
+$$
+K = Sigmoid(e \cdot v)
+$$
+
+(20) 特征变换：
+
+$$
+e = W_{n4} \cdot G + b_{n4}
+$$
+
+(21) 输出特征：
+
+$$
+A_i = K_i \cdot G_i
+$$
+
+代码实现含义：
+- `use_nam=False` 时必须结构上移除 NAM；
+- `use_nam=True` 时必须真实参与训练。
+
+5.7 评估公式
+
+(22) 语义服务质量：
+
+$$
+SSQ = \frac{ST(\hat{S})}{ST(S)}
+$$
+
+代码实现含义：
+- 正式 Fig.7 / Fig.10 需要真实分类器与真实标签；
+- 论文将 $ST(\cdot)$ 具体化为分类准确率。
+
+阻断项：
+- 论文没有明确给出分类器结构、训练协议、checkpoint。
+
+(23) BLEU 形式：
+
+$$
+BLEU = BP \cdot \exp\left(\sum_{n=1}^{N} w_n \log p_n\right)
+$$
+
+(24) n-gram precision：
+
+$$
+p_n = \frac{\sum_{C \in \{Candidates\}} \sum_{n\text{-}gram \in C} Count_{clip}(n\text{-}gram)}{\sum_{C' \in \{Candidates\}} \sum_{n\text{-}gram' \in C'} Count(n\text{-}gram')}
+$$
+
+代码实现含义：
+- Fig.8、Fig.9 必须至少统计 BLEU-1、BLEU-2。
+
+====================================================================
+6. 训练设置
+====================================================================
+
+6.1 论文明确写出的训练设置
+
+- 数据集：CIFAR、BIRDS、CATSvsDOGS
+- BLIP：预训练模型，参数量约 129MB
+- SD：预训练模型，参数量约 1.99GB
+- semantic encoder：3 layers, 8 heads, feature dim = 128
+- channel encoder：2 hidden layers = 256, 128
+- NAM：4-layer FF = 56, 128, 56, 56
+- MED：STM max = 500, threshold = 0.05
+- 训练流程：
+  1. 先联合训练 channel encoder/decoder + NAM
+  2. 冻结上述模块
+  3. 再联合训练 semantic encoder/decoder + NAM
+  4. 冻结上述模块
+  5. 再做 crossover-based iterative training，直到收敛
+- 环境：Windows Server 2016, Python 3.8, PyTorch 1.8.0, CUDA 11.6, Tesla T4
+
+6.2 论文未明确写出但训练时必须补充的项
+
+以下内容论文没有明确写出：
+- batch size
+- learning rate
+- optimizer
+- scheduler
+- epoch 数
+- warmup
+- gradient clipping
+- random seed
+- 是否多次重复取均值
+- 数据划分比例
+- tokenizer
+- max text length
+- BLIP / SD 具体模型版本
+- mutual information loss 的精确定义
+- crossover 迭代停止条件
+
+这些都必须显式标记为“不确定点”，不能写成论文原文。
+
+6.3 正式实验所需训练
+
+正式实验至少必须真实打通：
+- BLIP sender-side CKB
+- SD receiver-side CKB
+- semantic encoder / decoder
+- channel encoder / decoder
+- NAM
+- MED
+- AWGN / Rayleigh physical channel
+- baseline 路径（Fig.7 / Fig.10）
+
+6.4 调试实验允许的最小训练配置（为复现做的合理实现选择）
+
+调试模式允许：
+- 小数据子集
+- 极少 epoch
+- 只做 shape 验证
+- 只验证 loss 非 NaN
+- 只验证日志与结果文件能正常写出
+
+但调试结果：
+- 不得进入正式结果目录；
+- 不得产正式图；
+- 不得用于宣称“复现成功”。
+
+====================================================================
+7. 评估设置
+====================================================================
+
+7.1 论文明确写出的指标
+
+- 图像级指标：SSQ
+- 文本级指标：BLEU
+
+7.2 Fig.7：VLM-based KB 对比
+
+论文明确写出：
+- sender-side KB：BLIP、LEMON、RAM
+- receiver-side KB：SD
+- 数据集：CATSvsDOGS
+- 信道：AWGN
+- 指标：SSQ
+- 结论：BLIP 最好，LEMON 次之，RAM 最差
+
+正式复现要求：
+- 每个 sender-KB 分支都要真实跑完整主链路；
+- 输出结果文件建议：
+  - `results/fig7/curve.csv`
+  - `results/fig7/details.csv`
+  - `results/fig7/plot.png`
+
+绝对禁止：
+- 只跑 BLIP，再手工构造 LEMON/RAM 曲线；
+- 用假文本模板冒充 LEMON 或 RAM 正式结果。
+
+阻断项：
+- LEMON / RAM 的正式公开实现与 checkpoint 未在论文中明确给出。
+
+7.3 Fig.8：MED 持续学习效果
+
+论文明确写出：
+- 比较：with MED vs without MED
+- 数据集顺序：CIFAR -> Birds -> CatsvsDOGS
+- 信道：Rayleigh
+- 指标：BLEU（图中为 BLEU-1 和 BLEU-2）
+- 评价方式：continual learning map
+
+正式复现要求：
+- 必须是顺序持续学习；
+- 不允许把三个数据集混在一起离线训练后伪造 continual map。
+
+输出结果文件建议：
+- `results/fig8/bleu1_with_med.npy`
+- `results/fig8/bleu2_with_med.npy`
+- `results/fig8/bleu1_without_med.npy`
+- `results/fig8/bleu2_without_med.npy`
+- `results/fig8/heatmap.png`
+
+7.4 Fig.9：NAM 多 SNR 训练效果
+
+论文明确写出：
+- with NAM：训练时 $SNR_{train} \sim Uniform[0,10]$ dB
+- without NAM：分别在固定 $0, 2, 4, 8$ dB 训练
+- 测试：$SNR_{test} = 0,1,2,\dots,10$ dB
+- 指标：BLEU
+- 结论：with NAM 优于固定训练点的 without NAM 系统
+
+正式复现要求：
+- with NAM：
+  - `use_nam = true`
+  - `train_snr_mode = uniform_range`
+  - `train_snr_min_db = 0`
+  - `train_snr_max_db = 10`
+- without NAM：
+  - `use_nam = false`
+  - `train_snr_mode = fixed_point`
+  - 分别固定在 0 / 2 / 4 / 8 dB
+- 输出建议：
+  - `results/fig9/with_nam_curve.csv`
+  - `results/fig9/without_nam_0_curve.csv`
+  - `results/fig9/without_nam_2_curve.csv`
+  - `results/fig9/without_nam_4_curve.csv`
+  - `results/fig9/without_nam_8_curve.csv`
+  - `results/fig9/combined_plot.png`
+
+绝对禁止：
+- 配置名写 without NAM，但结构里仍然保留 NAM；
+- 没有真实 checkpoint 就先画图。
+
+7.5 Fig.10：与其他 ISC 系统对比
+
+论文明确写出：
+- baseline：JSCC（CNN-based）、WITT（ViT-based）
+- 指标：classification accuracy / SSQ，compression ratio，trainable parameters，semantic alignment
+- 结论：低 SNR 下 VLM-CSC 更优，compression ratio 更低，参数量更少
+
+正式复现要求：
+- VLM-CSC、JSCC、WITT 都必须真实实现或接入真实公开实现；
+- 必须有真实分类器和真实标签；
+- compression ratio 必须基于真实传输 payload 统计。
+
+阻断项：
+- 分类器结构未明确；
+- compression ratio 精确定义未明确；
+- baseline 版本与训练协议未明确。
+
+====================================================================
+8. 代码实现建议（模块划分、文件结构、接口）
+====================================================================
+
+推荐目录结构：
+
+project/
+  configs/
+    common.yaml
+    fig7.yaml
+    fig8.yaml
+    fig9.yaml
+    fig10.yaml
+    formal/
+    smoke/
+  data/
+    raw/
+    processed/
+    splits/
+    caches/
+  models/
+    ckb/
+      blip_sender.py
+      sd_receiver.py
+      lemon_sender.py
+      ram_sender.py
+    semantic/
+      semantic_encoder.py
+      semantic_decoder.py
+    channel/
+      physical_channel.py
+      channel_encoder.py
+      channel_decoder.py
+    modules/
+      nam.py
+      med.py
+      losses.py
+  baselines/
+    jscc/
+    witt/
+  trainers/
+    train_channel_stage.py
+    train_semantic_stage.py
+    train_crossover.py
+    continual_train_med.py
+  evaluators/
+    bleu_eval.py
+    ssq_eval.py
+    compression_eval.py
+    semantic_alignment_eval.py
+  experiments/
+    fig7_run.py
+    fig8_run.py
+    fig9_run.py
+    fig10_run.py
+  audit/
+    formal_guard.py
+    anti_cheat_checks.py
+    checkpoint_meta.py
+  results/
+  scripts/
+
+8.1 主链路模块接口建议
+
+`blip_sender.py`
+- 输入：`FloatTensor[B,C,H,W]`
+- 输出：`list[str]`, `LongTensor[B,T]`
+- formal 模式必须真实接入 BLIP
+
+`semantic_encoder.py`
+- 输入：`FloatTensor[B,T,128]`, `FloatTensor[B,1]`
+- 输出：`FloatTensor[B,T,128]`
+- 结构：3 层 transformer encoder + interleaved NAM
+
+`channel_encoder.py`
+- 输入：`FloatTensor[B,T,128]`, `FloatTensor[B,1]`
+- 输出：信道符号
+- 结构：FF 256 -> 128 + interleaved NAM
+
+`physical_channel.py`
+- 输入：发射符号、SNR、信道类型
+- 输出：接收符号
+- formal 模式至少支持 AWGN、Rayleigh
+
+`channel_decoder.py`
+- 输入：接收符号、SNR
+- 输出：恢复语义特征
+
+`semantic_decoder.py`
+- 输入：恢复语义特征、SNR
+- 输出：token logits 或恢复文本
+
+`sd_receiver.py`
+- 输入：恢复文本
+- 输出：`FloatTensor[B,C,H,W]`
+- formal 模式必须真实接入 SD
+
+8.2 MED / NAM 模块接口建议
+
+`med.py`
+- `add(sample, feature)`
+- `evaluate_and_transfer()`
+- `sample_for_incremental_train()`
+
+`nam.py`
+- 输入：`snr`, `features`
+- 输出：缩放后的特征
+- formal 模式下 `use_nam=false` 必须彻底移除 NAM 参数
+
+8.3 审计模块建议
+
+`formal_guard.py`
+- formal 模式禁止 fallback / mock / proxy
+- 缺 checkpoint / 缺 baseline / 缺真实标签时直接报错
+
+`checkpoint_meta.py`
+- 每个正式 checkpoint 记录：
+  - figure_name
+  - experiment_name
+  - dataset_split_id
+  - sender_kb
+  - receiver_kb
+  - use_med
+  - use_nam
+  - channel_type
+  - train_snr_mode
+  - seed
+  - git hash
+  - config hash
+
+====================================================================
+9. 论文未明确但实现时必须补充的选择
+====================================================================
+
+以下全部属于“为复现做的合理实现选择”，不能写成论文原文。
+
+9.1 BLIP 具体版本
+- 论文只说 BLIP，未写 BLIP-1 / BLIP-2 / checkpoint。
+- 建议选择最接近原始 captioning 任务的公开版本。
+- 这是严格复现阻断项。
+
+9.2 SD 具体版本与 scheduler
+- 论文只说 SD，未写版本号、采样器、步数。
+- 必须在工程中显式固定。
+- 这是严格复现阻断项。
+
+9.3 tokenizer 与 max text length
+- 论文未写。
+- 工程上必须固定 tokenizer、截断策略、max length。
+- 建议把截断比例写入日志。
+
+9.4 mutual information loss 的精确定义
+- 论文提到通过 minimizing mutual information 训练 channel encoder/decoder + NAM；
+- 但没有给出具体 MI loss 公式、估计器、实现方式。
+- 这是严格复现阻断项。
+
+9.5 SSQ 的分类器 evaluator
+- 论文把 $ST(\cdot)$ 具体化为分类准确率；
+- 但没有给出分类器结构、训练策略、是否冻结、checkpoint。
+- 这是严格复现阻断项。
+
+9.6 compression ratio 的精确定义
+- 论文未明确是按 bit、byte、latent payload 还是 token payload 统计。
+- 建议在工程中按 `transmitted payload bits / original image bits` 定义；
+- 但必须明确标注这是工程补充定义。
+
+9.7 baseline 的实现来源
+- 论文未给出 JSCC / WITT / LEMON / RAM 的具体实现来源。
+- 必须记录 provenance：
+  - 仓库地址
+  - checkpoint 来源
+  - 是否为论文同款
+- 否则正式复现阻断。
+
+9.8 数据集版本与 split
+- 论文正文写了 CIFAR、BIRDS、CATSvsDOGS；
+- 但未明确给出精确版本与 split。
+- 工程上必须单独固定 URL、版本、下载日期、split 脚本。
+
+9.9 continual learning 的更新间隔与 STM/LTM 配比
+- 论文说“at specific intervals”进行增量训练；
+- 但没有给出精确间隔和配比。
+- 必须作为工程补充项显式写入配置。
+
+====================================================================
+10. 正式实验的硬性约束（禁止事项、阻断项、调试/正式边界）
+====================================================================
+
+10.1 禁止事项
+
+正式实验中，禁止：
+1. proxy 曲线代替真实结果
+2. 手工构造数值代替真实评估结果
+3. mock / stub / placeholder 输出进入正式结果
+4. fallback caption / fallback image 代替真实 BLIP / SD
+5. 随机图像代替正式样本
+6. 伪标签代替真实标签
+7. toy baseline 冒充论文 baseline
+8. without-NAM 结构里仍保留 NAM 参数
+9. 没有真实 checkpoint 就生成正式图
+10. 把 smoke test 结果混入 formal results
+
+10.2 调试实验与正式实验边界
+
+smoke test：
+- 只用于检查连通性、shape、loss 非 NaN、日志落盘；
+- 允许小数据子集；
+- 不允许产正式图；
+- 不允许宣称复现成功。
+
+formal experiment：
+- 必须真实接入 BLIP、SD、MED、NAM、物理信道、真实数据、真实标签、baseline；
+- 缺任一关键模块，必须报错退出。
+
+10.3 阻断项
+
+以下任一存在，都不得声称“严格复现完成”：
+1. 精确 BLIP / SD 版本无法确定
+2. mutual information loss 无精确定义
+3. baseline 同款公开实现缺失
+4. SSQ 分类器 evaluator 未定义
+5. compression ratio 定义不明确
+6. 数据集版本 / split 无法固定
+7. 正式 checkpoint 缺失
+8. 正式路径存在 fallback
+
+10.4 正式实验退出条件
+
+formal 模式下，以下情况必须立即中止：
+- `allow_fallback == true`
+- `allow_mock == true`
+- baseline provenance 未填写
+- 缺真实标签
+- 缺 checkpoint
+- checkpoint meta 与当前配置不一致
+- 结果文件缺失但请求产正式图
+- without-NAM 结构检查失败
+- MED 未真实启用但请求运行 Fig.8
+
+10.5 结果可信度说明
+
+- 真实复现：主链路、真实模块、真实数据、真实评估、真实 baseline 全部到位
+- 工程近似：主链路真实，但若干论文未公开细节采用工程补充实现
+- 占位验证：仅做 smoke test 或局部连通性验证
+
+====================================================================
+11. 复现时的注意事项与常见坑
+====================================================================
+
+1. 训练顺序错
+- 论文不是简单端到端直接训；
+- 若全部模块一次性混训，已偏离论文训练协议。
+
+2. shape 不闭合
+- semantic feature dim=128；
+- channel encoder 第二层是 128；
+- 解码器对称；
+- 中间接口乱改会导致解码端不闭合。
+
+3. MED 只写成普通缓存池
+- 那不是论文 MED；
+- 必须实现 STM/LTM + RBF + threshold + transfer。
+
+4. NAM 只写模块，不做多 SNR 正式训练
+- 那不算论文 Fig.9 的 NAM 实验；
+- with NAM 必须在 $[0,10]$ dB 均匀训练；
+- without NAM 必须在固定点训练。
+
+5. 语义特征未成型就训练信道
+- 论文是 staged + crossover 训练；
+- 训练顺序不能随意篡改。
+
+6. BLIP / SD 被 fallback 替代
+- 这样主链路已不再是论文原系统；
+- 最多算工程占位验证。
+
+7. Fig.10 分类器不可靠
+- SSQ 依赖分类器准确率；
+- 分类器未定义会导致整个图不可信。
+
+8. baseline 不是同款
+- 若不是论文同款公开实现，必须显式标注为 `non-identical baseline`。
+
+9. 数据集版本不固定
+- 会导致结果不可审计、不可重现。
+
+10. 先画图后复现
+- 硬性禁止；
+- 所有图必须可追溯到真实日志、真实 checkpoint、真实结果表。
+
+====================================================================
+12. 反作弊验收标准
+====================================================================
+
+把下面内容做成自动检查清单：
+
+1. 正式实验路径中不得调用任何 `_proxy_*` 函数
+2. `formal` 配置中 `allow_fallback` 必须为 `false`
+3. `formal` 配置中 `allow_mock` 必须为 `false`
+4. 评估时必须使用真实数据集标签
+5. Fig.10 不得使用伪标签
+6. Fig.7 / Fig.8 / Fig.9 / Fig.10 每张图都必须追溯到：
+   - 配置文件
+   - 训练日志
+   - checkpoint
+   - 结果表
+7. checkpoint 必须带 meta，至少含：
+   - figure_name
+   - experiment_name
+   - dataset_split_id
+   - sender_kb
+   - receiver_kb
+   - use_med
+   - use_nam
+   - channel_type
+   - train_snr_mode
+   - seed
+   - git hash
+8. without-NAM checkpoint 结构中不得出现 NAM 参数
+9. with-MED 实验日志中必须出现 STM/LTM 更新记录
+10. Fig.8 必须来自 sequential continual learning 日志，而不是离线一次性训练
+11. baseline 必须记录 provenance：
+   - 是否论文同款
+   - 仓库地址
+   - checkpoint 来源
+12. 没有真实 checkpoint，不得生成正式图
+13. 没有通过正式验收，不得写“复现成功”
+
+====================================================================
+13. 最终给代理 AI 的一键复制指令
+====================================================================
+
+下面这段可直接复制给代理 AI：
+
+读取论文《Visual Language Model-Based Cross-Modal Semantic Communication Systems》，按严格复现审计模式搭建工程，不要做摘要，不要做简化演示，不要伪造任何实验结果。
+
+第一阶段：搭建正式工程骨架。
+1. 创建目录：configs, data, models, baselines, trainers, evaluators, experiments, audit, results。
+2. 实现 formal_guard.py，用于阻止 fallback、mock、proxy、缺 checkpoint、缺真实标签、缺 baseline provenance 的正式实验。
+3. 实现 checkpoint_meta.py，要求所有正式 checkpoint 写入 figure_name、experiment_name、dataset_split_id、sender_kb、receiver_kb、use_med、use_nam、channel_type、train_snr_mode、seed、git hash、config hash。
+
+第二阶段：先打通论文主链路。
+4. 接入真实 BLIP sender CKB，不允许使用 fallback caption。
+5. 接入真实 SD receiver CKB，不允许使用 mock image generator。
+6. 实现 semantic encoder：3 层 transformer encoder，8 heads，feature dim=128，层间插入 NAM。
+7. 实现 semantic decoder：与 semantic encoder 对称的 decoder 结构，层间插入 NAM。
+8. 实现 channel encoder：2 个 FF hidden layers，hidden dims=256,128，层间插入 NAM。
+9. 实现 channel decoder：与 channel encoder 对称。
+10. 实现 physical channel，至少支持 AWGN 和 Rayleigh。
+11. 实现 NAM，严格按下列公式建模：
+
+$$
+v' = ReLU(W_{n2} \cdot ReLU(W_{n1} \cdot r + b_{n1}) + b_{n2})
+$$
+
+$$
+v = Sigmoid(W_{n3} \cdot v' + b_{n3})
+$$
+
+$$
+e = W_{n4} \cdot G + b_{n4}
+$$
+
+$$
+K = Sigmoid(e \cdot v)
+$$
+
+$$
+A_i = K_i \cdot G_i
+$$
+
+正式实验中 `use_nam=false` 时必须彻底移除 NAM 参数。
+
+12. 实现 MED，严格按下列公式建模：
+
+$$
+RBF(s_i^{stm}, s_j^{ltm}) = \exp\left(-\frac{\|v_i^{stm}-v_j^{ltm}\|^2}{2\tau^2}\right)
+$$
+
+$$
+R(s_i^{stm}) = \frac{1}{n_{ltm}} \sum_{k=1}^{n_{ltm}} RBF(s_i^{stm}, s_k^{ltm})
+$$
+
+$$
+R(s_i^{stm}) > \lambda \Rightarrow M_{ltm} = M_{ltm} \cup s_i^{stm}
+$$
+
+其中：
+- $\tau = 10$
+- $\lambda = 0.05$
+- `STM max = 500`
+
+不要把普通 replay buffer 冒充 MED。
+
+第三阶段：实现训练协议。
+13. 不要直接一锅端端到端训练。
+14. 先实现 channel encoder/decoder + NAM 的联合训练路径；训练后冻结。
+15. 再实现 semantic encoder/decoder + NAM 的联合训练路径；训练后冻结。
+16. 再实现 crossover-based iterative training，直到收敛。
+17. 论文没有给出 mutual information loss 的精确定义；把它显式标记为 strict reproduction blocker。除非找到作者代码或补充材料，否则只能将 channel-stage 训练标记为 engineering approximation，不得标成论文同款严格复现。
+18. 正式训练配置和 smoke 配置分离；smoke 只做连通性，不得产正式图。
+
+第四阶段：实现评估器。
+19. 实现 BLEU evaluator，至少输出 BLEU-1、BLEU-2。
+20. 实现 SSQ evaluator，
+
+$$
+SSQ = \frac{ST(\hat{S})}{ST(S)}
+$$
+
+其中 $ST(\cdot)$ 使用真实分类准确率；若分类器未定义，则把 Fig.7 和 Fig.10 标记为 blocker，不得伪造结果。
+21. 实现 compression evaluator，按 transmitted payload / original image payload 统计；明确这是工程补充定义，除非找到论文精确定义，否则不得声称严格一致。
+
+第五阶段：逐图实现正式实验。
+22. Fig.7：比较 BLIP、LEMON、RAM 三个 sender-side KB，receiver-side KB 统一为 SD；信道用 AWGN；数据集用 CATSvsDOGS；指标用 SSQ；输出 curve.csv、details.csv、plot.png。没有真实 LEMON/RAM 实现时，直接阻断，不要手工造曲线。
+23. Fig.8：比较 with MED 和 without MED；按 CIFAR -> Birds -> CatsvsDOGS 顺序做 continual learning；信道固定 Rayleigh；指标为 BLEU-1 和 BLEU-2；输出 continual learning map 所需矩阵和热图。禁止离线混训后伪造 continual map。
+24. Fig.9：实现真消融。with NAM 使用 `use_nam=true` 且 $SNR_{train} \sim Uniform[0,10]$ dB；without NAM 使用 `use_nam=false` 且分别在固定 $0/2/4/8$ dB 训练；全部在 $SNR_{test}=0,1,2,\dots,10$ dB 评估 BLEU；输出 5 条真实曲线。禁止只是改配置名而结构里仍保留 NAM。
+25. Fig.10：比较 VLM-CSC、JSCC(CNN)、WITT(ViT)；指标包括 SSQ、compression ratio、trainable parameters、semantic alignment。baseline 必须是真实公开实现或被明确标注为 `non-identical baseline`。没有真实 baseline、真实分类器或真实标签，直接阻断，不得作正式图。
+
+第六阶段：实现审计与反作弊。
+26. 编写 anti_cheat_checks.py，检查正式实验路径中不得调用 `_proxy_*`、不得启用 `allow_fallback`、不得使用 mock、不得用伪标签、不得无 checkpoint 作图。
+27. 所有正式图必须从真实结果表自动生成，不允许手工拟合曲线。
+28. 所有结果文件都要带 provenance：对应配置、checkpoint、日志、git hash、时间戳。
+29. 如果任何阻断项未解决，最终报告中只能写“工程近似复现”或“占位验证”，不得写“严格复现成功”。
+
+第七阶段：输出物要求。
+30. 每个 figure 单独输出 results 子目录。
+31. 每个 formal run 单独保存 config 副本、stdout/stderr 日志、metrics CSV、checkpoint meta。
+32. 在最终 summary 中分三类汇报：paper-explicit、engineering-choice、blocking-items。
+33. 绝不要为了演示先加 proxy；如果只是 smoke test，必须明确标为 smoke，不得混入 formal 路径。
+

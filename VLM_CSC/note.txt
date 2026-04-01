@@ -1,0 +1,338 @@
+可以，我给你一版**“仅供代理 AI 参考的粗略读图数据”**。
+先强调一下：
+
+**这不是论文官方结果表，也不是精确数字。**
+这是我根据论文 Fig.7/8/9/10 的图面**手工目测读数**整理出来的，适合拿去给代理 AI 做：
+
+* 趋势参考
+* 初始目标范围
+* 曲线 sanity check
+
+**不能**拿它当正式复现结果，也**不能**直接拿去画正式图。论文里 Fig.7 比的是 BLIP / LEMON / RAM 的 SSQ，Fig.8 比的是 MED 持续学习效果，Fig.9 比的是 with/without NAM 的 BLEU 曲线，Fig.10 比的是 VLM-CSC 与 JSCC/WITT 的 SSQ、压缩率和参数量。  
+
+---
+
+## 1）Fig.7 粗略参考数据（SSQ vs SNR）
+
+论文文字结论是：**BLIP 最高，LEMON 次之，RAM 最低**，而且 BLIP 在低 SNR 下也比较稳。
+
+我按图面大致读出来的是：
+
+```txt
+# Fig.7 approximate
+# x 轴看起来是 5 个点，约为 SNR = [1, 4, 7, 10, 13]
+SNR,BLIP,LEMON,RAM
+1,0.870,0.767,0.697
+4,0.905,0.865,0.730
+7,0.919,0.881,0.771
+10,0.925,0.897,0.784
+13,0.928,0.914,0.789
+```
+
+你交给代理 AI 时，可以把 Fig.7 的目标趋势写成：
+
+```txt
+BLIP > LEMON > RAM
+三条曲线整体随 SNR 上升而上升
+BLIP 在低 SNR 区间仍保持明显领先
+```
+
+---
+
+## 2）Fig.8 粗略参考数据（MED 持续学习 map）
+
+论文正文说：
+
+* **without MED**：旧任务性能会明显下降
+* **with MED**：旧任务只会轻微下降。
+
+但这里有个点你要注意：
+
+**Fig.8 的图注文字和图面数值的对应关系，看起来有点不一致。**
+按正文描述，(a)(b) 应该是 without MED 的明显下降，(c)(d) 是 with MED 的轻微下降；
+但从图面数值看，**更像是 (a)(c) 是明显下降图，(b)(d) 是稳定图**。
+
+所以我建议你给代理 AI 时，**按图面数值优先**，用下面这版参考。
+
+### 2.1 我建议采用的解释
+
+* (a) without MED, BLEU-1
+* (b) with MED, BLEU-1
+* (c) without MED, BLEU-2
+* (d) with MED, BLEU-2
+
+### 2.2 数据表示方式
+
+我把 continual map 写成下三角矩阵：
+
+* 行：学习到第几个任务后
+* 列：被评估的数据集
+* 顺序统一为：`[Cifar, Birds, CatsVsDogs]`
+
+---
+
+### Fig.8(a) 参考值：without MED, BLEU-1
+
+```txt
+# rows = after learning [Cifar, Birds, CatsVsDogs]
+# cols = eval on [Cifar, Birds, CatsVsDogs]
+[
+  [0.85,  null, null],
+  [0.214, 0.69, null],
+  [0.19,  0.30, 0.77]
+]
+```
+
+---
+
+### Fig.8(b) 参考值：with MED, BLEU-1
+
+```txt
+[
+  [0.85, null, null],
+  [0.83, 0.85, null],
+  [0.79, 0.83, 0.76]
+]
+```
+
+---
+
+### Fig.8(c) 参考值：without MED, BLEU-2
+
+```txt
+[
+  [0.76, null, null],
+  [0.03, 0.55, null],
+  [0.03, 0.06, 0.64]
+]
+```
+
+---
+
+### Fig.8(d) 参考值：with MED, BLEU-2
+
+```txt
+[
+  [0.76, null, null],
+  [0.73, 0.73, null],
+  [0.65, 0.71, 0.61]
+]
+```
+
+你可以让代理 AI 记住 Fig.8 的核心目标：
+
+```txt
+without MED:
+  学完后续任务后，Cifar 相关 BLEU 明显掉下去
+
+with MED:
+  旧任务 BLEU 只小幅下降，不会塌
+```
+
+---
+
+## 3）Fig.9 粗略参考数据（NAM vs NNA）
+
+论文明确说：
+
+* **with NAM**：训练时 `SNR_train ∈ [0,10] dB`
+* **without NAM（NNA）**：分别在 `0/2/4/8 dB` 定点训练
+* 测试时都在 `SNR_test = 0..10 dB`
+* 结论是：**with NAM 的整条曲线优于所有 without NAM 曲线**。
+
+我按图大致读出来的是：
+
+```txt
+# Fig.9 approximate
+SNRtest,NNA_0dB,NNA_2dB,NNA_4dB,NNA_8dB,VLM_CSC_NAM
+0,0.825,0.822,0.807,0.779,0.830
+1,0.829,0.841,0.840,0.829,0.844
+2,0.831,0.850,0.850,0.843,0.854
+3,0.832,0.850,0.855,0.850,0.859
+4,0.833,0.851,0.858,0.858,0.863
+5,0.834,0.852,0.859,0.860,0.866
+6,0.835,0.853,0.860,0.862,0.868
+7,0.836,0.854,0.860,0.865,0.870
+8,0.837,0.855,0.860,0.869,0.872
+9,0.838,0.856,0.860,0.874,0.873
+10,0.839,0.857,0.860,0.875,0.874
+```
+
+给代理 AI 的趋势约束可以写成：
+
+```txt
+VLM_CSC_NAM 应整体位于所有 NNA 曲线之上
+NNA_0dB 在低 SNR 稍好，但整体最平、上限最低
+NNA_8dB 在高 SNR 区域会接近 NAM，但仍略低
+NAM 曲线应最平滑、整体最优
+```
+
+---
+
+## 4）Fig.10(a) 粗略参考数据（SSQ 对比）
+
+论文文字结论是：
+
+* **低 SNR**：VLM-CSC 最好
+* **高 SNR**：WITT / JSCC 会反超，因为它们是直接传图。
+
+我按图大致读出来的是：
+
+```txt
+# Fig.10(a) approximate
+# x 轴同样像是 5 个点，约为 SNR = [1, 4, 7, 10, 13]
+SNR,VLM_CSC,JSCC,WITT
+1,0.858,0.783,0.815
+4,0.875,0.838,0.872
+7,0.883,0.882,0.894
+10,0.892,0.898,0.904
+13,0.895,0.903,0.907
+```
+
+你可以让代理 AI 抓这个趋势：
+
+```txt
+低 SNR: VLM_CSC > WITT > JSCC
+中高 SNR: WITT 和 JSCC 逐渐超过 VLM_CSC
+```
+
+---
+
+## 5）Fig.10(b) 参考数据（压缩率 + 参数量）
+
+这一张柱状图有柱顶数字，基本可以直接读。
+论文也明确说：**VLM-CSC 压缩率最低、参数量最少；JSCC 居中；WITT 最高。** 
+
+```txt
+# Fig.10(b)
+Model,Compression_Ratio,Trainable_Parameters_M
+VLM_CSC,0.05,9.21
+JSCC,0.23,14.66
+WITT,0.46,33.07
+```
+
+---
+
+## 6）Fig.10(c) 不是数值图，给代理 AI 的参考方式
+
+Fig.10(c) 是**语义对齐示例图**，不是曲线图。
+论文结论是：重建图像和原图、文本描述之间有较高语义一致性。
+
+所以你交给代理 AI 时，不要让它为 Fig.10(c) 硬编数值；应该让它按“示例面板”来做，像这样：
+
+```txt
+Fig.10(c) 不需要数值曲线
+输出应为：
+- original image
+- reconstructed image
+- image description
+三行/三列或三行/四列的示例对齐面板
+核心是体现 semantic alignment，而不是精确数值
+```
+
+---
+
+## 7）最适合直接发给代理 AI 的“参考数据块”
+
+你可以直接复制下面这段：
+
+```txt
+这些数值只是根据论文 Fig.7/8/9/10 的图面手工目测得到的 rough reference，只能用于趋势参考、sanity check、初始化目标范围，不能当正式结果表，不能直接用来生成正式论文图。
+
+[Fig.7 approximate]
+SNR,BLIP,LEMON,RAM
+1,0.870,0.767,0.697
+4,0.905,0.865,0.730
+7,0.919,0.881,0.771
+10,0.925,0.897,0.784
+13,0.928,0.914,0.789
+
+Target trend:
+BLIP > LEMON > RAM
+all three curves increase with SNR
+BLIP remains robust at low SNR
+
+[Fig.8 approximate]
+Use lower-triangular continual learning matrices.
+rows = after learning [Cifar, Birds, CatsVsDogs]
+cols = eval on [Cifar, Birds, CatsVsDogs]
+
+without_MED_BLEU1 =
+[
+  [0.85, null, null],
+  [0.214, 0.69, null],
+  [0.19, 0.30, 0.77]
+]
+
+with_MED_BLEU1 =
+[
+  [0.85, null, null],
+  [0.83, 0.85, null],
+  [0.79, 0.83, 0.76]
+]
+
+without_MED_BLEU2 =
+[
+  [0.76, null, null],
+  [0.03, 0.55, null],
+  [0.03, 0.06, 0.64]
+]
+
+with_MED_BLEU2 =
+[
+  [0.76, null, null],
+  [0.73, 0.73, null],
+  [0.65, 0.71, 0.61]
+]
+
+Target trend:
+without MED -> old task performance drops sharply
+with MED -> only marginal decline on old tasks
+
+[Fig.9 approximate]
+SNRtest,NNA_0dB,NNA_2dB,NNA_4dB,NNA_8dB,VLM_CSC_NAM
+0,0.825,0.822,0.807,0.779,0.830
+1,0.829,0.841,0.840,0.829,0.844
+2,0.831,0.850,0.850,0.843,0.854
+3,0.832,0.850,0.855,0.850,0.859
+4,0.833,0.851,0.858,0.858,0.863
+5,0.834,0.852,0.859,0.860,0.866
+6,0.835,0.853,0.860,0.862,0.868
+7,0.836,0.854,0.860,0.865,0.870
+8,0.837,0.855,0.860,0.869,0.872
+9,0.838,0.856,0.860,0.874,0.873
+10,0.839,0.857,0.860,0.875,0.874
+
+Target trend:
+VLM_CSC_NAM should be overall best
+NNA_8dB approaches NAM at high SNR but remains slightly lower
+NNA_0dB is relatively flat and lowest in upper range
+
+[Fig.10(a) approximate]
+SNR,VLM_CSC,JSCC,WITT
+1,0.858,0.783,0.815
+4,0.875,0.838,0.872
+7,0.883,0.882,0.894
+10,0.892,0.898,0.904
+13,0.895,0.903,0.907
+
+Target trend:
+low SNR -> VLM_CSC best
+high SNR -> WITT and JSCC surpass VLM_CSC
+
+[Fig.10(b)]
+Model,Compression_Ratio,Trainable_Parameters_M
+VLM_CSC,0.05,9.21
+JSCC,0.23,14.66
+WITT,0.46,33.07
+
+Target trend:
+VLM_CSC has the lowest compression ratio and fewest trainable parameters
+JSCC is in the middle
+WITT is the highest
+
+[Fig.10(c)]
+No numeric curve is needed.
+Use qualitative semantic alignment panel only:
+original image / reconstructed image / image description
+```

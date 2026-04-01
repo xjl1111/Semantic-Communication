@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "validate-ram-infer",
+			"type": "shell",
+			"command": "d:/code/pycode/Semantic-Communication/.venv/Scripts/python.exe",
+			"args": [
+				"d:/code/pycode/Semantic-Communication/_tmp_validate_ram_infer.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+# DeepJSCC core
+torch>=2.1,<2.6
+torchvision>=0.16,<0.21
+numpy>=1.24,<2.1
+matplotlib>=3.8,<3.11
+tqdm>=4.66,<5.0
+
+# Optional utilities for experiment scripts
+Pillow>=10.0,<12.0

@@ -1,0 +1,601 @@
+sender,snr_db,image,label,pred_original,pred_reconstructed,source_text,recovered_text
+blip,0.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat laying on a bed
+blip,0.0,cat_00008.png,0,0,1,a photo of a cat laying on a bed,a photo of a dog laying on a bed
+blip,0.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat laying on a bed
+blip,0.0,cat_00053.png,0,0,1,a photo of a lion,a photo of a dog in the grass
+blip,0.0,cat_00061.png,0,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on top of a table
+blip,0.0,cat_00063.png,0,0,1,a photo of a cat laying on a bed,a photo of a dog standing in the grass
+blip,0.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a small dog sitting on a couch
+blip,0.0,cat_00077.png,0,0,0,a photo of a cat laying on a person's lap,a photo of a cat sitting on the floor
+blip,0.0,cat_00078.png,0,0,0,a photo of a cat sitting on a table,a photo of a cat laying on the floor
+blip,0.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a dog laying on the floor
+blip,0.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat laying on a bed
+blip,0.0,cat_00106.png,0,0,1,a photo of a mouse on a mouse,a photo of a dog laying on a bed
+blip,0.0,cat_00115.png,0,0,0,a photo of a black cat laying on a couch,a photo of a cat looking at the camera
+blip,0.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a dog in a field
+blip,0.0,cat_00127.png,0,0,1,a photo of a goat in the desert,a photo of a dog sitting on the floor
+blip,0.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat in the dark
+blip,0.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a cat sitting in a chair
+blip,0.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,0.0,cat_00187.png,0,0,0,a photo of a cat,a photo of a cat
+blip,0.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a cat sitting in a chair
+blip,0.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat looking at the camera
+blip,0.0,cat_00245.png,0,0,1,a photo of a cat sitting on a chair,a photo of a dog sitting on a couch
+blip,0.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a bed
+blip,0.0,cat_00256.png,0,0,1,a photo of a cat sitting on a couch,a photo of a small dog sitting on the floor
+blip,0.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,0.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat in the dark
+blip,0.0,cat_00277.png,0,0,1,a photo of a cat in a field of flowers,a photo of a small white dog
+blip,0.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a cat laying on a bed
+blip,0.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on top of a table
+blip,0.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat laying on the floor
+blip,0.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat looking at the camera
+blip,0.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog sitting on the floor
+blip,0.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on the floor
+blip,0.0,cat_00336.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a dog laying on a couch
+blip,0.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,0.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,0.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat looking out of a window
+blip,0.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat playing with a toy
+blip,0.0,cat_00412.png,0,0,0,a photo of a dog on the floor,a photo of a dog laying on the floor
+blip,0.0,cat_00418.png,0,0,0,a photo of a baby elephant playing with a toy,a photo of a cat looking at the camera
+blip,0.0,cat_00426.png,0,0,1,a photo of a white dog in the middle of a field,a photo of a dog laying in the grass
+blip,0.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,0.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,0.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat sitting on the floor
+blip,0.0,cat_00453.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat looking out a window
+blip,0.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat laying on the floor
+blip,0.0,cat_00464.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a chair
+blip,0.0,cat_00467.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat looking at the camera
+blip,0.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,0.0,cat_00515.png,0,0,0,a photo of a cat in a hat,a photo of a cat
+blip,0.0,dog_00012.png,1,1,0,a photo of a group of people playing with a dog,a photo of a cat looking at the camera
+blip,0.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a dog looking at the camera
+blip,0.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a dog in the grass
+blip,0.0,dog_00031.png,1,1,0,a photo of a dog laying in the grass,a photo of a cat laying on the floor
+blip,0.0,dog_00033.png,1,1,0,a photo of a dog looking at the camera,a photo of a cat looking at the camera
+blip,0.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a dog laying on a bed
+blip,0.0,dog_00042.png,1,1,0,a photo of a dog standing in front of a bunch of flowers,a photo of a cat sitting on a table
+blip,0.0,dog_00085.png,1,1,1,a photo of a black dog in a field,a photo of a dog
+blip,0.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog laying on a bed
+blip,0.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,0.0,dog_00141.png,1,1,1,a photo of a dog standing in the grass,a photo of a cat sitting in the grass
+blip,0.0,dog_00148.png,1,1,0,a photo of a dog sitting on a chair,a photo of a cat sitting on a chair
+blip,0.0,dog_00155.png,1,1,0,a photo of a man in a suit with a dog on his lap,a photo of a cat laying on a bed
+blip,0.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,0.0,dog_00168.png,1,1,1,a photo of a dog wearing a santa hat,a photo of a white dog sitting on a couch
+blip,0.0,dog_00178.png,1,1,0,a photo of a dog in a bathtub,a photo of a dog laying on the floor
+blip,0.0,dog_00181.png,1,1,1,a photo of a dog that is looking at the camera,a photo of a dog laying on the ground
+blip,0.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a small white dog
+blip,0.0,dog_00200.png,1,1,0,a photo of a dog sitting in a bathtub,a photo of a cat looking at the camera
+blip,0.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog laying on the floor
+blip,0.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog looking up at the camera
+blip,0.0,dog_00230.png,1,1,0,a photo of a dog sitting on the floor,a photo of a cat looking at the camera
+blip,0.0,dog_00232.png,1,1,1,a photo of a cat laying on the floor,a photo of a dog laying in the grass
+blip,0.0,dog_00238.png,1,1,0,a photo of a small dog playing with a ball,a photo of a cat looking at the camera
+blip,0.0,dog_00239.png,1,1,0,a photo of a small dog sitting on a white background,a photo of a cat sitting on the floor
+blip,0.0,dog_00250.png,1,1,1,a photo of a dog with a christmas tree in the background,a photo of a dog looking at the camera
+blip,0.0,dog_00262.png,1,1,0,a photo of a dog laying on the ground,a photo of a cat sitting on the floor
+blip,0.0,dog_00275.png,1,0,0,a photo of a group of dogs in a room,a photo of a group of people in a room
+blip,0.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,0.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog sitting on a couch
+blip,0.0,dog_00321.png,1,1,1,a photo of a dog sitting on a couch,a photo of a dog on a leash
+blip,0.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,0.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a small white dog with a pink bow
+blip,0.0,dog_00345.png,1,1,1,a photo of a dog,a photo of a dog
+blip,0.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a dog sitting in the grass
+blip,0.0,dog_00389.png,1,1,0,a photo of a dog sitting in front of a christmas tree,a photo of a cat sitting on top of a table
+blip,0.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog playing with a ball
+blip,0.0,dog_00431.png,1,1,1,a photo of a white dog laying on a couch,a photo of a dog laying on the floor
+blip,0.0,dog_00437.png,1,1,1,a photo of a dog sitting in the grass,a photo of a dog playing with a ball
+blip,0.0,dog_00444.png,1,1,1,a photo of a man holding two dogs,a photo of a dog playing with a ball
+blip,0.0,dog_00446.png,1,1,1,a photo of a small white dog on the ground,a photo of a small white dog
+blip,0.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,0.0,dog_00460.png,1,1,1,a photo of a small white dog wearing a pink bow,a photo of a small dog sitting on the floor
+blip,0.0,dog_00474.png,1,1,0,a photo of a dog with a duck in its mouth,a photo of a cat looking at the camera
+blip,0.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a dog in the grass
+blip,0.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog looking up at the camera
+blip,0.0,dog_00484.png,1,1,0,a photo of a small dog sitting on a table,a photo of a dog sitting on a couch
+blip,0.0,dog_00488.png,1,1,0,a photo of a dog running in the snow,a photo of a cat laying on the floor
+blip,0.0,dog_00502.png,1,1,0,a photo of a dog in the grass,a photo of a cat sitting on the floor
+blip,0.0,dog_00510.png,1,1,1,a photo of a small white dog,a photo of a dog playing with a ball
+blip,2.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat
+blip,2.0,cat_00008.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,2.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat sitting on top of a table
+blip,2.0,cat_00053.png,0,0,1,a photo of a woman in white and orange holding two cats,a photo of a dog that is looking at the camera
+blip,2.0,cat_00061.png,0,1,0,a photo of a dog sitting on a table,a photo of a cat sitting on a table
+blip,2.0,cat_00063.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on the floor
+blip,2.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a dog sitting on a couch
+blip,2.0,cat_00077.png,0,0,0,a photo of a cat laying on a person's lap,a photo of a cat looking at the camera
+blip,2.0,cat_00078.png,0,0,1,a photo of a cat sitting on a table,a photo of a dog that is looking at the camera
+blip,2.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a cat laying on a bed
+blip,2.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat sitting on a chair
+blip,2.0,cat_00106.png,0,0,0,a photo of a mouse on a mouse,a photo of a cat laying on a bed
+blip,2.0,cat_00115.png,0,0,1,a photo of a black cat laying on a couch,a photo of a small white dog
+blip,2.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a cat in a box
+blip,2.0,cat_00127.png,0,0,0,a photo of a goat in the desert,a photo of a cat looking at the camera
+blip,2.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,2.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a cat in a box
+blip,2.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the ground
+blip,2.0,cat_00187.png,0,0,0,a photo of a cat,a photo of a cat
+blip,2.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a cat sitting in a chair
+blip,2.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat sitting in the grass
+blip,2.0,cat_00245.png,0,0,0,a photo of a cat sitting on a chair,a photo of a cat sitting on a couch
+blip,2.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,2.0,cat_00256.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,2.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying in the grass
+blip,2.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat sitting on a table
+blip,2.0,cat_00277.png,0,0,0,a photo of a cat in a field of flowers,a photo of a cat laying on a bed
+blip,2.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a small white dog
+blip,2.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat laying on a bed
+blip,2.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat sitting on a table
+blip,2.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat in a box
+blip,2.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog laying on the ground
+blip,2.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on a bed
+blip,2.0,cat_00336.png,0,0,1,a photo of a cat sitting on top of a table,a photo of a dog standing in the grass
+blip,2.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,2.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,2.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat laying on a bed
+blip,2.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat playing with a toy
+blip,2.0,cat_00412.png,0,0,0,a photo of a dog on the floor,a photo of a dog laying on the floor
+blip,2.0,cat_00418.png,0,0,0,a photo of a baby elephant playing with a toy,a photo of a cat sitting on a table
+blip,2.0,cat_00426.png,0,0,1,a photo of a white dog in the middle of a field,a photo of a dog sitting in the grass
+blip,2.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,2.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,2.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat
+blip,2.0,cat_00453.png,0,0,1,a photo of a cat playing with a ball,a photo of a dog playing with a ball
+blip,2.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat in the dark
+blip,2.0,cat_00464.png,0,0,1,a photo of a cat sitting on top of a table,a photo of a dog sitting on a couch
+blip,2.0,cat_00467.png,0,0,1,a photo of a cat sitting on top of a table,a photo of a dog laying on a bed
+blip,2.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog
+blip,2.0,cat_00515.png,0,0,1,a photo of a cat in a hat,a photo of a dog
+blip,2.0,dog_00012.png,1,1,1,a photo of a group of people playing with a dog,a photo of a dog playing with a ball
+blip,2.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a small white dog sitting in the grass
+blip,2.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a dog standing in the grass
+blip,2.0,dog_00031.png,1,1,0,a photo of a dog laying in the grass,a photo of a cat laying on the floor
+blip,2.0,dog_00033.png,1,1,1,a photo of a dog looking at the camera,a photo of a dog looking up at the camera
+blip,2.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a small white dog on a black background
+blip,2.0,dog_00042.png,1,1,0,a photo of a dog standing in front of a bunch of flowers,a photo of a cat sitting on top of a table
+blip,2.0,dog_00085.png,1,1,1,a photo of a black dog in a field,a photo of a dog sitting in the grass
+blip,2.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog in the grass
+blip,2.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,2.0,dog_00141.png,1,1,0,a photo of a dog standing in the grass,a photo of a dog standing in the grass
+blip,2.0,dog_00148.png,1,1,0,a photo of a dog sitting on a chair,a photo of a cat sitting on the floor
+blip,2.0,dog_00155.png,1,1,0,a photo of a man in a suit with a dog on his lap,a photo of a small dog on a white background
+blip,2.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,2.0,dog_00168.png,1,1,0,a photo of a dog wearing a santa hat,a photo of a cat sitting on a person ' s lap
+blip,2.0,dog_00178.png,1,1,0,a photo of a dog in a bathtub,a photo of a dog in a bathtub
+blip,2.0,dog_00181.png,1,1,1,a photo of a dog that is looking at the camera,a photo of a dog that is looking at the camera
+blip,2.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a dog sitting on top of a table
+blip,2.0,dog_00200.png,1,1,1,a photo of a dog sitting in a bathtub,a photo of a dog playing with a ball
+blip,2.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog sitting on the floor
+blip,2.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog with its tongue out
+blip,2.0,dog_00230.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,2.0,dog_00232.png,1,1,0,a photo of a cat laying on the floor,a photo of a cat laying on a bed
+blip,2.0,dog_00238.png,1,1,1,a photo of a small dog playing with a ball,a photo of a dog playing with a ball
+blip,2.0,dog_00239.png,1,1,1,a photo of a small dog sitting on a white background,a photo of a small dog sitting on a couch
+blip,2.0,dog_00250.png,1,1,0,a photo of a dog with a christmas tree in the background,a photo of a cat that is looking at the camera
+blip,2.0,dog_00262.png,1,1,1,a photo of a dog laying on the ground,a photo of a dog laying on a bed
+blip,2.0,dog_00275.png,1,0,1,a photo of a group of dogs in a room,a photo of a cat sitting on top of a table
+blip,2.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,2.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog sitting on a couch
+blip,2.0,dog_00321.png,1,1,1,a photo of a dog sitting on a couch,a photo of a dog sitting on a couch
+blip,2.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog in the grass
+blip,2.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a dog that is looking at the camera
+blip,2.0,dog_00345.png,1,1,0,a photo of a dog,a photo of a cat
+blip,2.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a dog playing with a ball
+blip,2.0,dog_00389.png,1,1,1,a photo of a dog sitting in front of a christmas tree,a photo of a dog laying on a bed
+blip,2.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog sitting on top of a table
+blip,2.0,dog_00431.png,1,1,0,a photo of a white dog laying on a couch,a photo of a dog playing with a ball
+blip,2.0,dog_00437.png,1,1,0,a photo of a dog sitting in the grass,a photo of a cat laying on the floor
+blip,2.0,dog_00444.png,1,1,0,a photo of a man holding two dogs,a photo of a white cat with green eyes
+blip,2.0,dog_00446.png,1,1,0,a photo of a small white dog on the ground,a photo of a cat laying on the floor
+blip,2.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,2.0,dog_00460.png,1,1,1,a photo of a small white dog wearing a pink bow,a photo of a dog looking up at the camera
+blip,2.0,dog_00474.png,1,1,1,a photo of a dog with a duck in its mouth,a photo of a dog in the grass
+blip,2.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a dog standing in the grass
+blip,2.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog sitting in the grass
+blip,2.0,dog_00484.png,1,1,0,a photo of a small dog sitting on a table,a photo of a dog sitting on a couch
+blip,2.0,dog_00488.png,1,1,1,a photo of a dog running in the snow,a photo of a dog standing in the grass
+blip,2.0,dog_00502.png,1,1,0,a photo of a dog in the grass,a photo of a cat laying on the floor
+blip,2.0,dog_00510.png,1,1,0,a photo of a small white dog,a photo of a dog in the grass
+blip,4.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat in the dark
+blip,4.0,cat_00008.png,0,0,1,a photo of a cat laying on a bed,a photo of a small white dog
+blip,4.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat laying on a bed
+blip,4.0,cat_00053.png,0,0,1,a photo of a dog yaxingai with his mouth open,a photo of a dog that is looking at the camera
+blip,4.0,cat_00061.png,0,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,4.0,cat_00063.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,4.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a dog sitting on a couch
+blip,4.0,cat_00077.png,0,0,1,a photo of a cat laying on a person's lap,a photo of a small white dog with a pink bow
+blip,4.0,cat_00078.png,0,0,0,a photo of a cat sitting on a table,a photo of a cat sitting on the floor
+blip,4.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a cat in the dark
+blip,4.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat laying on a bed
+blip,4.0,cat_00106.png,0,0,0,a photo of a mouse on a mouse,a photo of a cat laying on a bed
+blip,4.0,cat_00115.png,0,0,0,a photo of a black cat laying on a couch,a photo of a cat laying on a bed
+blip,4.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a cat playing with a toy
+blip,4.0,cat_00127.png,0,0,0,a photo of a goat in the desert,a photo of a cat in the snow
+blip,4.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat sitting on a table
+blip,4.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a black cat in the snow
+blip,4.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,4.0,cat_00187.png,0,0,1,a photo of a cat,a photo of a white cat
+blip,4.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a cat sitting in a chair
+blip,4.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat in the dark
+blip,4.0,cat_00245.png,0,0,0,a photo of a cat sitting on a chair,a photo of a cat sitting on a table
+blip,4.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,4.0,cat_00256.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,4.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog on the ground
+blip,4.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat in the dark
+blip,4.0,cat_00277.png,0,0,0,a photo of a cat in a field of flowers,a photo of a cat standing in a room
+blip,4.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a cat looking at the camera
+blip,4.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a bed
+blip,4.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat laying on a bed
+blip,4.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat sitting in the grass
+blip,4.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog sitting on the floor
+blip,4.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on the floor
+blip,4.0,cat_00336.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,4.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,4.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,4.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat looking out a window
+blip,4.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat looking at the camera
+blip,4.0,cat_00412.png,0,0,0,a photo of a dog on the floor,a photo of a dog laying on the floor
+blip,4.0,cat_00418.png,0,0,0,a photo of a baby elephant playing with a toy,a photo of a person riding a horse
+blip,4.0,cat_00426.png,0,0,1,a photo of a white dog in the middle of a field,a photo of a dog laying on the floor
+blip,4.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat looking at the camera
+blip,4.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a bed
+blip,4.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat sitting on the floor
+blip,4.0,cat_00453.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,4.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat in the dark
+blip,4.0,cat_00464.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,4.0,cat_00467.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on the floor
+blip,4.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,4.0,cat_00515.png,0,0,0,a photo of a cat in a hat,a photo of a cat in a box
+blip,4.0,dog_00012.png,1,1,1,a photo of a group of people playing with a dog,a photo of a dog playing with a ball
+blip,4.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a dog laying on a bed
+blip,4.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a small white dog
+blip,4.0,dog_00031.png,1,1,1,a photo of a dog laying in the grass,a photo of a small white dog
+blip,4.0,dog_00033.png,1,1,0,a photo of a dog looking at the camera,a photo of a black cat
+blip,4.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a small dog laying on a bed
+blip,4.0,dog_00042.png,1,1,1,a photo of a dog standing in front of a bunch of flowers,a photo of a dog standing in front of a christmas tree
+blip,4.0,dog_00085.png,1,1,1,a photo of a black dog in a field,a photo of a dog in the grass
+blip,4.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog sitting on the floor
+blip,4.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,4.0,dog_00141.png,1,1,1,a photo of a dog standing in the grass,a photo of a dog sitting on the floor
+blip,4.0,dog_00148.png,1,1,1,a photo of a dog sitting on a chair,a photo of a dog sitting on a couch
+blip,4.0,dog_00155.png,1,1,1,a photo of a man in a suit with a dog on his lap,a photo of a small dog standing in a room
+blip,4.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a small dog sitting on a couch
+blip,4.0,dog_00168.png,1,1,1,a photo of a dog wearing a santa hat,a photo of a dog laying on a bed
+blip,4.0,dog_00178.png,1,1,1,a photo of a dog in a bathtub,a photo of a dog standing in a room
+blip,4.0,dog_00181.png,1,1,1,a photo of a dog that is looking at the camera,a photo of a dog that is looking at the camera
+blip,4.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a dog standing in a room
+blip,4.0,dog_00200.png,1,1,1,a photo of a dog sitting in a bathtub,a photo of a dog standing in a room
+blip,4.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog laying on the floor
+blip,4.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog looking up at the camera
+blip,4.0,dog_00230.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog laying on the floor
+blip,4.0,dog_00232.png,1,1,0,a photo of a cat laying on the floor,a photo of a cat laying on the floor
+blip,4.0,dog_00238.png,1,1,1,a photo of a small dog playing with a ball,a photo of a dog playing with a ball
+blip,4.0,dog_00239.png,1,1,1,a photo of a small dog sitting on a white background,a photo of a white cat sitting on a table
+blip,4.0,dog_00250.png,1,1,0,a photo of a dog with a christmas tree in the background,a photo of a dog running in the grass
+blip,4.0,dog_00262.png,1,1,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,4.0,dog_00275.png,1,0,0,a photo of a group of dogs in a room,a photo of a dog laying on a bed
+blip,4.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,4.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog sitting on a bed
+blip,4.0,dog_00321.png,1,1,1,a photo of a dog sitting on a couch,a photo of a dog sitting on a couch
+blip,4.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,4.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a small white dog with a pink bow on it ' s head
+blip,4.0,dog_00345.png,1,1,1,a photo of a dog,a photo of a dog
+blip,4.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a small white dog with a pink bow
+blip,4.0,dog_00389.png,1,1,1,a photo of a dog sitting in front of a christmas tree,a photo of a dog playing with a ball
+blip,4.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog on a leash
+blip,4.0,dog_00431.png,1,1,0,a photo of a white dog laying on a couch,a photo of a cat laying on a bed
+blip,4.0,dog_00437.png,1,1,1,a photo of a dog sitting in the grass,a photo of a dog standing in the grass
+blip,4.0,dog_00444.png,1,1,0,a photo of a man holding two dogs,a photo of a cat that is looking at the camera
+blip,4.0,dog_00446.png,1,1,1,a photo of a small white dog on the ground,a photo of a dog laying on the floor
+blip,4.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,4.0,dog_00460.png,1,1,0,a photo of a small white dog wearing a pink bow,a photo of a dog standing in a room
+blip,4.0,dog_00474.png,1,1,0,a photo of a dog with a duck in its mouth,a photo of a dog standing on a wooden floor
+blip,4.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a dog sitting in the grass
+blip,4.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,4.0,dog_00484.png,1,1,1,a photo of a small dog sitting on a table,a photo of a small dog sitting on a couch
+blip,4.0,dog_00488.png,1,1,1,a photo of a dog running in the snow,a photo of a dog running in the grass
+blip,4.0,dog_00502.png,1,1,1,a photo of a dog in the grass,a photo of a dog in the grass
+blip,4.0,dog_00510.png,1,1,1,a photo of a small white dog,a photo of a dog laying on the floor
+blip,6.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,6.0,cat_00008.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,6.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat playing with a toy
+blip,6.0,cat_00053.png,0,0,0,a photo of a smiling lion from behind,a photo of a person riding a horse
+blip,6.0,cat_00061.png,0,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,6.0,cat_00063.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,6.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a dog sitting on top of a table
+blip,6.0,cat_00077.png,0,0,0,a photo of a cat laying on a person's lap,a photo of a cat laying on a bed
+blip,6.0,cat_00078.png,0,0,0,a photo of a cat sitting on a table,a photo of a cat sitting on a couch
+blip,6.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a cat in the dark
+blip,6.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat sitting on a couch
+blip,6.0,cat_00106.png,0,0,0,a photo of a mouse on a mouse,a photo of a cat laying on a bed
+blip,6.0,cat_00115.png,0,0,0,a photo of a black cat laying on a couch,a photo of a cat sitting on a table
+blip,6.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a cat in a bathtub
+blip,6.0,cat_00127.png,0,0,0,a photo of a goat in the desert,a photo of a cat looking at the camera
+blip,6.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,6.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a cat in a bathtub
+blip,6.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying in the grass
+blip,6.0,cat_00187.png,0,0,0,a photo of a cat,a photo of a cat
+blip,6.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a black cat
+blip,6.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat looking at the camera
+blip,6.0,cat_00245.png,0,0,0,a photo of a cat sitting on a chair,a photo of a cat sitting on a table
+blip,6.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,6.0,cat_00256.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat
+blip,6.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,6.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat in the dark
+blip,6.0,cat_00277.png,0,0,0,a photo of a cat in a field of flowers,a photo of a cat sitting in a chair
+blip,6.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a cat looking at the camera
+blip,6.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,6.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat on a blue background
+blip,6.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat sitting in the grass
+blip,6.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog laying on the floor
+blip,6.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on the floor
+blip,6.0,cat_00336.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,6.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,6.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,6.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,6.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat playing with a toy
+blip,6.0,cat_00412.png,0,0,1,a photo of a dog on the floor,a photo of a dog sitting on the floor
+blip,6.0,cat_00418.png,0,0,0,a photo of a baby elephant playing with a toy,a photo of a cat looking at the camera
+blip,6.0,cat_00426.png,0,0,0,a photo of a white dog in the middle of a field,a photo of a dog running in the grass
+blip,6.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,6.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a bed
+blip,6.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat sitting on the floor
+blip,6.0,cat_00453.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat looking out a window
+blip,6.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat in the dark
+blip,6.0,cat_00464.png,0,0,1,a photo of a cat sitting on top of a table,a photo of a dog laying on a bed
+blip,6.0,cat_00467.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,6.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,6.0,cat_00515.png,0,0,0,a photo of a cat in a hat,a photo of a cat in a box
+blip,6.0,dog_00012.png,1,1,1,a photo of a group of people playing with a dog,a photo of a dog laying in the grass
+blip,6.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a small white dog sitting on a couch
+blip,6.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a dog standing in the grass
+blip,6.0,dog_00031.png,1,1,1,a photo of a dog laying in the grass,a photo of a dog laying in the grass
+blip,6.0,dog_00033.png,1,1,1,a photo of a dog looking at the camera,a photo of a dog looking up at the camera
+blip,6.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a small white dog
+blip,6.0,dog_00042.png,1,1,1,a photo of a dog standing in front of a bunch of flowers,a photo of a dog standing in the grass
+blip,6.0,dog_00085.png,1,1,0,a photo of a black dog in a field,a photo of a dog standing in a room
+blip,6.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog laying on the floor
+blip,6.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,6.0,dog_00141.png,1,1,1,a photo of a dog standing in the grass,a photo of a dog in the grass
+blip,6.0,dog_00148.png,1,1,1,a photo of a dog sitting on a chair,a photo of a dog sitting on a couch
+blip,6.0,dog_00155.png,1,1,1,a photo of a man in a suit with a dog on his lap,a photo of a dog laying on a bed
+blip,6.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,6.0,dog_00168.png,1,1,0,a photo of a dog wearing a santa hat,a photo of a dog playing with a ball
+blip,6.0,dog_00178.png,1,1,1,a photo of a dog in a bathtub,a photo of a dog playing with a ball
+blip,6.0,dog_00181.png,1,1,1,a photo of a dog that is looking at the camera,a photo of a dog that is looking at the camera
+blip,6.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a dog standing in a room
+blip,6.0,dog_00200.png,1,1,1,a photo of a dog sitting in a bathtub,a photo of a dog standing in a room
+blip,6.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog laying on the floor
+blip,6.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog looking at the camera
+blip,6.0,dog_00230.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,6.0,dog_00232.png,1,1,0,a photo of a cat laying on the floor,a photo of a cat laying on the floor
+blip,6.0,dog_00238.png,1,1,1,a photo of a small dog playing with a ball,a photo of a dog that is looking at the camera
+blip,6.0,dog_00239.png,1,1,1,a photo of a small dog sitting on a white background,a photo of a small white dog sitting on a couch
+blip,6.0,dog_00250.png,1,1,1,a photo of a dog with a christmas tree in the background,a photo of a dog that is looking at the camera
+blip,6.0,dog_00262.png,1,1,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,6.0,dog_00275.png,1,0,0,a photo of a group of dogs in a room,a photo of a cat in a box
+blip,6.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,6.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog standing in a room
+blip,6.0,dog_00321.png,1,1,0,a photo of a dog sitting on a couch,a photo of a dog standing on a sidewalk
+blip,6.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,6.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a small white dog with a pink bow on it ' s head
+blip,6.0,dog_00345.png,1,1,0,a photo of a dog,a photo of a
+blip,6.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a small white dog with a pink bow
+blip,6.0,dog_00389.png,1,1,1,a photo of a dog sitting in front of a christmas tree,a photo of a dog sitting in front of a christmas tree
+blip,6.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog sitting on a couch
+blip,6.0,dog_00431.png,1,1,1,a photo of a white dog laying on a couch,a photo of a dog laying on a bed
+blip,6.0,dog_00437.png,1,1,1,a photo of a dog sitting in the grass,a photo of a dog sitting in the grass
+blip,6.0,dog_00444.png,1,1,1,a photo of a man holding two dogs,a photo of a small white dog with a pink collar
+blip,6.0,dog_00446.png,1,1,1,a photo of a small white dog on the ground,a photo of a dog laying on the floor
+blip,6.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,6.0,dog_00460.png,1,1,1,a photo of a small white dog wearing a pink bow,a photo of a small white dog with a pink collar
+blip,6.0,dog_00474.png,1,1,0,a photo of a dog with a duck in its mouth,a photo of a dog standing in a room
+blip,6.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a small dog in the grass
+blip,6.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,6.0,dog_00484.png,1,1,1,a photo of a small dog sitting on a table,a photo of a small dog sitting on a couch
+blip,6.0,dog_00488.png,1,1,1,a photo of a dog running in the snow,a photo of a dog running in the grass
+blip,6.0,dog_00502.png,1,1,1,a photo of a dog in the grass,a photo of a dog in the grass
+blip,6.0,dog_00510.png,1,1,1,a photo of a small white dog,a photo of a small dog
+blip,8.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,8.0,cat_00008.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,8.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat laying on a bed
+blip,8.0,cat_00053.png,0,0,1,a photo of a lion and some other animals,a photo of a couple of dogs playing with a ball
+blip,8.0,cat_00061.png,0,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,8.0,cat_00063.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,8.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a dog sitting on a couch
+blip,8.0,cat_00077.png,0,0,0,a photo of a cat laying on a person's lap,a photo of a black cat laying on a white surface
+blip,8.0,cat_00078.png,0,0,0,a photo of a cat sitting on a table,a photo of a cat sitting on a chair
+blip,8.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a cat in the dark
+blip,8.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat sitting on a table
+blip,8.0,cat_00106.png,0,0,0,a photo of a mouse on a mouse,a photo of a cat laying on a bed
+blip,8.0,cat_00115.png,0,0,0,a photo of a black cat laying on a couch,a photo of a cat laying on a couch
+blip,8.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a cat in a box
+blip,8.0,cat_00127.png,0,0,1,a photo of a goat in the desert,a photo of a dog running in the grass
+blip,8.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,8.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a cat in a bathtub
+blip,8.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,8.0,cat_00187.png,0,0,0,a photo of a cat,a photo of a cat
+blip,8.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a cat sitting in a chair
+blip,8.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat looking at the camera
+blip,8.0,cat_00245.png,0,0,0,a photo of a cat sitting on a chair,a photo of a cat sitting on a table
+blip,8.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,8.0,cat_00256.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,8.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,8.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat in the dark
+blip,8.0,cat_00277.png,0,0,0,a photo of a cat in a field of flowers,a photo of a cat in a box
+blip,8.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a cat laying in the grass
+blip,8.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,8.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat on a blue background
+blip,8.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat sitting in the grass
+blip,8.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog laying on the floor
+blip,8.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on the floor
+blip,8.0,cat_00336.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,8.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,8.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,8.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,8.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat ' s face
+blip,8.0,cat_00412.png,0,0,0,a photo of a dog on the floor,a photo of a dog laying on the floor
+blip,8.0,cat_00418.png,0,0,0,a photo of a baby elephant playing with a toy,a photo of a person riding a horse
+blip,8.0,cat_00426.png,0,0,1,a photo of a white dog in the middle of a field,a photo of a dog laying in the grass
+blip,8.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on a table
+blip,8.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,8.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat sitting on the floor
+blip,8.0,cat_00453.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,8.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat in the dark
+blip,8.0,cat_00464.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,8.0,cat_00467.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,8.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,8.0,cat_00515.png,0,0,0,a photo of a cat in a hat,a photo of a cat in a box
+blip,8.0,dog_00012.png,1,1,1,a photo of a group of people playing with a dog,a photo of a dog playing with a ball
+blip,8.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a dog sitting on a black background
+blip,8.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a dog standing in the grass
+blip,8.0,dog_00031.png,1,1,1,a photo of a dog laying in the grass,a photo of a dog laying in the grass
+blip,8.0,dog_00033.png,1,1,1,a photo of a dog looking at the camera,a photo of a dog looking at the camera
+blip,8.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a dog laying on a bed
+blip,8.0,dog_00042.png,1,1,1,a photo of a dog standing in front of a bunch of flowers,a photo of a dog standing in front of a door
+blip,8.0,dog_00085.png,1,1,0,a photo of a black dog in a field,a photo of a dog in a bathtub
+blip,8.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog on the beach
+blip,8.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,8.0,dog_00141.png,1,1,0,a photo of a dog standing in the grass,a photo of a dog standing in the grass
+blip,8.0,dog_00148.png,1,1,1,a photo of a dog sitting on a chair,a photo of a dog sitting on a bed
+blip,8.0,dog_00155.png,1,1,1,a photo of a man in a suit with a dog on his lap,a photo of a small dog standing in a room
+blip,8.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,8.0,dog_00168.png,1,1,0,a photo of a dog wearing a santa hat,a photo of a dog playing with a ball
+blip,8.0,dog_00178.png,1,1,1,a photo of a dog in a bathtub,a photo of a dog standing in a room
+blip,8.0,dog_00181.png,1,1,0,a photo of a dog that is looking at the camera,a photo of a cat that is looking at the camera
+blip,8.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a dog in a field
+blip,8.0,dog_00200.png,1,1,1,a photo of a dog sitting in a bathtub,a photo of a dog standing in a room
+blip,8.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog laying on the floor
+blip,8.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog looking up at the camera
+blip,8.0,dog_00230.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,8.0,dog_00232.png,1,1,0,a photo of a cat laying on the floor,a photo of a cat laying on the floor
+blip,8.0,dog_00238.png,1,1,0,a photo of a small dog playing with a ball,a photo of a person riding a horse
+blip,8.0,dog_00239.png,1,1,1,a photo of a small dog sitting on a white background,a photo of a small white dog sitting on a couch
+blip,8.0,dog_00250.png,1,1,1,a photo of a dog with a christmas tree in the background,a photo of a dog standing in the grass
+blip,8.0,dog_00262.png,1,1,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,8.0,dog_00275.png,1,0,1,a photo of a group of dogs in a room,a photo of a group of dogs in a room
+blip,8.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,8.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog sitting on a couch
+blip,8.0,dog_00321.png,1,1,1,a photo of a dog sitting on a couch,a photo of a dog sitting on a couch
+blip,8.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,8.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a small white dog with a pink bow on it ' s head
+blip,8.0,dog_00345.png,1,1,1,a photo of a dog,a photo of a dog
+blip,8.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a dog playing with a ball
+blip,8.0,dog_00389.png,1,1,0,a photo of a dog sitting in front of a christmas tree,a photo of a dog sitting in front of a window
+blip,8.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog on a leash
+blip,8.0,dog_00431.png,1,1,1,a photo of a white dog laying on a couch,a photo of a small white dog on a black background
+blip,8.0,dog_00437.png,1,1,1,a photo of a dog sitting in the grass,a photo of a dog sitting in the grass
+blip,8.0,dog_00444.png,1,1,1,a photo of a man holding two dogs,a photo of a small white dog with a pink bow
+blip,8.0,dog_00446.png,1,1,1,a photo of a small white dog on the ground,a photo of a small dog laying on the floor
+blip,8.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,8.0,dog_00460.png,1,1,1,a photo of a small white dog wearing a pink bow,a photo of a small white dog with a pink bow
+blip,8.0,dog_00474.png,1,1,1,a photo of a dog with a duck in its mouth,a photo of a dog with a flower in its mouth
+blip,8.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a small dog in the grass
+blip,8.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,8.0,dog_00484.png,1,1,1,a photo of a small dog sitting on a table,a photo of a small dog sitting on a bed
+blip,8.0,dog_00488.png,1,1,1,a photo of a dog running in the snow,a photo of a dog running in the grass
+blip,8.0,dog_00502.png,1,1,1,a photo of a dog in the grass,a photo of a dog in the grass
+blip,8.0,dog_00510.png,1,1,1,a photo of a small white dog,a photo of a small white dog
+blip,10.0,cat_00000.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a couch
+blip,10.0,cat_00008.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,10.0,cat_00046.png,0,0,0,a photo of a woman holding a cat,a photo of a cat laying on a bed
+blip,10.0,cat_00053.png,0,0,0,a photo of a cat yaking in an aquarium,a photo of a cat with green eyes
+blip,10.0,cat_00061.png,0,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,10.0,cat_00063.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,10.0,cat_00068.png,0,0,1,a photo of a dog sitting on top of a table,a photo of a dog sitting on top of a table
+blip,10.0,cat_00077.png,0,0,0,a photo of a cat laying on a person's lap,a photo of a white cat on a black background
+blip,10.0,cat_00078.png,0,0,0,a photo of a cat sitting on a table,a photo of a cat sitting on a table
+blip,10.0,cat_00091.png,0,0,0,a photo of a cat in the woods,a photo of a cat in the dark
+blip,10.0,cat_00103.png,0,0,0,a photo of a cat sitting on a bed,a photo of a cat sitting on a table
+blip,10.0,cat_00106.png,0,0,1,a photo of a mouse on a mouse,a photo of a dog laying on a bed
+blip,10.0,cat_00115.png,0,0,0,a photo of a black cat laying on a couch,a photo of a cat laying on a couch
+blip,10.0,cat_00121.png,0,0,0,a photo of a cat in a bathtub,a photo of a cat in a box
+blip,10.0,cat_00127.png,0,0,0,a photo of a goat in the desert,a photo of a cloud in the sky
+blip,10.0,cat_00143.png,0,0,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,10.0,cat_00176.png,0,0,0,a photo of a cat in a green box,a photo of a cat in a bathtub
+blip,10.0,cat_00184.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,10.0,cat_00187.png,0,0,0,a photo of a cat,a photo of a cat
+blip,10.0,cat_00205.png,0,0,0,a photo of a cat sitting in a chair,a photo of a cat sitting in a chair
+blip,10.0,cat_00224.png,0,0,0,a photo of a cat looking at the camera,a photo of a cat looking at the camera
+blip,10.0,cat_00245.png,0,0,0,a photo of a cat sitting on a chair,a photo of a cat sitting on a table
+blip,10.0,cat_00251.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,10.0,cat_00256.png,0,0,0,a photo of a cat sitting on a couch,a photo of a cat sitting on a table
+blip,10.0,cat_00271.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,10.0,cat_00273.png,0,0,0,a photo of a cat in the dark,a photo of a cat in the dark
+blip,10.0,cat_00277.png,0,0,0,a photo of a cat in a field of flowers,a photo of a cat in a box
+blip,10.0,cat_00279.png,0,0,0,a photo of a white cat standing in the grass,a photo of a cat laying in the grass
+blip,10.0,cat_00294.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,10.0,cat_00302.png,0,0,0,a photo of a cat standing on a fence,a photo of a cat on a blue background
+blip,10.0,cat_00320.png,0,0,0,a photo of a cat sitting in the grass,a photo of a cat sitting in the grass
+blip,10.0,cat_00323.png,0,0,1,a photo of a dog laying on the floor,a photo of a dog laying on the floor
+blip,10.0,cat_00332.png,0,0,0,a photo of a cat laying on the ground,a photo of a cat laying on the floor
+blip,10.0,cat_00336.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,10.0,cat_00356.png,0,0,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,10.0,cat_00367.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,10.0,cat_00397.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,10.0,cat_00399.png,0,0,0,a photo of a cat playing with a red ball,a photo of a cat that is looking at the camera
+blip,10.0,cat_00412.png,0,0,0,a photo of a dog on the floor,a photo of a dog laying on the floor
+blip,10.0,cat_00418.png,0,0,1,a photo of a baby elephant playing with a toy,a photo of a group of dogs playing with a ball
+blip,10.0,cat_00426.png,0,0,0,a photo of a white dog in the middle of a field,a photo of a dog running in the grass
+blip,10.0,cat_00432.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,10.0,cat_00434.png,0,0,0,a photo of a cat sitting on a desk,a photo of a cat sitting on a table
+blip,10.0,cat_00438.png,0,0,0,a photo of a cat sitting on the floor,a photo of a cat sitting on the floor
+blip,10.0,cat_00453.png,0,0,0,a photo of a cat playing with a ball,a photo of a cat playing with a toy
+blip,10.0,cat_00456.png,0,0,0,a photo of a cat in the grass,a photo of a cat in the dark
+blip,10.0,cat_00464.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,10.0,cat_00467.png,0,0,0,a photo of a cat sitting on top of a table,a photo of a cat sitting on top of a table
+blip,10.0,cat_00470.png,0,0,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,10.0,cat_00515.png,0,0,0,a photo of a cat in a hat,a photo of a cat in a box
+blip,10.0,dog_00012.png,1,1,1,a photo of a group of people playing with a dog,a photo of a dog playing with a ball
+blip,10.0,dog_00016.png,1,1,1,a photo of a dog sitting on a person's lap,a photo of a white dog sitting on a red blanket
+blip,10.0,dog_00024.png,1,1,1,a photo of a small dog standing in the grass,a photo of a dog standing in the grass
+blip,10.0,dog_00031.png,1,1,1,a photo of a dog laying in the grass,a photo of a dog laying in the grass
+blip,10.0,dog_00033.png,1,1,1,a photo of a dog looking at the camera,a photo of a dog looking up at the camera
+blip,10.0,dog_00039.png,1,1,1,a photo of a small dog laying on a blanket,a photo of a small dog laying on a bed
+blip,10.0,dog_00042.png,1,1,1,a photo of a dog standing in front of a bunch of flowers,a photo of a dog standing in front of a door
+blip,10.0,dog_00085.png,1,1,0,a photo of a black dog in a field,a photo of a dog in a bathtub
+blip,10.0,dog_00101.png,1,1,1,a photo of a dog on the beach,a photo of a dog on the beach
+blip,10.0,dog_00128.png,1,1,0,a photo of a cat laying on a bed,a photo of a cat laying on a bed
+blip,10.0,dog_00141.png,1,1,0,a photo of a dog standing in the grass,a photo of a dog standing in the grass
+blip,10.0,dog_00148.png,1,1,1,a photo of a dog sitting on a chair,a photo of a dog sitting on a couch
+blip,10.0,dog_00155.png,1,1,1,a photo of a man in a suit with a dog on his lap,a photo of a dog laying on a bed
+blip,10.0,dog_00158.png,1,1,1,a photo of a dog sitting on a table,a photo of a dog sitting on a couch
+blip,10.0,dog_00168.png,1,1,0,a photo of a dog wearing a santa hat,a photo of a dog playing with a ball
+blip,10.0,dog_00178.png,1,1,1,a photo of a dog in a bathtub,a photo of a dog standing in a room
+blip,10.0,dog_00181.png,1,1,1,a photo of a dog that is looking at the camera,a photo of a dog looking up at the camera
+blip,10.0,dog_00190.png,1,1,1,a photo of a dog in a field of flowers,a photo of a dog standing in a room
+blip,10.0,dog_00200.png,1,1,1,a photo of a dog sitting in a bathtub,a photo of a dog sitting in a bathtub
+blip,10.0,dog_00207.png,1,1,1,a photo of a dog laying on the grass,a photo of a dog laying on the floor
+blip,10.0,dog_00212.png,1,1,1,a photo of a dog looking up at the camera,a photo of a dog looking up at the camera
+blip,10.0,dog_00230.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,10.0,dog_00232.png,1,1,0,a photo of a cat laying on the floor,a photo of a cat laying on the floor
+blip,10.0,dog_00238.png,1,1,1,a photo of a small dog playing with a ball,a photo of a dog playing with a ball
+blip,10.0,dog_00239.png,1,1,1,a photo of a small dog sitting on a white background,a photo of a small white dog sitting on a couch
+blip,10.0,dog_00250.png,1,1,0,a photo of a dog with a christmas tree in the background,a photo of a dog running in the grass
+blip,10.0,dog_00262.png,1,1,1,a photo of a dog laying on the ground,a photo of a dog laying on the floor
+blip,10.0,dog_00275.png,1,0,0,a photo of a group of dogs in a room,a photo of a group of people in a room
+blip,10.0,dog_00318.png,1,1,1,a photo of a dog,a photo of a dog
+blip,10.0,dog_00319.png,1,1,1,a photo of a dog sitting on a bed,a photo of a dog sitting on a couch
+blip,10.0,dog_00321.png,1,1,1,a photo of a dog sitting on a couch,a photo of a dog sitting on a couch
+blip,10.0,dog_00327.png,1,1,1,a photo of a dog sitting on the floor,a photo of a dog sitting on the floor
+blip,10.0,dog_00343.png,1,1,1,a photo of a small white dog with a pink bow on it's head,a photo of a small white dog on a red background
+blip,10.0,dog_00345.png,1,1,1,a photo of a dog,a photo of a dog
+blip,10.0,dog_00361.png,1,1,1,a photo of a white dog with a tennis ball in its mouth,a photo of a dog with a flower in its mouth
+blip,10.0,dog_00389.png,1,1,1,a photo of a dog sitting in front of a christmas tree,a photo of a dog sitting in front of a christmas tree
+blip,10.0,dog_00421.png,1,1,1,a photo of a dog on a leash,a photo of a dog laying on a bed
+blip,10.0,dog_00431.png,1,1,1,a photo of a white dog laying on a couch,a photo of a dog laying on a bed
+blip,10.0,dog_00437.png,1,1,1,a photo of a dog sitting in the grass,a photo of a dog sitting in the grass
+blip,10.0,dog_00444.png,1,1,1,a photo of a man holding two dogs,a photo of a small white puppy
+blip,10.0,dog_00446.png,1,1,1,a photo of a small white dog on the ground,a photo of a small dog laying on the floor
+blip,10.0,dog_00457.png,1,1,1,a photo of a dog,a photo of a dog
+blip,10.0,dog_00460.png,1,1,1,a photo of a small white dog wearing a pink bow,a photo of a small white dog with a pink collar
+blip,10.0,dog_00474.png,1,1,0,a photo of a dog with a duck in its mouth,a photo of a dog standing in a room
+blip,10.0,dog_00478.png,1,1,1,a photo of a small dog in the grass,a photo of a dog laying in the grass
+blip,10.0,dog_00483.png,1,1,1,a photo of a dog playing with a toy,a photo of a dog playing with a ball
+blip,10.0,dog_00484.png,1,1,1,a photo of a small dog sitting on a table,a photo of a small dog sitting on a couch
+blip,10.0,dog_00488.png,1,1,1,a photo of a dog running in the snow,a photo of a dog running in the grass
+blip,10.0,dog_00502.png,1,1,1,a photo of a dog in the grass,a photo of a dog in the grass
+blip,10.0,dog_00510.png,1,1,1,a photo of a small white dog,a photo of a small white dog

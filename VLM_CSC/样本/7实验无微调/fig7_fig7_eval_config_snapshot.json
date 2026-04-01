@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-04-01T12:15:11",
+  "mode": "eval",
+  "protocol_name": "fig7_awgn_catsvsdogs_ssq_v1",
+  "git_hash": "ea59de9",
+  "config": {
+    "project_root": "D:\\code\\pycode\\Semantic-Communication",
+    "model_file": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\model\\VLM-CSC.py",
+    "target_file": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\exp\\eval\\target.py",
+    "blip_ckb_dir": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\assets\\downloaded_models\\blip",
+    "ram_ckb_path": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\assets\\downloaded_models\\ram_swin_large_14m.pth",
+    "sd_ckb_dir": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\assets\\downloaded_models\\sd15",
+    "seed": 42,
+    "quiet_third_party": true,
+    "strict_ckpt": true,
+    "protocol": {
+      "name": "fig7_awgn_catsvsdogs_ssq_v1",
+      "locked": true,
+      "required_senders": [
+        "blip"
+      ],
+      "required_metrics": [
+        "ssq"
+      ],
+      "required_classifier_backend": "clip_finetuned",
+      "require_strict_ckpt": true,
+      "receiver_kb": "sd"
+    },
+    "senders": [
+      "blip"
+    ],
+    "channel_type": "awgn",
+    "channel_dim": 4,
+    "max_text_len": 30,
+    "caption_mode": "sr_prompt",
+    "caption_prompt": null,
+    "max_text_len_by_sender": {
+      "blip": 30
+    },
+    "snr_list": [
+      0.0,
+      2.0,
+      4.0,
+      6.0,
+      8.0,
+      10.0
+    ],
+    "sd_steps": 30,
+    "sd_height": 512,
+    "sd_width": 512,
+    "metrics": [
+      "ssq"
+    ],
+    "finetune_clip": true,
+    "clip_ft_epochs": 10,
+    "clip_ft_lr": 0.001,
+    "clip_ft_batch_size": 32,
+    "clip_classifier_path": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\experiments\\fig7\\finetuned_clip\\clip_classifier.pth",
+    "train_split_dir": "D:\\code\\pycode\\Semantic-Communication\\data\\datasets\\catsvsdogs\\train",
+    "test_split_dir": "D:\\code\\pycode\\Semantic-Communication\\data\\datasets\\catsvsdogs\\test",
+    "output_dir": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\experiments\\fig7",
+    "checkpoint_dir": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\experiments\\fig7\\checkpoints\\sr_prompt",
+    "caption_cache_dir": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\experiments\\fig7\\caption_cache",
+    "train": {
+      "enabled": true,
+      "use_previous_best_checkpoint": false,
+      "train_lr": 0.0001,
+      "train_weight_decay": 0.0,
+      "train_batch_size": 32,
+      "train_max_batches": -1,
+      "train_max_per_class": -1,
+      "val_ratio": 0.2,
+      "train_snr_min_db": 0.0,
+      "train_snr_max_db": 10.0,
+      "train_snr_mode": "uniform_range",
+      "use_caption_cache": true,
+      "strict_cache_required": true,
+      "train_phase_config": {
+        "channel_phase": {
+          "epochs": 20,
+          "channel_phase_objective": "masked_sequence_mse",
+          "early_stop_patience": 8,
+          "lr": 0.0001,
+          "weight_decay": 0.0
+        },
+        "semantic_phase": {
+          "epochs": 20,
+          "early_stop_patience": 8,
+          "lr": 0.0001,
+          "weight_decay": 0.0
+        },
+        "joint_phase": {
+          "max_joint_epochs": 20,
+          "early_stop_patience": 8,
+          "monitor": "val_semantic_loss",
+          "alpha": 0.5,
+          "beta": 1.0,
+          "schedule": "alternate_steps",
+          "lr": 0.0001,
+          "weight_decay": 0.0
+        }
+      },
+      "train_tag": "fig7_train"
+    },
+    "eval": {
+      "enabled": true,
+      "batch_size": 8,
+      "max_batches": -1,
+      "max_per_class": 250,
+      "tag": "fig7_eval",
+      "ckpt_blip": "D:\\code\\pycode\\Semantic-Communication\\VLM_CSC\\data\\experiments\\fig7\\checkpoints\\sr_prompt\\blip_phase_joint_best.pth"
+    },
+    "_provenance": {
+      "git_hash": "ea59de9"
+    }
+  },
+  "protocol_fingerprint_sha256": "165b8c3fbbf21cfeb5de56338b839a98e2f3c5568f07561a93180c78b64a80de"
+}

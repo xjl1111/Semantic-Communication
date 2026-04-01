@@ -1,0 +1,16 @@
+timestamp: 2026-03-31T06:35:31
+project_root: D:\code\pycode\Semantic-Communication
+test_split_dir: D:\code\pycode\Semantic-Communication\data\datasets\catsvsdogs\test
+snr_list: [0.0, 2.0, 4.0, 6.0, 8.0, 10.0]
+batch_size: 8
+max_batches: 10
+max_per_class: -1
+selected_images: 2000
+selected_batches: 10
+required_classifier_backend: clip_zeroshot
+classifier_backends_seen: ['clip_zeroshot']
+sender_backend: {'blip': 'clip_zeroshot', 'ram': 'clip_zeroshot'}
+ckpt_blip: D:\code\pycode\Semantic-Communication\VLM_CSC\data\experiments\fig7\checkpoints\sr_prompt_ft\blip_phase_joint_best.pth
+ckpt_blip_sha256: 8bae019102ca10ad1d413c302abca58b9e54ca40b36ff282cab4ef0f84995167
+ckpt_ram: D:\code\pycode\Semantic-Communication\VLM_CSC\data\experiments\fig7\checkpoints\sr_prompt_ft\ram_phase_joint_best.pth
+ckpt_ram_sha256: e5558e2c58e7402c74b1e0dedaa53e38e5fe62d91f3aa5c004de9fb58fa0fa2f

@@ -1,0 +1,961 @@
+sender,snr_db,image,label,pred_original,pred_reconstructed,source_text,recovered_text
+blip,0.0,cat_00000.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00008.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00046.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00053.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00061.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00063.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00068.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00077.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00078.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00091.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00103.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00106.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00115.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00121.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00127.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00143.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00176.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00184.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00187.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00205.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00224.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00245.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00251.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00256.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00271.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00273.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00277.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00279.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00294.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00302.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00323.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00332.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00336.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00356.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00367.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00397.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00399.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00412.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00418.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00426.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00432.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00434.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00438.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00453.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00456.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00464.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00467.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00470.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00515.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00558.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00565.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00573.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00586.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00597.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00599.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00607.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00608.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00637.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00641.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00646.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00650.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00664.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00669.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00671.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00673.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00676.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00688.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00690.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00695.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00716.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00727.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00739.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,0.0,cat_00760.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00786.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00790.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00792.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,0.0,cat_00811.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,0.0,cat_00819.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00000.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00008.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00046.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00053.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00061.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00063.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00068.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00077.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00078.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00091.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00103.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00106.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00115.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00121.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00127.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00143.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00176.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00184.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00187.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00205.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00224.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00245.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00251.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00256.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00271.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00273.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00277.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00279.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00294.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00302.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00323.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00332.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00336.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00356.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00367.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00397.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00399.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00412.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00418.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00426.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00432.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00434.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00438.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00453.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00456.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00464.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00467.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00470.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00515.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00558.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00565.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00573.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00586.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00597.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00599.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00607.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00608.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00637.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00641.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00646.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00650.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00664.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,2.0,cat_00669.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00671.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00673.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00676.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00688.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00690.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00695.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00716.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00727.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00739.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00760.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00786.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00790.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,2.0,cat_00792.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00811.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,2.0,cat_00819.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00000.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00008.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00046.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00053.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00061.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00063.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00068.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00077.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00078.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00091.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00103.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00106.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00115.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00121.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00127.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00143.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00176.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00184.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00187.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00205.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00224.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00245.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00251.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00256.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00271.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00273.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00277.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00279.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00294.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00302.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00323.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00332.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00336.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00356.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00367.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00397.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00399.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00412.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00418.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00426.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00432.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00434.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00438.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00453.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00456.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00464.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00467.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00470.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00515.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00558.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00565.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00573.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00586.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00597.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00599.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00607.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00608.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00637.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00641.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00646.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00650.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00664.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00669.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00671.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00673.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00676.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00688.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00690.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00695.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,4.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00716.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00727.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00739.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00760.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00786.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00790.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00792.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,4.0,cat_00811.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,4.0,cat_00819.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00000.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00008.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00046.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00053.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00061.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00063.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00068.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00077.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00078.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00091.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00103.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00106.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00115.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00121.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00127.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00143.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00176.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00184.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00187.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00205.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00224.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00245.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00251.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00256.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00271.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00273.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00277.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00279.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00294.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00302.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00323.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00332.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00336.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00356.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00367.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00397.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00399.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00412.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00418.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00426.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00432.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00434.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00438.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00453.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00456.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00464.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00467.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00470.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00515.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00558.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00565.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00573.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00586.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00597.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00599.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00607.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00608.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00637.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00641.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00646.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00650.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00664.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00669.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00671.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00673.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00676.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00688.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00690.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00695.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00716.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,6.0,cat_00727.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00739.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00760.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00786.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00790.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00792.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,6.0,cat_00811.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,6.0,cat_00819.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00000.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00008.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00046.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00053.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00061.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00063.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00068.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00077.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00078.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00091.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00103.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00106.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00115.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00121.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00127.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00143.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00176.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00184.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00187.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00205.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00224.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00245.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00251.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00256.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00271.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00273.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00277.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00279.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00294.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00302.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00323.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00332.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00336.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00356.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00367.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00397.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00399.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00412.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00418.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00426.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00432.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00434.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00438.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00453.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00456.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00464.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00467.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00470.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00515.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00558.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00565.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00573.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00586.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00597.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00599.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00607.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00608.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00637.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00641.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00646.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00650.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00664.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00669.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00671.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00673.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00676.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00688.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00690.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00695.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00716.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00727.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00739.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00760.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,8.0,cat_00786.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00790.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00792.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,8.0,cat_00811.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,8.0,cat_00819.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00000.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00008.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00046.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00053.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00061.png,0,1,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00063.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00068.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00077.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00078.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00091.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,10.0,cat_00103.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00106.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00115.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00121.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00127.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00143.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00176.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00184.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00187.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00205.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00224.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00245.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00251.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00256.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00271.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00273.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00277.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00279.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00294.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00302.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00320.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00323.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00332.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00336.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00356.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00367.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00397.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00399.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00412.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00418.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00426.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00432.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,10.0,cat_00434.png,0,0,0,"a photo of an animal, a cat",a photo of a cat
+blip,10.0,cat_00438.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00453.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00456.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00464.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00467.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00470.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00515.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00558.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00565.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00573.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00586.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00597.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00599.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00607.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00608.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00637.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00641.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00646.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00650.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00664.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00669.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00671.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00673.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00676.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00688.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00690.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00695.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00715.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00716.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00727.png,0,1,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00739.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00760.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00786.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00790.png,0,0,0,"a photo of an animal, a cat","a photo of an animal, a cat"
+blip,10.0,cat_00792.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00811.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+blip,10.0,cat_00819.png,0,0,0,"a photo of an animal, a cat",a photo of an a cat
+ram,0.0,cat_00000.png,0,0,0,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : armchair, chair, dog, pet, stool, toy."
+ram,0.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,0.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : cat, catch, girl, pet, selfie, stand, stool, tabby, woman."
+ram,0.0,cat_00053.png,0,0,1,"This image contains: animal, mouth, open.","this image contains : animal, lamb, tree."
+ram,0.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,0.0,cat_00063.png,0,0,1,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : baseball glove, catch, cloth, figurine, floor, living room, pillow, room, stool."
+ram,0.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, goggles, sit, stool."
+ram,0.0,cat_00077.png,0,0,0,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, lap, man, pet, selfie, white, woman."
+ram,0.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : animal, bottle, catch, table, doll, figurine, stand, stool, wine bottle, white."
+ram,0.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,0.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,0.0,cat_00106.png,0,0,0,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : brown, carpet, cat, floor, pink, play, retriever, sit, stand, stool, toy, yellow."
+ram,0.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,0.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, counter top, table, gray, hide, kitchen table, sit, stare, stool, white."
+ram,0.0,cat_00127.png,0,0,0,"This image contains: man, stool, wine glass.","this image contains : man, stool, wine glass."
+ram,0.0,cat_00143.png,0,0,1,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, curl, dog, dog bed, floor, lay, pillow, purple, red, sleep, white."
+ram,0.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, guinea pig, pet, tabby."
+ram,0.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, mud, jump, tub."
+ram,0.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : bath, bathroom sink, cat, floor, green, hide, selfie, stare, tub."
+ram,0.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,0.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,0.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,0.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,0.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,0.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, sit, stare, white, window, window sill."
+ram,0.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : blue, face, person, man, photo, room, selfie, stare, wear."
+ram,0.0,cat_00277.png,0,0,1,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : chase, dog, field, grass, grassy, gray, leash, stand."
+ram,0.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, tail, stand, white."
+ram,0.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, hide, lay, paw, siamese, stare, stool, white."
+ram,0.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, bureau, drawer, dresser, floor, ledge, stand, stool."
+ram,0.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : cage, cat, gray, hide, stare, tabby."
+ram,0.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog, floor."
+ram,0.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, pillow."
+ram,0.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,0.0,cat_00356.png,0,0,0,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, counter top, dog, floor, paw, stare."
+ram,0.0,cat_00367.png,0,0,1,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, owl, sit, stare, stool, white."
+ram,0.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : blue, carpet, cd, dog, floor, frisbee, mouth, red, stool, toy."
+ram,0.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,0.0,cat_00412.png,0,0,1,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : blanket, carpet, floor, lay, pet, mat, pillow, toy."
+ram,0.0,cat_00418.png,0,0,1,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, crowded, elephant, floor, gray, stand."
+ram,0.0,cat_00426.png,0,0,1,"This image contains: person, man, tennis player, tennis racket.","this image contains : person, man, shirt, wear, woman."
+ram,0.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, gray, selfie, stare, stool, tabby."
+ram,0.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, kitchen table, sit, stand, stare, stool, tabby."
+ram,0.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, cat, floor, pot, room, sit, stand, stare, toy, white."
+ram,0.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,0.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : grass, green, lush, man, stand, tree, white, woman."
+ram,0.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, pet, selfie."
+ram,0.0,cat_00467.png,0,0,1,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, bull, cloth, figurine, sculpture."
+ram,0.0,cat_00470.png,0,0,1,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stone, stand."
+ram,0.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,0.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,0.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,0.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : armchair, cat, chair, curl, couch, pad, green, lay, pillow, sleep, tabby."
+ram,0.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,0.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, chair, table, dinning table, living room, stand, stool."
+ram,0.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, pink."
+ram,0.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, table, dinning table, food, kitchen table, sit, stare."
+ram,0.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : blender, brown, cat, computer, computer monitor, computer screen, table, laptop, laptop, pink, sit, stare, tabby."
+ram,0.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,0.0,cat_00641.png,0,0,0,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, man, owl."
+ram,0.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : cat, stare, tabby."
+ram,0.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,0.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,0.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : black, cat, cape, floor, grass, grassy, green, lush, stand, stare, walk."
+ram,0.0,cat_00671.png,0,0,0,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, hand, game controller, girl, person, lap, man, play, remote, wii controller, tabby."
+ram,0.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, head, party hat, selfie, shirt, stare, tabby, wear, white."
+ram,0.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,0.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,0.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,0.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer desk, computer monitor, computer screen, table, lay, sit, stare, tabby."
+ram,0.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer, computer screen, table, pet, selfie, stare, toy."
+ram,0.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, lap, lay, lay, pillow, tabby."
+ram,0.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, table, doll, floor, room, stool, toy."
+ram,0.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, jump, paw, stand, white."
+ram,0.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,0.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,0.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,0.0,cat_00792.png,0,0,1,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, blue, dog, floor, lay, lay, snow, walk."
+ram,0.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : bed, girl, lay, pillow, selfie, white, woman."
+ram,0.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."
+ram,2.0,cat_00000.png,0,0,1,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : blue, chair, dog, pet, stool, toy."
+ram,2.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,2.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : brown, cat, pet, selfie, stand, stool, tabby, woman."
+ram,2.0,cat_00053.png,0,0,0,"This image contains: animal, mouth, open.","this image contains : animal, sky, tree."
+ram,2.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,2.0,cat_00063.png,0,0,0,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : table, figurine, floor, glass vase, room, pillow, sleep, stool, toilet seat."
+ram,2.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, sit, stool, stool."
+ram,2.0,cat_00077.png,0,0,1,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, man, pet, selfie, wear, white."
+ram,2.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : alcohol, animal, bottle, catch, person, man, pet, stand, stool, wine bottle, white."
+ram,2.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,2.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,2.0,cat_00106.png,0,0,0,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : carpet, cat, cat, floor, game controller, play, lid, remote, stool, toy, wear."
+ram,2.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,2.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, table, dinning table, hide, ledge, sit, stare, stool, white."
+ram,2.0,cat_00127.png,0,0,0,"This image contains: man, stool, wine glass.","this image contains : man, stool, wine glass."
+ram,2.0,cat_00143.png,0,0,1,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, purple, red, sleep, white."
+ram,2.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, hide, pet, tabby, tie."
+ram,2.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, jump, lay, sky."
+ram,2.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : bath, bathroom sink, cat, floor, green, siamese, stare, sunglasses."
+ram,2.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,2.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,2.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,2.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,2.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,2.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, stare, white, window, window sill."
+ram,2.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : dark, face, person, man, photo, room, selfie, stare, wear."
+ram,2.0,cat_00277.png,0,0,1,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : building, dirt field, dog, field, grass, gray, leash, stand, yard."
+ram,2.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, purple, stand, white."
+ram,2.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, lay, paw, stool, toilet seat, white."
+ram,2.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, footstall, ledge, pole, sculpture, stand, stool."
+ram,2.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : bush, cat, gray, hide, stare, tabby."
+ram,2.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog, floor."
+ram,2.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, pillow."
+ram,2.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,2.0,cat_00356.png,0,0,1,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, cement, dog, floor, lay, paw, toy."
+ram,2.0,cat_00367.png,0,0,0,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, mat, sit, stare, stool, white."
+ram,2.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy."
+ram,2.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,2.0,cat_00412.png,0,0,0,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : blanket, carpet, floor, lay, pet, pillow, toy."
+ram,2.0,cat_00418.png,0,0,1,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, carpet, elephant, floor, gray, man, stand."
+ram,2.0,cat_00426.png,0,0,1,"This image contains: person, man, tennis player, tennis racket.","this image contains : floor, person, man, shirt, wear."
+ram,2.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, pole, selfie, stare, stool, tabby."
+ram,2.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, plate, kitchen sink, sit, stand, stare, stool, tabby."
+ram,2.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, carpet, cat, floor, red, room, sit, stand, stare, toy, white."
+ram,2.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,2.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : grass, green, lush, man, stand, white, woman."
+ram,2.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, liquid, selfie."
+ram,2.0,cat_00467.png,0,0,1,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, car, figurine, sculpture."
+ram,2.0,cat_00470.png,0,0,0,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stand, wine glass."
+ram,2.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,2.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,2.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,2.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : cat, catch, cowboy hat, neckband, pillow, purple, tabby, tie, wear."
+ram,2.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,2.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, lamp, chair, table, curtain, living room, room, stand, stool."
+ram,2.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, stool."
+ram,2.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, counter top, table, dinning table, food, sit, stare."
+ram,2.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : bookshelf, brown, cat, computer, computer monitor, computer screen, table, laptop, paw, sit, stare, tabby."
+ram,2.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,2.0,cat_00641.png,0,0,0,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, parrot, squirrel."
+ram,2.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : cat, tabby, tail."
+ram,2.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,2.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,2.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : bird, black, cat, field, floor, grass, grassy, green, lush, stand, stare."
+ram,2.0,cat_00671.png,0,0,1,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, hand, game controller, person, man, preacher, muscle, robe, remote, selfie, wii controller."
+ram,2.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white."
+ram,2.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,2.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,2.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,2.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer, computer monitor, computer screen, table, lay, sit, stare, tabby."
+ram,2.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer, computer screen, table, pet, selfie, stare, toy."
+ram,2.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, image, lap, lay, pillow, tabby."
+ram,2.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, table, doll, room, stool, toy, walk."
+ram,2.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, paw, stand, white, yard."
+ram,2.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,2.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,2.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,2.0,cat_00792.png,0,0,0,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, brown, dog, floor, lay, snow, snowy, walk."
+ram,2.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : girl, hair, lay, pillow, selfie, white, woman."
+ram,2.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."
+ram,4.0,cat_00000.png,0,0,1,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : blue, chair, dog, pet, stool, toy."
+ram,4.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,4.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : cat, catch, pet, selfie, shirt, stand, stool, tabby, woman."
+ram,4.0,cat_00053.png,0,0,0,"This image contains: animal, mouth, open.","this image contains : animal, sky, tree."
+ram,4.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,4.0,cat_00063.png,0,0,0,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : baseball glove, curtain, table, figurine, floor, pillow, room, stool, tile wall."
+ram,4.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, goggles, sit, stool."
+ram,4.0,cat_00077.png,0,0,1,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, lap, man, pet, selfie, wear, white."
+ram,4.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : alcohol, animal, bottle, table, wine, man, pet, stand, stool, wine bottle, white."
+ram,4.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,4.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,4.0,cat_00106.png,0,0,1,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : brown, carpet, cat, curl, fawn, floor, hospital bed, footstall, miniature, mouse, stool, toy."
+ram,4.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,4.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, counter top, table, gray, hide, ledge, sit, stare, stool, table top, white."
+ram,4.0,cat_00127.png,0,0,0,"This image contains: man, stool, wine glass.","this image contains : man, stool, woman."
+ram,4.0,cat_00143.png,0,0,1,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, curl, dog, dog bed, floor, lay, pillow, red, sleep, white."
+ram,4.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, hide, pet, tabby, turquoise."
+ram,4.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, jump, image, sky."
+ram,4.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : broccoli, cat, floor, green, head, siamese, stare, wear."
+ram,4.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,4.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,4.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,4.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,4.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,4.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, sit, stare, white, window sill."
+ram,4.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : dark, face, person, man, photo, room, selfie, stare, wear."
+ram,4.0,cat_00277.png,0,0,1,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : swimwear, dog, field, flower, grass, gray, lush, stand."
+ram,4.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, puddle, stand, white."
+ram,4.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, jump, paw, stare, stool, tabby, white."
+ram,4.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, footstall, ledge, pole, sculpture, stand, stool."
+ram,4.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : bush, cat, gray, hide, stare, tabby."
+ram,4.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog, floor."
+ram,4.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, sleep."
+ram,4.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,4.0,cat_00356.png,0,0,0,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, cement, dog, floor, lay, paw, shepherd."
+ram,4.0,cat_00367.png,0,0,0,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, mat, sit, stare, stool, white."
+ram,4.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : catch, cd, dog, floor, frisbee, mouth, red, stool, toy."
+ram,4.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,4.0,cat_00412.png,0,0,1,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : blanket, carpet, floor, lay, pet, pillow, purple, toy."
+ram,4.0,cat_00418.png,0,0,0,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, brush, elephant, floor, gray, man, stand."
+ram,4.0,cat_00426.png,0,0,0,"This image contains: person, man, tennis player, tennis racket.","this image contains : person, man, racket, tennis racket."
+ram,4.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, pole, selfie, stare, stool, tabby."
+ram,4.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, kitchen table, sit, stand, stare, stool, tabby."
+ram,4.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, carpet, cat, floor, red, room, sit, stand, stare, toy, white."
+ram,4.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,4.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : dress, grass, green, lush, man, stand, white, woman."
+ram,4.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, food, selfie."
+ram,4.0,cat_00467.png,0,0,1,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, doberman, figurine, sculpture."
+ram,4.0,cat_00470.png,0,0,0,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stand, wine glass."
+ram,4.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,4.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,4.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,4.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : cat, catch, cowboy hat, neckband, pillow, red, tabby, tie, wear."
+ram,4.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,4.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, chair, table, dinning table, living room, room, stool, wood."
+ram,4.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, stool."
+ram,4.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, table, dinning table, food, fruit, sit, stare."
+ram,4.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : bookshelf, brown, cat, computer, computer monitor, computer screen, table, laptop, paw, sit, stare, tabby."
+ram,4.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,4.0,cat_00641.png,0,0,1,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, owl, tile wall."
+ram,4.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : swimwear, cat, tabby."
+ram,4.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,4.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,4.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : bird, black, cat, field, floor, grass, grassy, green, lush, stand, stare."
+ram,4.0,cat_00671.png,0,0,0,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, control, hand, game controller, person, person, man, play, remote, wii controller."
+ram,4.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white."
+ram,4.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,4.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,4.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,4.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer screen, computer, counter top, table, lay, sit, stare, tabby."
+ram,4.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer, computer screen, table, pet, selfie, stare, toy."
+ram,4.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, image, lap, lay, pillow, tabby."
+ram,4.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, doll, floor, room, stool, toy."
+ram,4.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, paw, stand, white."
+ram,4.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,4.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,4.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,4.0,cat_00792.png,0,0,1,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, brown, dog, floor, lay, snow, snowy, snow."
+ram,4.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : girl, lay, pillow, selfie, selfie, white, woman."
+ram,4.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."
+ram,6.0,cat_00000.png,0,0,1,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : blue, chair, dog, pet, stool, toy."
+ram,6.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,6.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : cat, catch, pet, selfie, shirt, stand, stool, tabby, woman."
+ram,6.0,cat_00053.png,0,0,1,"This image contains: animal, mouth, open.","this image contains : animal, mouth, toy."
+ram,6.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,6.0,cat_00063.png,0,0,0,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : baseball glove, curtain, table, figurine, floor, pillow, room, stool, tile wall."
+ram,6.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, goggles, sit, stool."
+ram,6.0,cat_00077.png,0,0,1,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, lap, man, pet, selfie, wear, white."
+ram,6.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : alcohol, animal, bottle, table, wine, man, pet, stand, stool, wine bottle, white, wine glass."
+ram,6.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,6.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,6.0,cat_00106.png,0,0,0,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : brown, carpet, cat, floor, girl, play, racket, stand, tennis player, tennis racket, toy, yellow."
+ram,6.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,6.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, counter top, table, plate, hide, ledge, sit, stare, stool, table top, white."
+ram,6.0,cat_00127.png,0,0,0,"This image contains: man, stool, wine glass.","this image contains : man, stool, wine glass."
+ram,6.0,cat_00143.png,0,0,0,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, purple, sleep, white."
+ram,6.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, hide, pet, tabby, yellow."
+ram,6.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, fly, jump, sky."
+ram,6.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : broccoli, cat, floor, green, head, siamese, stare, wear."
+ram,6.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,6.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,6.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,6.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,6.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,6.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, stare, white, window, window sill."
+ram,6.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : dark, face, person, man, photo, room, selfie, stare, wear."
+ram,6.0,cat_00277.png,0,0,0,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : bookshelf, dog, gray, flower, grass, gray, lush, stand."
+ram,6.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, puddle, stand, white."
+ram,6.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, lay, paw, stare, stool, tile, white."
+ram,6.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, footstall, ledge, pole, sculpture, stand, stool."
+ram,6.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : bush, cat, gray, hide, stare, tabby."
+ram,6.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog, floor."
+ram,6.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, sleep."
+ram,6.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,6.0,cat_00356.png,0,0,1,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, cement, dog, floor, lay, paw, stretch."
+ram,6.0,cat_00367.png,0,0,0,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, mat, sit, stare, stool, white."
+ram,6.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy."
+ram,6.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,6.0,cat_00412.png,0,0,1,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : blanket, carpet, floor, lay, mat, pet, pillow, toy."
+ram,6.0,cat_00418.png,0,0,1,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, elephant, floor, gray, gray, man, stand."
+ram,6.0,cat_00426.png,0,0,1,"This image contains: person, man, tennis player, tennis racket.","this image contains : person, man, photo, tennis racket."
+ram,6.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, pole, selfie, stare, stool, tabby."
+ram,6.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, kitchen table, sit, stand, stare, stool, tabby."
+ram,6.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, carpet, cat, floor, red, room, sit, stand, stare, toy, white."
+ram,6.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,6.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : dress, grass, green, lush, man, stand, white, woman."
+ram,6.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, selfie, selfie."
+ram,6.0,cat_00467.png,0,0,0,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, chipmunk, figurine."
+ram,6.0,cat_00470.png,0,0,0,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stand, wine glass."
+ram,6.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,6.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,6.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,6.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : cat, catch, hand, neckband, pillow, purple, red, tabby, tie, toy."
+ram,6.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,6.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, chair, table, dinning table, living room, room, stool, window."
+ram,6.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, package."
+ram,6.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, table, dinning table, food, green, sit, stare."
+ram,6.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : bookshelf, brown, cat, computer, computer monitor, computer screen, table, laptop, paw, sit, stare, tabby."
+ram,6.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,6.0,cat_00641.png,0,0,0,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, owl, wine glass."
+ram,6.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : cake, cat, tabby."
+ram,6.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,6.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,6.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : bird, black, cat, field, floor, grass, grassy, green, lush, stand, stare."
+ram,6.0,cat_00671.png,0,0,1,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, hand, game controller, game controller, person, man, muscle, play, remote, wii controller."
+ram,6.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white."
+ram,6.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,6.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,6.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,6.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer, computer desk, counter top, table, lay, sit, stare, tabby."
+ram,6.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer screen, computer, table, pet, selfie, stare, toy."
+ram,6.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, image, lap, lay, pillow, tabby."
+ram,6.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, table, doll, floor, room, stool, toy."
+ram,6.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, paw, stand, white, yard."
+ram,6.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,6.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,6.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,6.0,cat_00792.png,0,0,1,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, brown, dog, floor, horse, lay, snow, walk."
+ram,6.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : bed, girl, lay, pillow, selfie, white, woman."
+ram,6.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."
+ram,8.0,cat_00000.png,0,0,1,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : blue, chair, dog, pet, stool, toy."
+ram,8.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,8.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : cat, catch, pet, selfie, shirt, stand, stool, tabby, woman."
+ram,8.0,cat_00053.png,0,0,1,"This image contains: animal, mouth, open.","this image contains : animal, mouth, teddy."
+ram,8.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,8.0,cat_00063.png,0,0,1,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : bureau, curtain, table, figurine, floor, lay, pillow, room, stool, tile wall."
+ram,8.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, goggles, sit, stool."
+ram,8.0,cat_00077.png,0,0,1,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, lap, man, pet, selfie, wear, white."
+ram,8.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : alcohol, animal, bottle, table, wine, man, pet, stand, stool, wine bottle, white."
+ram,8.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,8.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,8.0,cat_00106.png,0,0,0,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : brown, carpet, cat, floor, girl, play, pink, smile, shirt, stool, toy, wine glass."
+ram,8.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,8.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, counter top, table, gray, head, hide, kitchen table, sit, stare, stool, white."
+ram,8.0,cat_00127.png,0,0,0,"This image contains: man, stool, wine glass.","this image contains : man, stool, wine glass."
+ram,8.0,cat_00143.png,0,0,1,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, red, sleep, white."
+ram,8.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, hide, pet, tabby, tie."
+ram,8.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, jump, jump, sky."
+ram,8.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : broccoli, cat, floor, green, head, siamese, stare, wear."
+ram,8.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,8.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,8.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,8.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,8.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,8.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, stare, white, window, window sill."
+ram,8.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : dark, face, person, man, photo, room, selfie, stare, wear."
+ram,8.0,cat_00277.png,0,0,1,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : dandelion, dog, field, flower, grass, gray, puddle, stand."
+ram,8.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, puddle, stand, white."
+ram,8.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, lay, paw, stare, stool, toilet seat, white."
+ram,8.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, footstall, ledge, pole, sculpture, stand, stool."
+ram,8.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : bush, cat, gray, hide, stare, tabby."
+ram,8.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog, floor."
+ram,8.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, sleep."
+ram,8.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,8.0,cat_00356.png,0,0,1,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, cement, dog, floor, lay, paw, stretch."
+ram,8.0,cat_00367.png,0,0,1,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, husky, sit, stare, stool, white."
+ram,8.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : catch, cd, dog, floor, frisbee, mouth, red, red, stool, toy."
+ram,8.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,8.0,cat_00412.png,0,0,1,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : carpet, carpet, floor, lay, mat, pet, pillow, toy."
+ram,8.0,cat_00418.png,0,0,0,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, elephant, elephant, floor, gray, man, stand."
+ram,8.0,cat_00426.png,0,0,0,"This image contains: person, man, tennis player, tennis racket.","this image contains : person, man, shirt, tennis racket."
+ram,8.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, pole, selfie, stare, stool, tabby."
+ram,8.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, kitchen table, sit, stand, stare, stool, tabby."
+ram,8.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, carpet, cat, floor, red, room, sit, stand, stare, toy, white."
+ram,8.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,8.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : dress, grass, green, lush, man, stand, white, woman."
+ram,8.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, package, selfie."
+ram,8.0,cat_00467.png,0,0,1,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, car, figurine, sculpture."
+ram,8.0,cat_00470.png,0,0,0,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stand, wine glass."
+ram,8.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,8.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,8.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,8.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : cat, catch, hand, neckband, pillow, purple, tabby, tie, toy, wear."
+ram,8.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,8.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, chair, table, dinning table, living room, room, stool, window."
+ram,8.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, greet."
+ram,8.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, table, dinning table, food, fruit, sit, stare."
+ram,8.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : bookshelf, brown, cat, computer, computer monitor, computer screen, table, laptop, lay, paw, sit, stare, tabby."
+ram,8.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,8.0,cat_00641.png,0,0,0,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, owl, wine glass."
+ram,8.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : cake, cat, tabby."
+ram,8.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,8.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,8.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : bird, black, cat, field, floor, grass, grassy, green, lush, stand, stare."
+ram,8.0,cat_00671.png,0,0,0,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, control, hand, game controller, person, instrument, man, play, remote, wii controller."
+ram,8.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white."
+ram,8.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,8.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,8.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,8.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer, computer monitor, computer screen, table, lay, sit, stare, tabby."
+ram,8.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer, computer screen, table, pet, selfie, stare, toy."
+ram,8.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, image, lap, lay, pillow, tabby."
+ram,8.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, table, doll, floor, room, stool, toy."
+ram,8.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, paw, stand, white."
+ram,8.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,8.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,8.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,8.0,cat_00792.png,0,0,0,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, brown, dog, floor, lay, snow, snowy, walk."
+ram,8.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : bed, girl, lay, pillow, selfie, white, woman."
+ram,8.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."
+ram,10.0,cat_00000.png,0,0,1,"This image contains: blue, chair, dog, pet, stool, toy.","this image contains : blue, chair, dog, pet, stool, toy."
+ram,10.0,cat_00008.png,0,0,0,"This image contains: bottle, cat, lay, pet, tabby.","this image contains : bottle, cat, lay, pet, tabby."
+ram,10.0,cat_00046.png,0,0,0,"This image contains: cat, catch, pet, selfie, shirt, stand, stool, tabby, woman.","this image contains : cat, catch, pet, selfie, shirt, stand, stool, tabby, woman."
+ram,10.0,cat_00053.png,0,0,0,"This image contains: animal, mouth, open.","this image contains : animal, mouth, open."
+ram,10.0,cat_00061.png,0,1,0,"This image contains: bottle, table, figurine, selfie, sit, stool.","this image contains : bottle, table, figurine, selfie, sit, stool."
+ram,10.0,cat_00063.png,0,0,0,"This image contains: baseball glove, curtain, table, figurine, floor, pillow, room, sculpture, stool, window.","this image contains : baseball glove, curtain, table, figurine, floor, pillow, room, stool, tile wall."
+ram,10.0,cat_00068.png,0,0,1,"This image contains: dog, goggles, sit, stool.","this image contains : dog, goggles, sit, stool."
+ram,10.0,cat_00077.png,0,0,1,"This image contains: baseball hat, cat, catch, lap, man, pet, selfie, wear, white.","this image contains : baseball hat, cat, catch, lap, man, pet, selfie, wear, white."
+ram,10.0,cat_00078.png,0,0,0,"This image contains: alcohol, animal, bottle, table, wine, man, pet, stand, stool, white, wine bottle, wine glass.","this image contains : alcohol, animal, bottle, table, liquid, man, pet, stand, stool, wine bottle, white."
+ram,10.0,cat_00091.png,0,0,0,"This image contains: cat, neckband, stand, stare, tabby, white.","this image contains : cat, neckband, stand, stare, tabby, white."
+ram,10.0,cat_00103.png,0,0,0,"This image contains: brown, cat, floor, lay, sit, stare, tabby.","this image contains : brown, cat, floor, lay, sit, stare, tabby."
+ram,10.0,cat_00106.png,0,0,0,"This image contains: brown, carpet, cat, floor, mouse, play, racket, remote, tennis racket, toy, wii, wii controller.","this image contains : brown, carpet, cat, floor, girl, play, racket, play, stool, toy, wine glass."
+ram,10.0,cat_00115.png,0,0,0,"This image contains: black, cat, floor, lay, pillow, stool.","this image contains : black, cat, floor, lay, pillow, stool."
+ram,10.0,cat_00121.png,0,0,0,"This image contains: black, cat, counter top, table, head, hide, husky, sit, stare, stool, table top, white.","this image contains : black, cat, counter top, table, head, hide, ledge, sit, stare, stool, table top, white."
+ram,10.0,cat_00127.png,0,0,1,"This image contains: man, stool, wine glass.","this image contains : man, stool, tree."
+ram,10.0,cat_00143.png,0,0,1,"This image contains: animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, plaid, quilt, red, sleep, white.","this image contains : animal, blanket, carpet, comfort, dog, dog bed, floor, lay, pillow, red, sleep, white."
+ram,10.0,cat_00176.png,0,0,0,"This image contains: blue, cat, hide, pet, tabby, turquoise.","this image contains : blue, cat, hide, pet, tabby, turquoise."
+ram,10.0,cat_00184.png,0,0,1,"This image contains: animal, brown, dog, floor, fly, jump, sky.","this image contains : animal, brown, dog, floor, mud, puddle, sky."
+ram,10.0,cat_00187.png,0,0,0,"This image contains: broccoli, cat, floor, green, head, siamese, stare, wear.","this image contains : broccoli, cat, floor, green, head, siamese, stare, wear."
+ram,10.0,cat_00205.png,0,0,0,"This image contains: armchair, cat, chair, sit, stare, stool, tabby.","this image contains : armchair, cat, chair, sit, stare, stool, tabby."
+ram,10.0,cat_00224.png,0,0,1,"This image contains: animal, image, man, photo, selfie.","this image contains : animal, image, man, photo, selfie."
+ram,10.0,cat_00245.png,0,0,0,"This image contains: black, bow tie, cat, neckband, stare, tie, wear, white.","this image contains : black, bow tie, cat, neckband, stare, tie, wear, white."
+ram,10.0,cat_00251.png,0,0,0,"This image contains: black, cat, lay, white.","this image contains : black, cat, lay, white."
+ram,10.0,cat_00256.png,0,0,0,"This image contains: cat, neckband, stare, tabby, wear.","this image contains : cat, neckband, stare, tabby, wear."
+ram,10.0,cat_00271.png,0,0,0,"This image contains: animal, cat, dog, ledge, stare, white, window, window sill.","this image contains : animal, cat, dog, ledge, stare, white, window, window sill."
+ram,10.0,cat_00273.png,0,0,1,"This image contains: dark, face, person, man, photo, room, selfie, stare, wear.","this image contains : dark, face, person, man, photo, room, selfie, stare, wear."
+ram,10.0,cat_00277.png,0,0,1,"This image contains: dandelion, dog, field, flower, grass, gray, stand, yellow.","this image contains : dandelion, dog, field, flower, grass, gray, stand, yellow."
+ram,10.0,cat_00279.png,0,0,0,"This image contains: animal, cat, night, stand, white.","this image contains : animal, cat, puddle, stand, white."
+ram,10.0,cat_00294.png,0,0,0,"This image contains: bathroom sink, black, cat, floor, lay, paw, sink, stare, stool, stretch, white.","this image contains : bathroom sink, black, cat, floor, lay, paw, stare, stool, toilet seat, white."
+ram,10.0,cat_00302.png,0,0,0,"This image contains: black, footstall, ledge, podium, sculpture, stand, stool.","this image contains : black, footstall, ledge, pole, sculpture, stand, stool."
+ram,10.0,cat_00320.png,0,0,0,"This image contains: bush, cat, gray, hide, stare, tabby.","this image contains : bush, cat, gray, hide, stare, tabby."
+ram,10.0,cat_00323.png,0,0,1,"This image contains: brown, dog, floor.","this image contains : brown, dog."
+ram,10.0,cat_00332.png,0,0,0,"This image contains: cat, floor, lay, pavement.","this image contains : cat, floor, lay, sleep."
+ram,10.0,cat_00336.png,0,0,0,"This image contains: cat, hat, head, stare, tabby, wear, white.","this image contains : cat, hat, head, stare, tabby, wear, white."
+ram,10.0,cat_00356.png,0,0,1,"This image contains: brown, cat, cement, dog, floor, lay, paw, stretch.","this image contains : brown, cat, cement, dog, floor, lay, paw, stretch."
+ram,10.0,cat_00367.png,0,0,1,"This image contains: animal, carpet, floor, gray, husky, sit, stare, stool, white.","this image contains : animal, carpet, floor, gray, husky, sit, stare, stool, white."
+ram,10.0,cat_00397.png,0,0,1,"This image contains: catch, cd, dog, floor, frisbee, mouth, play, red, stool, toy.","this image contains : catch, cd, dog, floor, frisbee, mouth, red, red, stool, toy."
+ram,10.0,cat_00399.png,0,0,0,"This image contains: cat, catch, gray, pillow, toy.","this image contains : cat, catch, gray, pillow, toy."
+ram,10.0,cat_00412.png,0,0,1,"This image contains: blanket, carpet, floor, lay, mat, pet, pillow, toy.","this image contains : blanket, carpet, floor, lay, mat, pet, pillow, toy."
+ram,10.0,cat_00418.png,0,0,0,"This image contains: animal, baby elephant, bend, elephant, floor, gray, man, stand.","this image contains : animal, baby elephant, elephant, elephant, floor, gray, man, stand."
+ram,10.0,cat_00426.png,0,0,0,"This image contains: person, man, tennis player, tennis racket.","this image contains : person, man, shirt, tennis racket."
+ram,10.0,cat_00432.png,0,0,0,"This image contains: cat, pole, selfie, stare, stool, tabby.","this image contains : cat, pole, selfie, stare, stool, tabby."
+ram,10.0,cat_00434.png,0,0,0,"This image contains: cat, table, kitchen counter, sit, stand, stare, stool, tabby.","this image contains : cat, table, kitchen table, sit, stand, stare, stool, tabby."
+ram,10.0,cat_00438.png,0,0,0,"This image contains: black, carpet, cat, floor, red, room, sit, stand, stare, toy, white.","this image contains : black, carpet, cat, floor, red, room, sit, stand, stare, toy, white."
+ram,10.0,cat_00453.png,0,0,1,"This image contains: figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor.","this image contains : figurine, floor, hardwood floor, pet, stand, stool, toy, wood floor."
+ram,10.0,cat_00456.png,0,0,1,"This image contains: dress, grass, green, lush, man, stand, white, woman.","this image contains : dress, grass, green, lush, man, stand, white, woman."
+ram,10.0,cat_00464.png,0,0,1,"This image contains: bottle, container, package, selfie.","this image contains : bottle, container, package, selfie."
+ram,10.0,cat_00467.png,0,0,1,"This image contains: animal, brown, carve, figurine, sculpture.","this image contains : animal, brown, doberman, figurine, sculpture."
+ram,10.0,cat_00470.png,0,0,0,"This image contains: animal, catch, green, man, stand, wine glass.","this image contains : animal, catch, green, man, stand, wine glass."
+ram,10.0,cat_00515.png,0,0,1,"This image contains: animal, pet, selfie.","this image contains : animal, pet, selfie."
+ram,10.0,cat_00558.png,0,0,0,"This image contains: cat, table, stare.","this image contains : cat, table, stare."
+ram,10.0,cat_00565.png,0,0,0,"This image contains: cat, stand, stare, white.","this image contains : cat, stand, stare, white."
+ram,10.0,cat_00573.png,0,0,0,"This image contains: cat, catch, cd, neckband, paper plate, pillow, red, tabby, toy, wear.","this image contains : cat, catch, cowboy hat, neckband, pillow, red, stool, tabby, tie, wear."
+ram,10.0,cat_00586.png,0,0,0,"This image contains: animal, cat, floor, image, lay, photo.","this image contains : animal, cat, floor, image, lay, photo."
+ram,10.0,cat_00597.png,0,0,0,"This image contains: armchair, chair, table, hassock, living room, room, stool, window.","this image contains : armchair, chair, table, dinning table, living room, room, stool, window."
+ram,10.0,cat_00599.png,0,0,0,"This image contains: animal, cat, package.","this image contains : animal, cat, stool."
+ram,10.0,cat_00607.png,0,0,0,"This image contains: cat, table, dinning table, food, picnic table, sit, stare.","this image contains : cat, table, dinning table, food, fruit, sit, stare."
+ram,10.0,cat_00608.png,0,0,0,"This image contains: bookshelf, brown, cat, computer, computer desk, computer monitor, computer screen, table, desktop computer, laptop, monitor, paw, sit, stare, tabby.","this image contains : bookshelf, brown, cat, computer, computer monitor, computer screen, table, laptop, paw, sit, stare, tabby."
+ram,10.0,cat_00637.png,0,0,0,"This image contains: animal, image, photo.","this image contains : animal, image, photo."
+ram,10.0,cat_00641.png,0,0,0,"This image contains: bookshelf, owl, wine glass.","this image contains : bookshelf, owl, wine glass."
+ram,10.0,cat_00646.png,0,0,0,"This image contains: cake, cat, tabby.","this image contains : cage, cat, tabby."
+ram,10.0,cat_00650.png,0,0,0,"This image contains: cat, floor, gray, stand, stare, stool, tabby, walk.","this image contains : cat, floor, gray, stand, stare, stool, tabby, walk."
+ram,10.0,cat_00664.png,0,0,0,"This image contains: bookshelf, cat, room, stand, stare, white.","this image contains : bookshelf, cat, room, stand, stare, white."
+ram,10.0,cat_00669.png,0,0,0,"This image contains: bird, black, cat, crow, floor, grass, grassy, green, lush, stand, stare.","this image contains : bird, black, cat, field, floor, grass, grassy, green, lush, stand, stare."
+ram,10.0,cat_00671.png,0,0,1,"This image contains: catch, control, hand, game, game controller, person, man, play, video game, wii, wii controller.","this image contains : catch, hand, game controller, game controller, person, man, muscle, play, remote, wii controller."
+ram,10.0,cat_00673.png,0,0,0,"This image contains: baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white.","this image contains : baseball hat, cat, hat, head, hide, selfie, stare, tabby, wear, white."
+ram,10.0,cat_00676.png,0,0,0,"This image contains: cat, image, stare, tabby.","this image contains : cat, image, stare, tabby."
+ram,10.0,cat_00688.png,0,0,0,"This image contains: cat, selfie, stare, tabby.","this image contains : cat, selfie, stare, tabby."
+ram,10.0,cat_00690.png,0,0,0,"This image contains: cat, floor, sit, stare, tabby.","this image contains : cat, floor, sit, stare, tabby."
+ram,10.0,cat_00695.png,0,0,0,"This image contains: cat, computer, computer screen, counter top, table, lay, sit, stare, tabby.","this image contains : cat, computer, computer monitor, computer screen, table, lay, sit, stare, tabby."
+ram,10.0,cat_00715.png,0,0,0,"This image contains: computer, computer screen, table, pet, selfie, stare, toy.","this image contains : computer, computer screen, table, pet, selfie, stare, toy."
+ram,10.0,cat_00716.png,0,0,0,"This image contains: cat, image, lap, lay, pillow, tabby.","this image contains : cat, image, lap, lay, pillow, tabby."
+ram,10.0,cat_00727.png,0,1,0,"This image contains: armchair, blue, chair, table, doll, floor, room, stool, toy.","this image contains : armchair, blue, chair, table, doll, floor, room, stool, toy."
+ram,10.0,cat_00739.png,0,0,0,"This image contains: black, jump, paw, stand, white.","this image contains : black, jump, paw, stand, white."
+ram,10.0,cat_00760.png,0,0,0,"This image contains: black, cat, floor, stand, stare, stool, white.","this image contains : black, cat, floor, stand, stare, stool, white."
+ram,10.0,cat_00786.png,0,0,0,"This image contains: cardboard box, cat, hide, sit, stare, tabby.","this image contains : cardboard box, cat, hide, sit, stare, tabby."
+ram,10.0,cat_00790.png,0,0,0,"This image contains: animal, brown, cat, stand, tail.","this image contains : animal, brown, cat, stand, tail."
+ram,10.0,cat_00792.png,0,0,0,"This image contains: animal, blanket, brown, dog, floor, horse, lay, snow, walk.","this image contains : animal, blanket, brown, dog, floor, lay, snow, snowy, walk."
+ram,10.0,cat_00811.png,0,0,0,"This image contains: bed, girl, lay, pillow, selfie, white, woman.","this image contains : bed, girl, lay, pillow, selfie, white, woman."
+ram,10.0,cat_00819.png,0,0,0,"This image contains: animal, black, cat, image, stare.","this image contains : animal, black, cat, image, stare."

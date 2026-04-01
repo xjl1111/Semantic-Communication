@@ -20,8 +20,11 @@ from model.channel import Channel
 
 # ========== 全局路径配置 ==========
 BASE_DIR = pathlib.Path(__file__).resolve().parents[1]
-DATA_DIR = BASE_DIR.parent / "data"
-LOG_DIR = BASE_DIR.parent / "logs"
+REPO_ROOT = BASE_DIR.parent
+COMMON_DATASETS_DIR = REPO_ROOT / "data" / "datasets"
+DATA_DIR = COMMON_DATASETS_DIR / "torchvision_cifar10"
+PROJECT_DATA_DIR = BASE_DIR / "data"
+LOG_DIR = PROJECT_DATA_DIR / "logs"
 
 
 # ========== 数据加载 ==========
@@ -40,6 +43,7 @@ def get_dataloaders(
         persistent_workers: 保持worker进程活跃避免重建
     """
     transform = transforms.Compose([transforms.ToTensor()])
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     
     train_ds = datasets.CIFAR10(root=str(DATA_DIR), train=True, download=True, transform=transform)
     test_ds = datasets.CIFAR10(root=str(DATA_DIR), train=False, download=True, transform=transform)

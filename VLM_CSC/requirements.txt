@@ -1,0 +1,29 @@
+# Core runtime
+numpy>=1.24,<2.1
+Pillow>=10.0,<12.0
+matplotlib>=3.8,<3.11
+tqdm>=4.66,<5.0
+
+# Deep learning
+torch>=2.1,<2.6
+torchvision>=0.16,<0.21
+
+# VLM / generation stack
+transformers>=4.41,<4.47
+diffusers>=0.30,<0.34
+accelerate>=0.30,<0.35
+huggingface-hub>=0.23,<0.28
+safetensors>=0.4.3,<0.5
+
+# RAM dependency stack (recognize-anything)
+timm>=0.9.12,<1.1
+fairscale>=0.4.13,<0.5
+scipy>=1.10,<1.14
+
+# Optional metrics
+nltk>=3.8,<4.0
+lpips>=0.1.4,<0.2
+
+# Optional CLIP dependency used by recognize-anything internals
+ftfy>=6.2,<7.0
+regex>=2024.5.15

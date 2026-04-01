@@ -1,0 +1,14 @@
+timestamp: 2026-04-01T12:12:01
+project_root: D:\code\pycode\Semantic-Communication
+test_split_dir: D:\code\pycode\Semantic-Communication\data\datasets\catsvsdogs\test
+snr_list: [0.0, 2.0, 4.0, 6.0, 8.0, 10.0]
+batch_size: 8
+max_batches: -1
+max_per_class: 50
+selected_images: 100
+selected_batches: 13
+required_classifier_backend: clip_finetuned
+classifier_backends_seen: ['clip_finetuned']
+sender_backend: {'blip': 'clip_finetuned'}
+ckpt_blip: D:\code\pycode\Semantic-Communication\VLM_CSC\data\experiments\fig7\checkpoints\sr_prompt\blip_phase_joint_best.pth
+ckpt_blip_sha256: c05c899bea92f9e06a9988119f2ab60bd03367b58a733349f460751ec80d2dc3
