@@ -97,7 +97,7 @@ USE_FINETUNED_BLIP: bool = True  # True = 微调BLIP, False = 原始BLIP-base
 #   None                       ← BLIP-2 模式不使用 prompt
 #
 #  ⚠  修改 prompt 后需重新生成 caption_cache
-CAPTION_PROMPT: str | None = None  # None = 使用 CAPTION_MODE 默认值
+CAPTION_PROMPT: str | None = ""   # "" = 真正无 prompt，BLIP 无条件生成（text=None）
 
 # ─── CLIP 分类器微调 ──────────────────────────────────────────────────────────
 

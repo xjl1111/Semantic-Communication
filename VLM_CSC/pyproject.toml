@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm-csc"
+version = "0.1.0"
+description = "Visual Language Model-Based Cross-Modal Semantic Communication System"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "VLM-CSC Authors"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    # 基础依赖 - 使用宽松版本，与根目录 requirements.txt 兼容
+    "numpy>=1.24.0",
+    "Pillow>=9.0.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.60.0",
+    # PyTorch - 不指定版本，使用已安装的版本
+    "torch>=2.1.0",
+    "torchvision>=0.15.0",
+    # HuggingFace 相关
+    "transformers>=4.41.0",
+    "diffusers>=0.30.0",
+    "accelerate>=0.30.0",
+    "huggingface-hub>=0.23.0",
+    "safetensors>=0.4.3",
+    "timm>=0.9.12",
+    # 其他
+    "fairscale>=0.4.13",
+    "scipy>=1.10.0",
+    "nltk>=3.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "isort>=5.12",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+]
+metrics = [
+    "lpips>=0.1.4,<0.2",
+]
+ram = [
+    "ftfy>=6.2,<7.0",
+    "regex>=2024.5.15",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vlm_csc = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --tb=short"

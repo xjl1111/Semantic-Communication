@@ -1,3 +1,4 @@
+"""Memory Evolution and Distillation (MED) module."""
 from __future__ import annotations
 
 import random
@@ -9,6 +10,7 @@ import torch
 
 @dataclass
 class MemorySample:
+    """A single memory sample stored in MED."""
     image_id: str
     caption_text: str
     token_ids: torch.Tensor
@@ -18,6 +20,12 @@ class MemorySample:
 
 
 class MED:
+    """Memory Evolution and Distillation for continual learning.
+
+    Manages short-term memory (STM) and long-term memory (LTM)
+    with RBF similarity-based transfer mechanism.
+    """
+
     def __init__(
         self,
         stm_max_size: int = 500,
@@ -112,23 +120,19 @@ class MED:
         return float(stacked.mean().item())
 
     def select_representatives(self) -> List[MemorySample]:
-        """批量矩阵运算版（替代逐对 Python 循环，速度 100x+）。"""
+        """Batch matrix computation for STM->LTM transfer selection."""
         if len(self.stm) == 0:
             return []
 
         if len(self.ltm) == 0:
             return list(self.stm)
 
-        # STM 特征矩阵 [S, D]
         stm_feats = torch.stack([item.semantic_feature for item in self.stm])
-        # LTM 特征矩阵 [L, D]
         ltm_feats = torch.stack([item.semantic_feature for item in self.ltm])
 
-        # 批量 RBF: [S, L]
-        # diff2[i, j] = ||stm[i] - ltm[j]||^2
-        diff2 = torch.cdist(stm_feats, ltm_feats, p=2).pow(2)  # [S, L]
-        rbf = torch.exp(-diff2 / (2.0 * (self.tau ** 2)))       # [S, L]
-        avg_sim = rbf.mean(dim=1).tolist()                       # [S]
+        diff2 = torch.cdist(stm_feats, ltm_feats, p=2).pow(2)
+        rbf = torch.exp(-diff2 / (2.0 * (self.tau ** 2)))
+        avg_sim = rbf.mean(dim=1).tolist()
 
         selected: List[MemorySample] = []
         for item, sim in zip(self.stm, avg_sim):
@@ -138,6 +142,15 @@ class MED:
                 cond = sim < self.threshold
             if cond:
                 selected.append(item)
+
+        import numpy as _np
+        _sims = _np.array(avg_sim)
+        print(
+            f"[MED] select: {len(selected)}/{len(self.stm)} passed "
+            f"(threshold={self.threshold}, transfer_if={self.transfer_if})  "
+            f"sim: min={_sims.min():.4f} mean={_sims.mean():.4f} max={_sims.max():.4f}  "
+            f"LTM_before={len(self.ltm)}"
+        )
         return selected
 
     def maybe_transfer_to_ltm(self) -> Dict[str, int]:

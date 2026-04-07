@@ -5,6 +5,8 @@ import random
 from pathlib import Path
 from typing import Dict, List
 
+import torch
+
 from PIL import Image
 from tqdm import tqdm
 
@@ -100,6 +102,7 @@ def run_channel_phase(
             train_loss_sum += float(batch_loss.item())
             train_steps += 1
             batch_loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
 
         model.eval()
@@ -243,6 +246,7 @@ def run_semantic_phase(
             train_loss_sum += float(batch_loss.item())
             train_steps += 1
             batch_loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
             _update_med_and_check(
                 model=model, med_replay_enabled=med_replay_enabled,
@@ -437,6 +441,7 @@ def run_joint_phase(
             train_total_sum += float(total_loss_for_log.item())
             train_steps += 1
             active_loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
             global_step += 1
             _update_med_and_check(

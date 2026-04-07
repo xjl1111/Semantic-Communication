@@ -24,6 +24,7 @@ from train.resume_manager import ResumeManager, prompt_resume_or_restart
 
 from train.config import TrainConfig, load_vlm_module, _validate_train_phase_config
 from train.helpers import (
+    _append_csv_row,
     _evaluate_bleu_on_records,
     _load_phase_best_checkpoint_strict,
     _validate_fig8_variant_checkpoint_map_complete,
@@ -88,6 +89,10 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     caption_cache_root.mkdir(parents=True, exist_ok=True)
 
+    # 每次训练开始时清空旧的训练监控 CSV，确保增量写入不累积重复行
+    for _old_csv in output_dir.glob("fig8_*_train_monitor_val_*.csv"):
+        _old_csv.unlink()
+
     audit_manager = TaskDatasetManager(
         sequence=config.dataset_sequence,
         dataset_roots=config.dataset_roots,
@@ -150,7 +155,10 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
     resume_mgr = ResumeManager(checkpoint_dir, "fig8")
     prompt_resume_or_restart(resume_mgr)
 
-    for variant_name in variant_plan:
+    for vi, variant_name in enumerate(variant_plan, 1):
+        print(f"\n{'='*60}")
+        print(f"  变体 [{vi}/{len(variant_plan)}] {variant_name}")
+        print(f"{'='*60}")
         enable_med, variant_med_kwargs = resolve_fig8_variant_med_config(
             variant=variant_name,
             med_kwargs_base=med_kwargs_base,
@@ -188,6 +196,7 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
             )
 
             for task_idx, task_name in enumerate(required_sequence):
+                print(f"\n--- [{variant_name}/{sender}] 任务 [{task_idx+1}/{len(required_sequence)}] {task_name} ---")
                 fig8_resume_key = f"{variant_name}/{sender}/{task_name}"
 
                 # ── 断点续传：如果该 task 的全部 phase 已完成，直接跳过训练 ──
@@ -228,7 +237,7 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
                             f"Insufficient train/val batches for variant={variant_name}, sender={sender}, task={task_name}"
                         )
 
-                    # caption 只取决于 sender + dataset + caption_mode，与 with_med/without_med 无关
+                    # caption 只取决于 sender + dataset + prompt，与 with_med/without_med 无关
                     # 统一放在 sender/task_N 下，跨 variant 复用
                     task_cache_dir = caption_cache_root / sender / f"task_{task_idx + 1}_{task_name}"
                     all_records = list(train_records) + list(val_records)
@@ -299,9 +308,14 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
                     )
 
                 # ── 累积 BLEU 评估（无论训练还是 resume 都执行）──
+                # 训练监控用有限样本快速估计，最终精确值由 final_eval 负责
+                _monitor_max_batches = int(getattr(config, 'train_monitor_max_batches', 30))
                 model.eval()
                 seen_tasks = required_sequence[: task_idx + 1]
-                for seen_dataset in seen_tasks:
+                print(f"[train_monitor] 累积 BLEU 评估: {seen_tasks} (max_batches={_monitor_max_batches})")
+                for eval_i, seen_dataset in enumerate(seen_tasks, 1):
+                    print(f"  [{eval_i}/{len(seen_tasks)}] 评估 test_dataset={seen_dataset} (训练到 {task_name} 后)")
+
                     if task_manager.consumer != "train":
                         raise RuntimeError("Fig8 train monitor requires TaskDatasetManager consumer='train'.")
                     bleu_scores = _evaluate_bleu_on_records(
@@ -309,7 +323,7 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
                         records=task_manager.get_task_val_set(seen_dataset),
                         snr_db=float(config.train_snr_min_db),
                         sd_steps=int(config.sd_steps),
-                        max_batches=config.train_max_batches,
+                        max_batches=_monitor_max_batches,
                         batch_size=config.train_batch_size,
                         seed=config.seed + task_idx,
                     )
@@ -331,16 +345,20 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
                     bleu1_rows_all.append(bleu1_row)
                     bleu2_rows_all.append(bleu2_row)
 
-            _write_matrix_csv(
-                sender_bleu1_rows,
-                output_dir / f"fig8_{variant_name}_{sender}_train_monitor_val_bleu1_matrix.csv",
-                score_field="bleu1",
-            )
-            _write_matrix_csv(
-                sender_bleu2_rows,
-                output_dir / f"fig8_{variant_name}_{sender}_train_monitor_val_bleu2_matrix.csv",
-                score_field="bleu2",
-            )
+                    # ── 立即增量写入 CSV，不等所有任务跑完 ──
+                    # 只写两层：最细粒度 (variant+sender) + 全局汇总；中间 variant 层冗余已删除
+                    _fn1 = ["sender", "train_stage", "test_dataset", "bleu1", "checkpoint"]
+                    _fn2 = ["sender", "train_stage", "test_dataset", "bleu2", "checkpoint"]
+                    for _p in [
+                        output_dir / f"fig8_{variant_name}_{sender}_train_monitor_val_bleu1_matrix.csv",
+                        output_dir / "fig8_train_monitor_val_bleu1_matrix.csv",
+                    ]:
+                        _append_csv_row(bleu1_row, _p, _fn1)
+                    for _p in [
+                        output_dir / f"fig8_{variant_name}_{sender}_train_monitor_val_bleu2_matrix.csv",
+                        output_dir / "fig8_train_monitor_val_bleu2_matrix.csv",
+                    ]:
+                        _append_csv_row(bleu2_row, _p, _fn2)
 
             # ── 训练监控热力图 ──
             _generate_train_monitor_heatmaps(
@@ -352,21 +370,9 @@ def run_fig8_continual_training(config: TrainConfig, device: str) -> Dict[str, o
                 output_dir=output_dir,
             )
 
-        _write_matrix_csv(
-            variant_bleu1_rows,
-            output_dir / f"fig8_{variant_name}_train_monitor_val_bleu1_matrix.csv",
-            score_field="bleu1",
-        )
-        _write_matrix_csv(
-            variant_bleu2_rows,
-            output_dir / f"fig8_{variant_name}_train_monitor_val_bleu2_matrix.csv",
-            score_field="bleu2",
-        )
-
     final_bleu1_csv = output_dir / "fig8_train_monitor_val_bleu1_matrix.csv"
     final_bleu2_csv = output_dir / "fig8_train_monitor_val_bleu2_matrix.csv"
-    _write_matrix_csv(bleu1_rows_all, final_bleu1_csv, score_field="bleu1")
-    _write_matrix_csv(bleu2_rows_all, final_bleu2_csv, score_field="bleu2")
+    print(f"\n[train_monitor] 结果已写入: {output_dir}")
 
     checkpoint_summary_csv = output_dir / "fig8_continual_task_checkpoints.csv"
     with checkpoint_summary_csv.open("w", newline="", encoding="utf-8") as f:

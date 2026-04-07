@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from PIL import Image
+from tqdm import tqdm
 
 from common.utils import chunk_records
 from train.phase_utils import (
@@ -301,8 +302,9 @@ def _evaluate_bleu_on_records(
     references: List[str] = []
     hypotheses: List[str] = []
     batches = chunk_records(records, batch_size=batch_size, max_batches=max_batches)
+    total_samples = sum(len(b) for b in batches)
     sample_index = 0
-    for batch in batches:
+    for batch in tqdm(batches, desc=f"BLEU eval (snr={snr_db}dB)", leave=False):
         for rec in batch:
             image = Image.open(rec["path"]).convert("RGB")
             out = model.infer_full(
@@ -319,10 +321,10 @@ def _evaluate_bleu_on_records(
             hypotheses.append(str(out["recovered_text"]))
             sample_index += 1
 
-    return {
-        "bleu1": _compute_bleu_n(references, hypotheses, n=1),
-        "bleu2": _compute_bleu_n(references, hypotheses, n=2),
-    }
+    bleu1 = _compute_bleu_n(references, hypotheses, n=1)
+    bleu2 = _compute_bleu_n(references, hypotheses, n=2)
+    print(f"  -> BLEU-1={bleu1:.4f}  BLEU-2={bleu2:.4f}  ({sample_index} samples)")
+    return {"bleu1": bleu1, "bleu2": bleu2}
 
 
 def _write_matrix_csv(rows: List[Dict], out_csv: Path, score_field: str) -> None:
@@ -343,6 +345,17 @@ def _write_matrix_csv(rows: List[Dict], out_csv: Path, score_field: str) -> None
                     "checkpoint": row["checkpoint"],
                 }
             )
+
+
+def _append_csv_row(row: Dict, out_csv: Path, fieldnames: List[str]) -> None:
+    """立即追加一行到 CSV（文件不存在或为空时自动写表头）。"""
+    out_csv.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not out_csv.exists() or out_csv.stat().st_size == 0
+    with out_csv.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        if write_header:
+            writer.writeheader()
+        writer.writerow({k: row.get(k, "") for k in fieldnames})
 
 
 def _validate_fig8_variant_checkpoint_map_complete(

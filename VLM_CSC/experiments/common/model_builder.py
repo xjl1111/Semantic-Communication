@@ -6,9 +6,11 @@ import io
 from pathlib import Path
 from typing import Dict
 
+from vlm_csc import VLMCscSystem
+
 
 def build_vlm_system(
-    vlm_module,
+    vlm_module=None,  # Deprecated: kept for backward compatibility
     *,
     sender: str,
     blip_dir: Path,
@@ -53,12 +55,12 @@ def build_vlm_system(
     )
 
     if not quiet_third_party:
-        return vlm_module.VLMCscSystem(**kwargs).to(device)
+        return VLMCscSystem(**kwargs).to(device)
 
     stream = io.StringIO()
     try:
         with contextlib.redirect_stdout(stream), contextlib.redirect_stderr(stream):
-            model = vlm_module.VLMCscSystem(**kwargs).to(device)
+            model = VLMCscSystem(**kwargs).to(device)
         return model
     except Exception:
         captured = stream.getvalue().strip()

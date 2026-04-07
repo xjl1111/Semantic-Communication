@@ -8,8 +8,10 @@ from typing import Dict, List
 
 import numpy as np
 
-from common.utils import load_module_from_file
 from train.phase_utils import require_phase_block as _require_phase_block
+
+# Import vlm_csc package directly instead of loading from file
+import vlm_csc
 
 
 @dataclass
@@ -57,6 +59,7 @@ class TrainConfig:
     caption_mode: str = "baseline"
     caption_prompt: str | None = None
     sd_steps: int = 20
+    train_monitor_max_batches: int = 30
 
 
 def set_seed(seed: int = 42) -> None:
@@ -68,8 +71,9 @@ def set_seed(seed: int = 42) -> None:
     torch.cuda.manual_seed_all(seed)
 
 
-def load_vlm_module(vlm_file: Path):
-    return load_module_from_file("vlm_csc_module", vlm_file)
+def load_vlm_module(vlm_file: Path = None):
+    """Return the vlm_csc module. vlm_file is kept for backward compatibility."""
+    return vlm_csc
 
 
 def _validate_train_phase_config(config: TrainConfig) -> Dict[str, Dict]:

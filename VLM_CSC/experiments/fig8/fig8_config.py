@@ -35,17 +35,17 @@ from common.shared_config import SHARED_DEFAULTS, build_eval_block, build_shared
 CHANNEL_TYPE: str = "rayleigh"   # ← 论文确定值
 
 # 信道符号维度（= channel enc/dec 输出维度）
-#   压缩率 ≈ max_text_len × bert_embed_dim / channel_dim
-#   [论文] Tab.I 推测 channel_dim = 4，约 30:1 压缩
-#   ▶ 与 Fig7 保持一致，确保论文对齐
-CHANNEL_DIM: int = 4             # ← 论文推测值，与 Fig7 一致
+#   压缩率 ≈ max_text_len × feature_dim / channel_dim
+#   [论文] Tab.I 推测 channel_dim = 4（32:1 压缩），瓶颈过窄
+#   ▶ 提升至 8（16:1 压缩）：允许更多任务特异性特征通过信道
+CHANNEL_DIM: int = 8
 
 # BLIP 侧最大 token 数
 #   [论文] §III-A 明确写出：T = 24
 #   但 24 token ≈ 15~18 英文单词，类别词（"bird"、"cat"）可能被截断
 #   Fig8 跨 3 个不同数据集，描述长度差异更大，truncation 风险更高
-#   ▶ 与 Fig7 保持一致，使用 30 减少截断风险
-MAX_TEXT_LEN: int = 30           # ← 与 Fig7 一致，减少截断
+#   ▶ 回归论文值 T=24，序列越短 BLEU 逐 token 匹配越精确
+MAX_TEXT_LEN: int = 24           # ← 论文确定值 §III-A
 
 # ─── 持续学习数据集顺序 ───────────────────────────────────────────────────────
 
@@ -73,9 +73,18 @@ MED_STM_MAX_SIZE: int = 500       # ← 论文参考值
 #   [论文] §III-D 公式中出现 τ，论文给出 τ = 10
 MED_TAU: float = 10.0             # ← 论文确定值
 
-# 迁移触发阈值（performance drop 超过此值才触发 MED 回放）
-#   [论文] §III-D 给出 δ = 0.05
-MED_THRESHOLD: float = 0.05       # ← 论文确定值
+# STM→LTM 迁移相似度阈值
+#   配合 transfer_if="smaller"：只有与 LTM 平均相似度 < 阈值的新颖样本才进入
+#   实测 τ=10 + dim=128 → RBF 相似度范围约 0.93~1.0（见 similarity_analysis 输出）
+#   threshold=0.975 → 约 30% STM 样本被选入（与 LTM 差异较大的）
+#   - p30=0.9749（30% 样本低于此值）
+#   - p40=0.9775（40% 样本低于此值）
+#   - p50=0.9795（50% 样本低于此值）
+MED_THRESHOLD: float = 0.975
+
+# LTM 最大容量上限（None = 无限）
+#   ▶ 硬上限 2000：即使通过阈值筛选，也不会无限增长
+MED_LTM_MAX_SIZE: int = 2000
 
 # ─── 优化器超参数 ─────────────────────────────────────────────────────────────
 
@@ -95,14 +104,22 @@ TRAIN_BATCH_SIZE: int = 16
 # ─── 训练阶段 epoch 数 ────────────────────────────────────────────────────────
 
 # 论文未指定各阶段 epoch 数；以下为工程经验值
-CHANNEL_EPOCHS:  int = 6          # Phase 1：信道重建阶段
-SEMANTIC_EPOCHS: int = 8          # Phase 2：语义生成阶段
-JOINT_EPOCHS:    int = 12         # Phase 3：联合阶段最大 epoch
-#   ▶ 正向提升：JOINT_EPOCHS 可升至 20，结合 JOINT_PATIENCE 看收敛情况
+# ⚡ 快速验证模式：减少 epoch 以快速查看 MED 是否正常工作
+CHANNEL_EPOCHS:  int = 3          # Phase 1：信道重建阶段（快速验证：3，正式：30）
+SEMANTIC_EPOCHS: int = 3          # Phase 2：语义生成阶段（快速验证：3，正式：30）
+JOINT_EPOCHS:    int = 3          # Phase 3：联合阶段最大 epoch（快速验证：3，正式：20）
+#   ▶ 给联合阶段更多收敛空间，配合 patience=8 早停
 
 # 早停 patience
 #   ▶ 正向改进：改为 5 或 7，减少过早停止
-JOINT_PATIENCE: int = 8
+JOINT_PATIENCE: int = 2           # 快速验证：2，正式：10
+
+# ─── 训练监控 BLEU 评估 ──────────────────────────────────────────────────────
+
+# 训练阶段累积 BLEU 评估的 batch 上限（-1=全部）
+#   每个 task 结束后要对所有已见任务做 BLEU 评估（infer_full + beam search），
+#   全量评估极慢（万级样本 × beam search），30 batch 足以估计趋势
+TRAIN_MONITOR_MAX_BATCHES: int = 30
 
 # ─── 联合阶段损失权重 ─────────────────────────────────────────────────────────
 
@@ -169,7 +186,7 @@ CAPTION_MODE: str = "sr_prompt"   # sr / sr_prompt / prompt / blip2
 # ⚠  切换此项后需要重新生成 caption_cache 并重新训练。
 USE_FINETUNED_BLIP: bool = False
 
-CAPTION_PROMPT: str | None = None  # None = 使用 CAPTION_MODE 默认值
+CAPTION_PROMPT: str | None = ""   # "" = 真正无 prompt，BLIP 无条件生成（text=None）
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -276,14 +293,15 @@ def build_fig8_config() -> dict:
             semantic_epochs=SEMANTIC_EPOCHS,
             joint_max_epochs=JOINT_EPOCHS,
             train_tag="fig8_train",
-            use_previous_best_checkpoint=True,
+            use_previous_best_checkpoint=False,  # 强制重新训练（快速验证时设为False）
             use_med=True,
             med_kwargs={
                 "stm_max_size":       MED_STM_MAX_SIZE,
                 "tau":                MED_TAU,
                 "threshold":          MED_THRESHOLD,
-                "transfer_if":        "greater",
-                "strict_paper_repro": True,
+                "transfer_if":        "smaller",
+                "ltm_max_size":       MED_LTM_MAX_SIZE,
+                "strict_paper_repro": False,
             },
             train_lr=TRAIN_LR,
             train_wd=TRAIN_WD,
@@ -292,6 +310,9 @@ def build_fig8_config() -> dict:
             joint_patience=JOINT_PATIENCE,
             joint_schedule=JOINT_SCHEDULE,
         ),
+
+        # 训练监控 BLEU 评估 batch 上限
+        "train_monitor_max_batches": TRAIN_MONITOR_MAX_BATCHES,
 
         # ── 评估块 ────────────────────────────────────────────────────────────
         "eval": build_eval_block(

@@ -251,6 +251,7 @@ def _build_train_config(cfg: dict) -> _TC:
         caption_prompt=cfg.get("caption_prompt"),
         channel_dim=cfg.get("channel_dim"),
         sd_steps=int(cfg.get("sd_steps", 20)),
+        train_monitor_max_batches=int(cfg.get("train_monitor_max_batches", cfg.get("train", {}).get("train_monitor_max_batches", 30))),
     )
 
 

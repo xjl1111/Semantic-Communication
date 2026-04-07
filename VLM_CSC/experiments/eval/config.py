@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List
 
-from common.utils import load_module_from_file
+# Import vlm_csc package directly instead of loading from file
+import vlm_csc
 
 
 @dataclass
@@ -59,5 +60,6 @@ class EvalConfig:
     clip_classifier_path: str = ""
 
 
-def load_module(module_name: str, file_path: Path):
-    return load_module_from_file(module_name, file_path)
+def load_module(module_name: str = None, file_path: Path = None):
+    """Return the vlm_csc module. Arguments are kept for backward compatibility."""
+    return vlm_csc

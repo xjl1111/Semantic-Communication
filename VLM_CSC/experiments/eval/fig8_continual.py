@@ -21,6 +21,17 @@ from eval.metrics import (
 )
 
 
+def _append_eval_csv_row(row: Dict, out_csv: Path, fieldnames: List[str]) -> None:
+    """立即追加一行到评估 CSV（文件不存在或为空时自动写表头）。"""
+    out_csv.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not out_csv.exists() or out_csv.stat().st_size == 0
+    with out_csv.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        if write_header:
+            writer.writeheader()
+        writer.writerow({k: row.get(k, "") for k in fieldnames})
+
+
 def _run_continual_bleu_map(
     config: EvalConfig,
     vlm_module,
@@ -79,7 +90,10 @@ def _run_continual_bleu_map(
     if med_kwargs_base is not None and "strict_paper_repro" not in med_kwargs_base:
         med_kwargs_base["strict_paper_repro"] = bool(config.strict_paper_repro)
 
-    for variant in variant_order:
+    for vi, variant in enumerate(variant_order, 1):
+        print(f"\n{'='*60}")
+        print(f"  [final_eval] 变体 [{vi}/{len(variant_order)}] {variant}")
+        print(f"{'='*60}")
         if variant == "with_med":
             if config.fig8_variant_checkpoint_map is None or variant not in config.fig8_variant_checkpoint_map:
                 raise RuntimeError("with_med=True but MED trajectory checkpoints are missing")
@@ -98,6 +112,7 @@ def _run_continual_bleu_map(
             sender_bleu2_rows = []
 
             for stage_idx, stage_dataset in enumerate(config.dataset_sequence):
+                print(f"\n--- [final_eval] {variant}/{sender} 训练阶段 [{stage_idx+1}/{len(config.dataset_sequence)}] {stage_dataset} ---")
                 model = build_vlm_system(
                     vlm_module,
                     sender=sender,
@@ -139,6 +154,8 @@ def _run_continual_bleu_map(
                     if len(records) == 0:
                         raise RuntimeError(f"No records for continual eval dataset={test_dataset}")
 
+                    print(f"    评估 test={test_dataset} ({len(records)} samples)")
+
                     bleu_scores, rows = evaluate_bleu_sender_snr(
                         model=model,
                         sender_type=sender,
@@ -154,48 +171,31 @@ def _run_continual_bleu_map(
                     )
                     sender_matrix_bleu1[stage_idx, test_idx] = float(bleu_scores["bleu1"])
                     sender_matrix_bleu2[stage_idx, test_idx] = float(bleu_scores["bleu2"])
+                    print(f"    -> {variant}/{sender} stage={stage_dataset} test={test_dataset}  BLEU-1={bleu_scores['bleu1']:.4f}  BLEU-2={bleu_scores['bleu2']:.4f}")
 
                     detail_rows.extend(rows)
-                    variant_bleu1_rows.append(
-                        {
-                            "variant": variant,
-                            "sender": sender,
-                            "train_stage": stage_dataset,
-                            "test_dataset": test_dataset,
-                            "bleu1": float(bleu_scores["bleu1"]),
-                            "checkpoint": str(ckpt_path),
-                        }
-                    )
-                    sender_bleu1_rows.append(
-                        {
-                            "variant": variant,
-                            "sender": sender,
-                            "train_stage": stage_dataset,
-                            "test_dataset": test_dataset,
-                            "bleu1": float(bleu_scores["bleu1"]),
-                            "checkpoint": str(ckpt_path),
-                        }
-                    )
-                    variant_bleu2_rows.append(
-                        {
-                            "variant": variant,
-                            "sender": sender,
-                            "train_stage": stage_dataset,
-                            "test_dataset": test_dataset,
-                            "bleu2": float(bleu_scores["bleu2"]),
-                            "checkpoint": str(ckpt_path),
-                        }
-                    )
-                    sender_bleu2_rows.append(
-                        {
-                            "variant": variant,
-                            "sender": sender,
-                            "train_stage": stage_dataset,
-                            "test_dataset": test_dataset,
-                            "bleu2": float(bleu_scores["bleu2"]),
-                            "checkpoint": str(ckpt_path),
-                        }
-                    )
+                    _eval_fn1 = ["variant", "sender", "train_stage", "test_dataset", "bleu1", "checkpoint"]
+                    _eval_fn2 = ["variant", "sender", "train_stage", "test_dataset", "bleu2", "checkpoint"]
+                    _b1_row = {"variant": variant, "sender": sender, "train_stage": stage_dataset,
+                               "test_dataset": test_dataset, "bleu1": float(bleu_scores["bleu1"]), "checkpoint": str(ckpt_path)}
+                    _b2_row = {"variant": variant, "sender": sender, "train_stage": stage_dataset,
+                               "test_dataset": test_dataset, "bleu2": float(bleu_scores["bleu2"]), "checkpoint": str(ckpt_path)}
+                    variant_bleu1_rows.append(_b1_row)
+                    sender_bleu1_rows.append(_b1_row)
+                    variant_bleu2_rows.append(_b2_row)
+                    sender_bleu2_rows.append(_b2_row)
+
+                    # ── 立即增量写入评估 CSV ──
+                    for _p in [
+                        output_dir / f"fig8_{variant}_{sender}_final_test_bleu1_matrix.csv",
+                        output_dir / f"fig8_{variant}_final_test_bleu1_matrix.csv",
+                    ]:
+                        _append_eval_csv_row(_b1_row, _p, _eval_fn1)
+                    for _p in [
+                        output_dir / f"fig8_{variant}_{sender}_final_test_bleu2_matrix.csv",
+                        output_dir / f"fig8_{variant}_final_test_bleu2_matrix.csv",
+                    ]:
+                        _append_eval_csv_row(_b2_row, _p, _eval_fn2)
 
             _plot_matrix_heatmap(
                 sender_matrix_bleu1,
@@ -213,31 +213,6 @@ def _run_continual_bleu_map(
             )
 
             sender_bleu1_csv = output_dir / f"fig8_{variant}_{sender}_final_test_bleu1_matrix.csv"
-            sender_bleu2_csv = output_dir / f"fig8_{variant}_{sender}_final_test_bleu2_matrix.csv"
-            with sender_bleu1_csv.open("w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=["variant", "sender", "train_stage", "test_dataset", "bleu1", "checkpoint"])
-                writer.writeheader()
-                for row in sender_bleu1_rows:
-                    writer.writerow(row)
-            with sender_bleu2_csv.open("w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=["variant", "sender", "train_stage", "test_dataset", "bleu2", "checkpoint"])
-                writer.writeheader()
-                for row in sender_bleu2_rows:
-                    writer.writerow(row)
-
-        bleu1_csv = output_dir / f"fig8_{variant}_final_test_bleu1_matrix.csv"
-        bleu2_csv = output_dir / f"fig8_{variant}_final_test_bleu2_matrix.csv"
-        with bleu1_csv.open("w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["variant", "sender", "train_stage", "test_dataset", "bleu1", "checkpoint"])
-            writer.writeheader()
-            for row in variant_bleu1_rows:
-                writer.writerow(row)
-        with bleu2_csv.open("w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["variant", "sender", "train_stage", "test_dataset", "bleu2", "checkpoint"])
-            writer.writeheader()
-            for row in variant_bleu2_rows:
-                writer.writerow(row)
-
     detail_csv = output_dir / f"fig8_{config.tag}_final_test_details.csv"
     with detail_csv.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["sender", "snr_db", "image", "source_text", "recovered_text"], extrasaction="ignore")
@@ -254,6 +229,7 @@ def _run_continual_bleu_map(
         f.write(f"med_variants: {config.med_variants}\n")
         f.write(f"eval_output_mode: {config.eval_output_mode}\n")
 
+    print(f"\n[final_eval] 评估结果已写入: {output_dir}")
     return {
         "detail_csv": str(detail_csv),
         "curve_csv": str(output_dir / f"fig8_with_med_{config.senders[0]}_final_test_bleu1_matrix.csv"),
