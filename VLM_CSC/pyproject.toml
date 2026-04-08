@@ -62,10 +62,11 @@ ram = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
+include = ["model*"]
 
 [tool.setuptools.package-data]
-vlm_csc = ["py.typed"]
+model = ["py.typed"]
 
 [tool.black]
 line-length = 100

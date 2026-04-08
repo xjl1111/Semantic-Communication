@@ -6,7 +6,7 @@ from pathlib import Path
 import torch
 from PIL import Image
 
-from vlm_csc.receivers.base import ReceiverCKB
+from model.receivers.base import ReceiverCKB
 
 
 class ReceiverCKB_SD(ReceiverCKB):

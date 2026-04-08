@@ -2,16 +2,22 @@
 from __future__ import annotations
 
 import random
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List
 
 import numpy as np
 
+# Ensure VLM_CSC root is on sys.path so model imports work
+_VLM_CSC_ROOT = Path(__file__).resolve().parents[2]
+if str(_VLM_CSC_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VLM_CSC_ROOT))
+
 from train.phase_utils import require_phase_block as _require_phase_block
 
-# Import vlm_csc package directly instead of loading from file
-import vlm_csc
+# Import model package directly instead of loading from file
+import model
 
 
 @dataclass
@@ -72,8 +78,8 @@ def set_seed(seed: int = 42) -> None:
 
 
 def load_vlm_module(vlm_file: Path = None):
-    """Return the vlm_csc module. vlm_file is kept for backward compatibility."""
-    return vlm_csc
+    """Return the model module. vlm_file is kept for backward compatibility."""
+    return model
 
 
 def _validate_train_phase_config(config: TrainConfig) -> Dict[str, Dict]:

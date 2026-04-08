@@ -19,7 +19,6 @@ from common import (
     TaskDatasetManager,
     build_vlm_system,
     collect_binary_images_from_split,
-    load_module_from_file,
 )
 from fig7.fig7_config import build_fig7_config
 from fig8.fig8_config import build_fig8_config
@@ -103,9 +102,7 @@ def _collect_sender_records_fig8(cfg: dict, task_name: str, max_per_class_overri
 
 
 def _build_sender_model(cfg: dict, model_file: str, sender: str):
-    vlm_module = load_module_from_file("vlm_csc_module_for_cache", Path(model_file))
     return build_vlm_system(
-        vlm_module,
         sender=sender,
         blip_dir=Path(cfg["blip_ckb_dir"]),
         ram_ckpt=Path(cfg["ram_ckb_path"]),

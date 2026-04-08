@@ -1,12 +1,18 @@
 """评估配置数据类。"""
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List
 
-# Import vlm_csc package directly instead of loading from file
-import vlm_csc
+# Ensure VLM_CSC root is on sys.path so model imports work
+_VLM_CSC_ROOT = Path(__file__).resolve().parents[2]
+if str(_VLM_CSC_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VLM_CSC_ROOT))
+
+# Import model package directly instead of loading from file
+import model
 
 
 @dataclass
@@ -61,5 +67,5 @@ class EvalConfig:
 
 
 def load_module(module_name: str = None, file_path: Path = None):
-    """Return the vlm_csc module. Arguments are kept for backward compatibility."""
-    return vlm_csc
+    """Return the model module. Arguments are kept for backward compatibility."""
+    return model

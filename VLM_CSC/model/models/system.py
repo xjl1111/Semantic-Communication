@@ -10,13 +10,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
 
-from vlm_csc.models.encoders import SemanticEncoder, ChannelEncoder
-from vlm_csc.models.decoders import SemanticDecoder, ChannelDecoder
-from vlm_csc.models.channel import PhysicalChannel
-from vlm_csc.models.memory import MED
-from vlm_csc.senders import SenderCKB_BLIP, SenderCKB_RAM
-from vlm_csc.receivers import ReceiverCKB_SD
-from vlm_csc.tokenization import SimpleTextTokenizer
+from model.models.encoders import SemanticEncoder, ChannelEncoder
+from model.models.decoders import SemanticDecoder, ChannelDecoder
+from model.models.channel import PhysicalChannel
+from model.models.memory import MED
+from model.senders import SenderCKB_BLIP, SenderCKB_RAM
+from model.receivers import ReceiverCKB_SD
+from model.tokenization import SimpleTextTokenizer
 
 
 class VLMCscSystem(nn.Module):

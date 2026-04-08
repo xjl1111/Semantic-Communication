@@ -8,8 +8,8 @@ from typing import Any, Dict
 import torch
 from PIL import Image
 
-from vlm_csc.preprocessing import ImageUpsampler
-from vlm_csc.senders.base import SenderCKB
+from model.preprocessing import ImageUpsampler
+from model.senders.base import SenderCKB
 
 
 class SenderCKB_BLIP(SenderCKB):
@@ -95,11 +95,27 @@ class SenderCKB_BLIP(SenderCKB):
                 f"{missing}. Please run VLM_CSC/experiments/tools/repair_blip_assets.py before training/evaluation."
             )
 
-        self.processor = BlipProcessor.from_pretrained(
-            self.blip_dir,
-            use_fast=False,
-            local_files_only=True,
-        )
+        # Handle transformers version compatibility
+        try:
+            self.processor = BlipProcessor.from_pretrained(
+                self.blip_dir,
+                use_fast=False,
+                local_files_only=True,
+            )
+        except TypeError as e:
+            # Newer transformers versions may have config conflicts
+            if "image_processor" in str(e):
+                from transformers import BlipImageProcessor, BertTokenizerFast
+                image_processor = BlipImageProcessor.from_pretrained(
+                    self.blip_dir, local_files_only=True
+                )
+                tokenizer = BertTokenizerFast.from_pretrained(
+                    self.blip_dir, local_files_only=True
+                )
+                self.processor = BlipProcessor(image_processor=image_processor, tokenizer=tokenizer)
+            else:
+                raise
+
         self.model = BlipForConditionalGeneration.from_pretrained(
             self.blip_dir,
             local_files_only=True,

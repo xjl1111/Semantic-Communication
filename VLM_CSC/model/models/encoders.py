@@ -4,7 +4,7 @@ from __future__ import annotations
 import torch
 import torch.nn as nn
 
-from vlm_csc.models.nam import NAM
+from model.models.nam import NAM
 
 
 class SemanticEncoder(nn.Module):

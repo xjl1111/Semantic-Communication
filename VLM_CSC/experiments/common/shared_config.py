@@ -32,15 +32,15 @@ from typing import Any, Dict, Optional
 def build_shared_paths() -> Dict[str, str]:
     """返回 project_root 与所有预训练模型的绝对路径。
 
-    shared_config.py 位于 VLM_CSC/exp/common/，向上三级即为 project_root。
+    shared_config.py 位于 VLM_CSC/experiments/common/，向上三级即为 project_root。
+    注意: model_file 已废弃，现在直接使用 vlm_csc 包。
     """
     project_root = Path(__file__).resolve().parents[3]
-    exp_root     = project_root / "VLM_CSC" / "exp"
-    model_dir    = project_root / "VLM_CSC" / "model"
+    exp_root     = project_root / "VLM_CSC" / "experiments"
     models_dir   = project_root / "VLM_CSC" / "data" / "assets" / "downloaded_models"
     return {
         "project_root": str(project_root),
-        "model_file":   str(model_dir  / "VLM-CSC.py"),
+        "model_file":   "",  # 已废弃，直接使用 vlm_csc 包
         "target_file":  str(exp_root   / "eval" / "target.py"),
         "blip_ckb_dir": str(models_dir / "blip"),
         "ram_ckb_path": str(models_dir / "ram_swin_large_14m.pth"),

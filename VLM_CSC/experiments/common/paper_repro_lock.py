@@ -1,6 +1,13 @@
 from __future__ import annotations
 
+import sys
+from pathlib import Path
 from typing import Dict
+
+# Ensure VLM_CSC root is on sys.path so model imports work
+_VLM_CSC_ROOT = Path(__file__).resolve().parents[2]
+if str(_VLM_CSC_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VLM_CSC_ROOT))
 
 STRICT_PAPER_REPRO = True
 PAPER_REPRO_LOCK_VERSION = "v1"
@@ -20,12 +27,7 @@ LOCKED_MODEL_ASSUMPTIONS: Dict[str, object] = {
 
 def assert_nam_hidden_dims_locked() -> None:
     """Runtime guard: verify NAM._PAPER_HIDDEN_DIMS matches the protocol lock."""
-    import sys
-    from pathlib import Path as _P
-    _model_dir = str(_P(__file__).resolve().parents[2] / "model")
-    if _model_dir not in sys.path:
-        sys.path.insert(0, _model_dir)
-    from communication_modules import NAM
+    from model.models.nam import NAM
     actual = tuple(NAM._PAPER_HIDDEN_DIMS)
     expected = tuple(LOCKED_MODEL_ASSUMPTIONS["nam_hidden_dims"])
     if actual != expected:

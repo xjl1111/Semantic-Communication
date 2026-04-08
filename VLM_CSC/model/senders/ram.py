@@ -8,7 +8,7 @@ from typing import Any
 import torch
 from PIL import Image
 
-from vlm_csc.senders.base import SenderCKB
+from model.senders.base import SenderCKB
 
 
 class SenderCKB_RAM(SenderCKB):

@@ -9,7 +9,7 @@ from PIL import Image
 
 def check_channel_numerics() -> None:
     """Verify channel model numerics."""
-    from vlm_csc.models.channel import PhysicalChannel
+    from model.models.channel import PhysicalChannel
 
     x = torch.randn(4, 128)
 
@@ -57,7 +57,7 @@ def check_ckb_assets(base_dir: Path | str) -> None:
 
 def check_nam_snr_sensitivity() -> None:
     """Verify NAM responds to SNR changes."""
-    from vlm_csc.models.nam import NAM
+    from model.models.nam import NAM
 
     nam = NAM(feature_dim=128)
     nam.eval()
@@ -72,7 +72,7 @@ def check_nam_snr_sensitivity() -> None:
 
 def check_system_forward(blip_dir: Path | str, sd_dir: Path | str) -> None:
     """Verify system forward pass works."""
-    from vlm_csc import VLMCscSystem
+    from model import VLMCscSystem
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 

@@ -27,7 +27,14 @@ from __future__ import annotations
 
 import inspect
 import re
+import sys
+from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+# Ensure VLM_CSC root is on sys.path so model imports work
+_VLM_CSC_ROOT = Path(__file__).resolve().parents[2]
+if str(_VLM_CSC_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VLM_CSC_ROOT))
 
 
 def _check_item(item_id: int, name: str, passed: bool, detail: str = "") -> Dict[str, Any]:
@@ -42,7 +49,7 @@ def _check_item(item_id: int, name: str, passed: bool, detail: str = "") -> Dict
 def check_nam_hidden_dims(model) -> Dict[str, Any]:
     """§12-1: NAM hidden dims = (56,128,56,56)"""
     try:
-        from communication_modules import NAM
+        from model.models.nam import NAM
         actual = tuple(NAM._PAPER_HIDDEN_DIMS)
         expected = (56, 128, 56, 56)
         return _check_item(1, "NAM hidden dims", actual == expected,

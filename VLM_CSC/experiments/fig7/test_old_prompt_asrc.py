@@ -23,8 +23,7 @@ from pathlib import Path
 # ── 路径设置 ──────────────────────────────────────────────────────────────────
 _ROOT = Path(__file__).resolve().parents[3]          # Semantic-Communication/
 _VLM  = _ROOT / "VLM_CSC"
-sys.path.insert(0, str(_VLM / "model"))
-sys.path.insert(0, str(_VLM / "exp"))
+sys.path.insert(0, str(_VLM / "experiments"))
 
 from PIL import Image
 

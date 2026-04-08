@@ -87,8 +87,8 @@ CAPTION_MODE: str = "sr_prompt"  # sr / sr_prompt / prompt / blip2
 #
 #  ⚠  切换此项后需要重新生成 caption_cache 并重新训练。
 #        微调模型目录：  experiments/fig7/finetuned_blip/
-#        运行微调： .venv\\Scripts\\python.exe VLM_CSC/exp/fig7/finetune_blip_fig7.py
-USE_FINETUNED_BLIP: bool = True  # True = 微调BLIP, False = 原始BLIP-base
+#        运行微调： .venv\\Scripts\\python.exe VLM_CSC/experiments/fig7/finetune_blip_fig7.py
+USE_FINETUNED_BLIP: bool = False  # True = 微调BLIP, False = 原始BLIP-base
 
 # BLIP 描述生成提示词（可选，None = 按 CAPTION_MODE 默认值）
 #
@@ -239,7 +239,7 @@ def build_fig7_config() -> dict:
         if not (_ft_blip_dir / "model.safetensors").exists():
             raise RuntimeError(
                 f"USE_FINETUNED_BLIP=True 但微调模型不存在: {_ft_blip_dir}\n"
-                f"请先运行: .venv\\Scripts\\python.exe VLM_CSC/exp/fig7/finetune_blip_fig7.py"
+                f"请先运行: .venv\\Scripts\\python.exe VLM_CSC/experiments/fig7/finetune_blip_fig7.py"
             )
         cfg["blip_ckb_dir"] = str(_ft_blip_dir)
         print(f"[fig7_config] 使用微调 BLIP: {_ft_blip_dir}")

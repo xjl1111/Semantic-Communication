@@ -29,8 +29,7 @@ from PIL import Image, ImageFilter
 # ── 路径 ──────────────────────────────────────────────────────────────────────
 _ROOT = Path(__file__).resolve().parents[3]
 _VLM  = _ROOT / "VLM_CSC"
-sys.path.insert(0, str(_VLM / "model"))
-sys.path.insert(0, str(_VLM / "exp"))
+sys.path.insert(0, str(_VLM / "experiments"))
 
 BLIP_DIR  = _VLM / "data" / "assets" / "downloaded_models" / "blip"
 TEST_DIR  = _ROOT / "data" / "datasets" / "catsvsdogs" / "test"

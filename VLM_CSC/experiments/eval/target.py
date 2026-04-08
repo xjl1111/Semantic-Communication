@@ -97,7 +97,7 @@ class CatsDogsDownstreamClassifier:
 
         raise RuntimeError(
             f"所有 CLIP 变体均不在本地缓存中，无法初始化分类器。"
-            f"请先运行 VLM_CSC/model/download_clip.py 或手动下载 clip-vit-large-patch14。"
+            f"请先运行 vlm_csc.assets.download_clip 或手动下载 clip-vit-large-patch14。"
             f"最后一个错误: {last_exc}"
         ) from last_exc
 

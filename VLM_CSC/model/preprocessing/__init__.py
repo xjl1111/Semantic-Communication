@@ -1,4 +1,4 @@
 """Image preprocessing utilities."""
-from vlm_csc.preprocessing.upsampler import ImageUpsampler
+from .upsampler import ImageUpsampler
 
 __all__ = ["ImageUpsampler"]

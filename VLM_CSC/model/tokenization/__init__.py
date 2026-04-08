@@ -1,4 +1,4 @@
 """Text tokenization utilities."""
-from vlm_csc.tokenization.tokenizer import SimpleTextTokenizer
+from .tokenizer import SimpleTextTokenizer
 
 __all__ = ["SimpleTextTokenizer"]

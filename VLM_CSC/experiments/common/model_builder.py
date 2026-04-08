@@ -3,10 +3,16 @@ from __future__ import annotations
 
 import contextlib
 import io
+import sys
 from pathlib import Path
 from typing import Dict
 
-from vlm_csc import VLMCscSystem
+# Ensure VLM_CSC root is on sys.path so model imports work
+_VLM_CSC_ROOT = Path(__file__).resolve().parents[2]
+if str(_VLM_CSC_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VLM_CSC_ROOT))
+
+from model import VLMCscSystem
 
 
 def build_vlm_system(
